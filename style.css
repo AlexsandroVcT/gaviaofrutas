@@ -335,6 +335,10 @@ section {
     color: var(--primary-color);
 }
 
+.whatsapp {
+    margin-top: 5px;
+}
+
 .input-group {
     padding: 1rem;
     border: .125rem solid var(--primary-color);

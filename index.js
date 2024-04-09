@@ -35,13 +35,13 @@ Array.from(categories).forEach((item, index) => {
         let currCat = foodCategory.querySelector('button.active')
         currCat.classList.remove('active')
         e.target.classList.add('active')
-        foodMenuList.classList ='food-item-wrap '+ e.target.getAttribute('data-food-type')
+        foodMenuList.classList = 'food-item-wrap ' + e.target.getAttribute('data-food-type')
     }
 })
 
 // on scroll animation
 
-let scroll = window.requestAnimationFrame || function(callback) {window.setTimeout(callback, 1000/60)}
+let scroll = window.requestAnimationFrame || function (callback) { window.setTimeout(callback, 1000 / 60) }
 
 let elToShow = document.querySelectorAll('.play-on-scroll')
 

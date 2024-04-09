@@ -1,0 +1,181 @@
+/* Estilos CSS para o carrinho */
+.cart {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    max-width: 300px;
+    background-color: #f0f8ff; /* Azul claro */
+}
+
+.cart h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333; /* Cor do texto */
+}
+
+.cart-list {
+    list-style: none;
+    padding: 0;
+}
+
+.cart-list li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+
+/* Estilos para o menu de carrinho */
+.cart-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 100%;
+    background-color: #f0f8ff; /* Cor de fundo do menu */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    display: none; /* Inicia oculto por padrão */
+}
+
+/* Mostra o menu quando ele é focado ou algum de seus descendentes está focado */
+.cart-menu:focus-within {
+    display: block;
+}
+
+/* Estilos para o conteúdo do menu de carrinho */
+.cart-menu-content {
+    padding: 20px;
+}
+
+.cart-menu-content h2{ 
+    color: #7a7a7b
+}
+
+
+.cart-menu.open {
+    display: block; /* Mostra o menu quando a classe .open é aplicada */
+}
+
+/* Estilos para o botão de fechar */
+.close-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    cursor: pointer;
+    font-size: 24px;
+    color: #333; /* Cor do ícone de fechar */
+}
+
+/* Estilos para o ícone do carrinho */
+#cart-icon {
+    position: relative;
+    left: -15%;
+}
+
+/* Estilos CSS para o carrinho */
+.cart-menu-content h2 {
+    margin-top: 1px;
+    margin-bottom: 20px;
+    font-size: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    left: 26px;
+    margin-left: 43px;
+}
+
+.cart-menu-content .close-btn,
+.cart-menu-content .bx-shopping-bag {
+    font-size: 24px;
+    cursor: pointer;
+}
+
+
+.cart-list {
+    list-style: none;
+    padding: 0;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.cart-item img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin-right: 10px;
+    border-radius: 10px;
+}
+
+.cart-item .item-details {
+    flex: 1;
+    text-align: left;
+}
+
+.cart-item .item-actions {
+    display: flex; /* Exibe os elementos em linha */
+    align-items: center; /* Alinha os itens verticalmente */
+    border: 1px solid #f2f2f2; /* Adiciona uma borda ao redor do contêiner */
+    border-radius: var(--borderRadius) !important; /* Adiciona um raio à borda */
+    overflow: hidden; /* Esconde qualquer conteúdo que vá além do contêiner */
+}
+
+.cart-item-price {
+    margin-left: 10px; /* Adicione margem à esquerda para separar o preço dos botões */
+}
+
+.quantity-btn {
+    padding: 5px; /* Adiciona espaço interno aos botões */
+    cursor: pointer; /* Define o cursor como ponteiro ao passar por cima */
+    border: none; /* Remove a borda dos botões */
+    background-color: transparent; /* Define o fundo como transparente */
+    transition: background-color 0.3s ease; /* Adiciona uma transição suave ao fundo */
+}
+
+.quantity-btn:hover {
+    background-color: #0d8048; /* Cor de fundo ao passar o mouse */
+    color: #fff; /* Muda a cor do texto ao passar o mouse */
+}
+
+.item-quantity {
+    padding: 5px; /* Adiciona espaço interno à quantidade */
+    font-weight: bold; /* Define a quantidade em negrito */
+}
+
+
+.remove-btn {
+    color: #0F9D58;
+    background: none; /* Remove o fundo */
+    border: none; /* Remove a borda */
+    padding: 0; /* Remove o preenchimento */
+    cursor: pointer;
+    font-size: 20px;
+    outline: none; /* Remove o contorno ao redor do botão */
+}
+
+.cart-discount {
+    margin-top: 20px;
+}
+
+.cart-discount span {
+    text-decoration: line-through;
+    margin-right: 10px;
+}
+
+.checkout-btn {
+    background-color: #0F9D58; /* Turquesa escuro */
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+}
+

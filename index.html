@@ -14,7 +14,14 @@
       href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="carrinho.css" />
+
+    <script src="carrinho.js" defer ></script>
+
   </head>
   <body>
     <!-- MOBILE NAV -->
@@ -50,30 +57,50 @@
     <!-- TOP NAVIGATION -->
     <div class="nav">
       <div class="menu-wrap">
-        <a href="#home">
-          <div class="logo">Gavião frutas</div>
-        </a>
-        <div class="menu h-xs">
           <a href="#home">
-            <div class="menu-item active">Início</div>
+              <div class="logo">Gavião frutas</div>
           </a>
-          <a href="#about">
-            <div class="menu-item">Sobre Nós</div>
-          </a>
-          <a href="#food-menu-section">
-            <div class="menu-item">Catálogo</div>
-          </a>
-          <a href="#footer">
-            <div class="menu-item">Contato</div>
-          </a>
-        </div>
-        <div class="right-menu">
-          <div class="cart-btn">
-            <i class="bx bxl-instagram-alt"></i>
+          <div class="menu h-xs">
+              <a href="#home">
+                  <div class="menu-item active">Início</div>
+              </a>
+              <a href="#about">
+                  <div class="menu-item">Sobre Nós</div>
+              </a>
+              <a href="#food-menu-section">
+                  <div class="menu-item">Catálogo</div>
+              </a>
+              <a href="#footer">
+                  <div class="menu-item">Contato</div>
+              </a>
           </div>
+          <div id="cart-icon" onclick="openCartMenu()">
+            <i class="bx bx-shopping-bag"></i>
+            <span class="cart-count">0</span>
         </div>
+        
       </div>
-    </div>
+  </div>
+<!-- SISTEMA DE CARRINHO-->
+<div class="cart-menu" id="cart-menu">
+  <div class="cart-menu-content">
+      <span class="close-btn" onclick="closeCartMenu()">&lt;</span>
+      <h2></i> Meu Carrinho <i class="bx bx-shopping-bag"></i> </h2>
+      <ul class="cart-list">
+          <!-- Os itens do carrinho serão adicionados aqui -->
+      </ul>
+      <div class="cart-summary">
+          <div class="cart-subtotal">
+              <span>Subtotal:</span>
+              <span class="subtotal-value">$0.00</span>
+          </div>
+          <button class="checkout-btn">Finalizar Compra</button>
+      </div>
+  </div>
+</div>
+
+
+  
     <!-- END TOP NAVIGATION -->
     <!-- SECTION HOME -->
     <section
@@ -842,10 +869,10 @@
             <br />
             <div>
               <h1>Rede sociais</h1>
-              <a href="https://www.instagram.com/claudio.cell2/" target="_blank"><i class="bx bxl-instagram"></i>
+              <a href="https://www.instagram.com/gaviao_frg/" target="_blank"><i class="bx bxl-instagram"></i>
                 instagram</a>
               <div class="whatsapp">
-                <a href="https://api.whatsapp.com/send?phone=5582996338832&text=%20Olá! Eu encontrei o seu site e gostaria de obter mais informações sobre seus produtos/serviços.%20%20Poderia me fornecer mais detalhes? Obrigado!"
+                <a href="https://api.whatsapp.com/send?phone=5582987114659&text=%20Olá! Eu encontrei o seu site e gostaria de obter mais informações sobre seus produtos/serviços.%20%20Poderia me fornecer mais detalhes? Obrigado!"
                 target="_blank"><i class="bx bxl-whatsapp"></i>
                 whatsapp</a>
               </div>

@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /
+Sitemap: https://gaviaofrutas.com.br/sitemap.xml

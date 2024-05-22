@@ -86,3 +86,18 @@ bottomNavItems.forEach((item, index) => {
         bottomMove.style.left = index * 25 + '%'
     }
 })
+
+
+Swal.fire({
+    icon: 'info',
+    title: 'Site em Reforma',
+    text: 'Estamos trabalhando para melhorar sua experiência. O site estará de volta em breve. Obrigado pela compreensão!',
+    timerProgressBar: true,
+    showConfirmButton: true, // Mostra o botão de confirmação padrão
+    confirmButtonText: 'Entendi',
+    showCancelButton: false, // Esconde o botão de cancelamento
+    customClass: {
+      confirmButton: 'green-button' // Adiciona a classe 'green-button' ao botão de confirmação
+    }
+  });
+  

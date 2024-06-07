@@ -69,7 +69,7 @@ loginForm.addEventListener("submit", async (event) => {
     const password = document.querySelector("#loginPassword").value;
 
     try {
-        const response = await fetch("/auth/login", {
+        const response = await fetch("https://gaviao-frutas.vercel.app/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

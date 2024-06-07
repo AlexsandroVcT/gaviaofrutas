@@ -12,6 +12,12 @@ dotenv.config({ path: '.env.development.local' });
 const app = express();
 const port = process.env.PORT || 3000;
 
+// Middleware para permitir acesso de origens cruzadas (CORS)
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+});
+
 createConnection({
   type: 'postgres',
   host: process.env.GAVIAO_FRUTAS_DB_HOST,

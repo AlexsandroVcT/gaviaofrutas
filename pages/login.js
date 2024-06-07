@@ -21,7 +21,7 @@ signUpForm.addEventListener("submit", async (event) => {
     const password = signUpForm.querySelector("#signupPassword").value;
 
     try {
-        const response = await fetch("/auth/register", {
+        const response = await fetch("https://gaviao-frutas.vercel.app/register", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

@@ -400,3 +400,26 @@ form.sign-in-form {
     left: 50%;
   }
 }
+
+/* ALERTA PERSONALIZADO SUCESSO */
+/* Estilo do botão verde */
+.swal2-confirm.green-button {
+  background-color: #0F9D58; /* Cor de fundo verde */
+  color: white; /* Cor do texto branco */
+  border: none; /* Remove a borda */
+}
+
+/* Estilo do botão verde quando está em foco */
+.swal2-confirm.green-button:focus {
+  box-shadow: 0 0 0 0.2rem rgba(76, 175, 80, 0.5); /* Adiciona uma sombra verde quando o botão está em foco */
+}
+.swal2-confirm.red-button {
+  background-color: #d3001c; /* Cor de fundo verde */
+  color: white; /* Cor do texto branco */
+  border: none; /* Remove a borda */
+}
+
+/* Estilo do botão verde quando está em foco */
+.swal2-confirm.green-button:focus {
+  box-shadow: 0 0 0 0.2rem rgba(224, 7, 18, 0.5); /* Adiciona uma sombra verde quando o botão está em foco */
+}

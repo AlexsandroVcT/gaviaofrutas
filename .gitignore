@@ -1,0 +1,12 @@
+.vercel
+
+# Environment variables
+.env
+.env.*.local
+
+# Node modules
+node_modules/
+
+# TypeORM config file if it includes sensitive info
+ormconfig.json
+ormconfig.js

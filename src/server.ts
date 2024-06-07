@@ -1,3 +1,4 @@
+import cors from 'cors';
 import 'reflect-metadata';
 import express, { Request, Response } from 'express';
 import path from 'path';
@@ -7,16 +8,18 @@ import bcrypt from 'bcryptjs';
 import authRouter from './scripts/auth';
 import { User } from './entities/User';
 
+
 dotenv.config({ path: '.env.development.local' });
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Middleware para permitir acesso de origens cruzadas (CORS)
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  next();
-});
+const corsOptions = {
+    origin: "*",
+    optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
 
 createConnection({
   type: 'postgres',

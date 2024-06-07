@@ -14,10 +14,16 @@ const port = process.env.PORT || 3000;
 
 createConnection({
   type: 'postgres',
-  url: process.env.GAVIAO_FRUTAS_DB_URL,
+  host: process.env.GAVIAO_FRUTAS_DB_HOST,
+  port: parseInt(process.env.GAVIAO_FRUTAS_DB_PORT || '0'),
+  username: process.env.GAVIAO_FRUTAS_DB_USER,
+  password: process.env.GAVIAO_FRUTAS_DB_PASSWORD,
+  database: process.env.GAVIAO_FRUTAS_DB_DATABASE,
   synchronize: true,
   logging: true,
   entities: [User],
+  migrations: [],
+  subscribers: [],
   ssl: {
     rejectUnauthorized: false,
   },
@@ -96,7 +102,7 @@ createConnection({
   });
 
   app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../login.html'));
+    res.sendFile(path.join(__dirname, '../public/login.html'));
   });
 
   app.listen(port, () => {

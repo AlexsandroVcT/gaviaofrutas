@@ -25,10 +25,16 @@ const app = (0, express_1.default)();
 const port = process.env.PORT || 3000;
 (0, typeorm_1.createConnection)({
     type: 'postgres',
-    url: process.env.GAVIAO_FRUTAS_DB_URL,
+    host: process.env.GAVIAO_FRUTAS_DB_HOST,
+    port: parseInt(process.env.GAVIAO_FRUTAS_DB_PORT || '0'),
+    username: process.env.GAVIAO_FRUTAS_DB_USER,
+    password: process.env.GAVIAO_FRUTAS_DB_PASSWORD,
+    database: process.env.GAVIAO_FRUTAS_DB_DATABASE,
     synchronize: true,
     logging: true,
     entities: [User_1.User],
+    migrations: [],
+    subscribers: [],
     ssl: {
         rejectUnauthorized: false,
     },
@@ -94,7 +100,7 @@ const port = process.env.PORT || 3000;
         }
     }));
     app.get('/', (req, res) => {
-        res.sendFile(path_1.default.join(__dirname, '../login.html'));
+        res.sendFile(path_1.default.join(__dirname, '../public/login.html'));
     });
     app.listen(port, () => {
         console.log(`Servidor rodando em http://localhost:${port}`);

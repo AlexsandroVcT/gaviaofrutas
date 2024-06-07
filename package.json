@@ -7,8 +7,7 @@
   "license": "MIT",
   "scripts": {
     "start": "ts-node src/server.ts",
-    "build": "tsc",
-    "postbuild": "cp -r ./dist ./public"
+    "build": "tsc"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",

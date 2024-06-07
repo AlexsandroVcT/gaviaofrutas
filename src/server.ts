@@ -30,7 +30,7 @@ createConnection({
 }).then(connection => {
   const userRepository = connection.getRepository(User);
 
-  app.use(express.static(path.join(__dirname, '../public/dist')));
+  app.use(express.static(path.join(__dirname, '../')));
   app.use(express.json());
   app.use('/auth', authRouter);
 
@@ -102,7 +102,7 @@ createConnection({
   });
 
   app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../public/dist/pages/login.html'));
+    res.sendFile(path.join(__dirname, '../public/login.html'));
   });
 
   app.listen(port, () => {

@@ -7,7 +7,7 @@ import { createConnection } from 'typeorm';
 import bcrypt from 'bcryptjs';
 import authRouter from './scripts/auth';
 import { User } from './entities/User';
-
+import { validate } from 'email-validator'; // Importar a biblioteca de validação de e-mail
 
 dotenv.config({ path: '.env.development.local' });
 
@@ -43,35 +43,55 @@ createConnection({
   app.use(express.json());
   app.use('/auth', authRouter);
 
-  app.post('/register', async (req: Request, res: Response) => {
-    try {
-      const { username, email, password } = req.body;
-      console.log(`Recebido POST request para registro de usuário: ${username}, ${email}`);
 
-      const existingUser = await userRepository.findOne({ where: { email } });
+app.post('/register', async (req: Request, res: Response) => {
+  try {
+    const { username, email, password } = req.body;
+    console.log(`Recebido POST request para registro de usuário: ${username}, ${email}`);
 
-      if (existingUser) {
-        console.log('Usuário já existe.');
-        return res.status(400).json({ message: 'Usuário já existe.' });
-      }
-
-      const hashedPassword = await bcrypt.hash(password, 10);
-
-      const newUser = userRepository.create({
-        username,
-        email,
-        password: hashedPassword,
-      });
-
-      await userRepository.save(newUser);
-
-      console.log('Usuário registrado com sucesso!');
-      res.status(201).json({ message: 'Usuário registrado com sucesso!' });
-    } catch (error) {
-      console.error('Erro ao registrar usuário:', error);
-      res.status(500).json({ message: 'Erro ao registrar usuário.' });
+    // Validar o nome de usuário
+    if (!username || typeof username !== 'string' || username.trim().length < 3) {
+      console.log('O nome de usuário fornecido não é válido.');
+      return res.status(400).json({ message: 'O nome de usuário deve ter pelo menos 3 caracteres.' });
     }
-  });
+
+  // Validar o e-mail
+if (!email || typeof email !== 'string' || email.trim().length < 6 || !validate(email)) {
+  console.log('O e-mail fornecido não é válido.');
+  return res.status(400).json({ message: 'O e-mail fornecido não é válido.' });
+}
+
+    // Validar a senha
+    if (!password || typeof password !== 'string' || password.trim().length < 6) {
+      console.log('A senha fornecida não é válida.');
+      return res.status(400).json({ message: 'A senha deve ter pelo menos 6 caracteres.' });
+    }
+
+    const existingUser = await userRepository.findOne({ where: { email } });
+
+    if (existingUser) {
+      console.log('Usuário já existe.');
+      return res.status(400).json({ message: 'Usuário já existe.' });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const newUser = userRepository.create({
+      username,
+      email,
+      password: hashedPassword,
+    });
+
+    await userRepository.save(newUser);
+
+    console.log('Usuário registrado com sucesso!');
+    res.status(201).json({ message: 'Usuário registrado com sucesso!' });
+  } catch (error) {
+    console.error('Erro ao registrar usuário:', error);
+    res.status(500).json({ message: 'Erro ao registrar usuário.' });
+  }
+});
+
 
   app.post('/login', async (req: Request, res: Response) => {
     try {

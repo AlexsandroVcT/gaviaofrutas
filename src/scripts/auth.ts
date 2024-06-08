@@ -11,6 +11,12 @@ router.post('/register', async (req, res) => {
 
     console.log(`Registrando usuário: ${username}, ${email}`);
 
+    // Verificar se o email tem pelo menos 6 caracteres
+    if (email.length < 6) {
+        console.log('O e-mail fornecido não é válido.');
+        return res.status(400).json({ message: 'O e-mail fornecido não é válido.' });
+    }
+
     // Verificar se o e-mail já está em uso
     const userRepository = getRepository(User);
     const existingUser = await userRepository.findOne({ where: { email } });
@@ -35,6 +41,7 @@ router.post('/register', async (req, res) => {
     console.log(`Usuário registrado com sucesso: ${JSON.stringify(newUser)}`);
     res.status(201).json({ message: 'Usuário registrado com sucesso.' });
 });
+
 
 // Rota para login de usuário
 router.post('/login', async (req, res) => {

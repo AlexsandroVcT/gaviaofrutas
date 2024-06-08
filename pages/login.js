@@ -16,9 +16,31 @@ const signUpForm = document.querySelector(".sign-up-form");
 signUpForm.addEventListener("submit", async (event) => {
     event.preventDefault(); // Evita o envio do formulário
 
-    const username = signUpForm.querySelector("#signupUsername").value;
-    const email = signUpForm.querySelector("#signupEmail").value;
-    const password = signUpForm.querySelector("#signupPassword").value;
+    const usernameInput = signUpForm.querySelector("#signupUsername");
+    const emailInput = signUpForm.querySelector("#signupEmail");
+    const passwordInput = signUpForm.querySelector("#signupPassword");
+
+    const username = usernameInput.value;
+    const email = emailInput.value;
+    const password = passwordInput.value;
+
+    // Validar o nome de usuário
+    if (!username || username.trim().length < 3) {
+        showError("O nome de usuário deve ter pelo menos 3 caracteres.");
+        return;
+    }
+
+    // Validar o e-mail
+    if (!email || !validateEmail(email)) {
+        showError("O e-mail fornecido não é válido.");
+        return;
+    }
+
+    // Validar a senha
+    if (!password || password.trim().length < 6) {
+        showError("A senha deve ter pelo menos 6 caracteres.");
+        return;
+    }
 
     try {
         const response = await fetch("https://gaviao-frutas.vercel.app/register", {
@@ -36,11 +58,18 @@ signUpForm.addEventListener("submit", async (event) => {
 
         signUpForm.reset();
         Swal.fire({
-            title: "Sucesso!",
-            text: "Cadastro realizado com sucesso!",
+            title: "Cadastro realizado com sucesso!",
             icon: "success",
+            position: "top-end", // Posição no canto superior direito
+            showConfirmButton: false, // Não mostrar botão de confirmação
+            timer: 2000, // Exibir por 2 segundos
+            toast: true, // Configurar como notificação toast
+            width: "20rem", // Largura da notificação
+            padding: "0.5rem", // Padding interno
             customClass: {
-              confirmButton: 'green-button' // Adiciona a classe 'green-button' ao botão de confirmação
+                popup: 'custom-popup', // Adiciona uma classe personalizada ao contêiner da notificação
+                title: 'custom-title', // Adiciona uma classe personalizada ao título
+                icon: 'custom-icon' // Adiciona uma classe personalizada ao ícone
             }
         }).then(() => {
             // Redirecionar para a página de login após o cadastro bem-sucedido
@@ -49,15 +78,49 @@ signUpForm.addEventListener("submit", async (event) => {
     } catch (error) {
         console.error("Erro:", error.message);
         Swal.fire({
-            title: "Erro!",
-            text: error.message,
+            title: error.message,
             icon: "error",
+            position: "top-end", // Posição no canto superior direito
+            toast: true, // Configurar como notificação toast
+            timer: 3000, // Exibir por 2 segundos
+            showConfirmButton: false, // Não mostrar botão de confirmação
+            width: "20rem", // Largura da notificação
+            padding: "0.5rem", // Padding interno
             customClass: {
-              confirmButton: 'red-button' // Adiciona a classe 'red-button' ao botão de confirmação
+                popup: 'custom-popup', // Adiciona uma classe personalizada ao contêiner da notificação
+                title: 'custom-title', // Adiciona uma classe personalizada ao título
+                icon: 'custom-icon' // Adiciona uma classe personalizada ao ícone
             }
         });
     }
 });
+
+// Função para exibir mensagens de erro
+function showError(errorMessage) {
+    Swal.fire({
+        title: errorMessage,
+        icon: "error",
+        position: "top-end", // Posição no canto superior direito
+        toast: true, // Configurar como notificação toast
+        timer: 3000, // Exibir por 2 segundos
+        showConfirmButton: false, // Não mostrar botão de confirmação
+        width: "20rem", // Largura da notificação
+        padding: "0.5rem", // Padding interno
+        customClass: {
+            popup: 'custom-popup', // Adiciona uma classe personalizada ao contêiner da notificação
+            title: 'custom-title', // Adiciona uma classe personalizada ao título
+            icon: 'custom-icon' // Adiciona uma classe personalizada ao ícone
+        }
+    });
+}
+
+// Função para validar o formato do e-mail
+function validateEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return email.length >= 6 && emailRegex.test(email);
+}
+
+
 
 // Manipulador de evento para o formulário de login
 const loginForm = document.querySelector(".sign-in-form");
@@ -106,11 +169,18 @@ loginForm.addEventListener("submit", async (event) => {
     } catch (error) {
         console.error("Erro:", error.message);
         Swal.fire({
-            title: "Erro!",
-            text: error.message,
+            title: error.message,
             icon: "error",
+            position: "top-end", // Posição no canto superior direito
+            timer: 3000, // Exibir por 2 segundos
+            showConfirmButton: false, // Não mostrar botão de confirmação
+            toast: true, // Configurar como notificação toast
+            width: "20rem", // Largura da notificação
+            padding: "0.5rem", // Padding interno
             customClass: {
-              confirmButton: 'red-button' // Adiciona a classe 'red-button' ao botão de confirmação
+              popup: 'custom-popup', // Adiciona uma classe personalizada ao contêiner da notificação
+              title: 'custom-title', // Adiciona uma classe personalizada ao título
+              icon: 'custom-icon' // Adiciona uma classe personalizada ao ícone
             }
         });
     }

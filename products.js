@@ -1,196 +1,309 @@
 const products = [
+  // Frutas
   {
     id: 1,
-    title: "1.Uva",
-    price: 120,
-    imageSrc: "assets/imgs_vdd/produto1.jpg",
-    category: "salad-type"
+    title: "Maçã",
+    price: 5.99,
+    imageSrc: "../assets/imgs_vdd/maça.png",
+    category: "salad-type",
   },
   {
     id: 2,
-    title: "2.Uva",
-    price: 120,
-    imageSrc: "assets/imgs_vdd/produto1.jpg",
-    category: "salad-type"
+    title: "Abacaxi",
+    price: 12.99,
+    imageSrc: "../assets/imgs_vdd/abacaxi.png",
+    category: "salad-type",
   },
   {
     id: 3,
-    title: "3.Uva",
-    price: 120,
-    imageSrc: "assets/imgs_vdd/produto1.jpg",
-    category: "salad-type"
+    title: "Pera",
+    price: 12.99,
+    imageSrc: "../assets/imgs_vdd/pera.png",
+    category: "salad-type",
   },
   {
     id: 4,
-    title: "4.Maça",
-    price: 120,
-    imageSrc: "assets/anh-nguyen-kcA-c3f_3FE-unsplash.jpg",
-    category: "salad-type"
+    title: "Melancia",
+    price: 10.99,
+    imageSrc: "../assets/imgs_vdd/melancia.png",
+    category: "salad-type",
   },
   {
     id: 5,
-    title: "5.Uva",
-    price: 120,
-    imageSrc: "assets/imgs_vdd/produto1.jpg",
-    category: "salad-type"
+    title: "Banana",
+    price: 3.99,
+    imageSrc: "../assets/imgs_vdd/banana.png",
+    category: "salad-type",
   },
   {
     id: 6,
-    title: "6.Uva",
-    price: 120,
-    imageSrc: "assets/imgs_vdd/produto1.jpg",
-    category: "salad-type"
+    title: "Uva",
+    price: 7.99,
+    imageSrc: "../assets/imgs_vdd/uva.png",
+    category: "salad-type",
   },
   {
     id: 7,
-    title: "7.Uva",
-    price: 120,
-    imageSrc: "assets/imgs_vdd/produto1.jpg",
-    category: "salad-type"
+    title: "Abacate",
+    price: 20.99,
+    imageSrc: "../assets/imgs_vdd/abacate.png",
+    category: "salad-type",
   },
   {
     id: 8,
-    title: "8.Uva",
-    price: 120,
-    imageSrc: "assets/imgs_vdd/produto1.jpg",
-    category: "salad-type"
+    title: "Morango",
+    price: 22.99,
+    imageSrc: "../assets/imgs_vdd/morango.png",
+    category: "salad-type",
   },
+  // Verduras Nutritivas
   {
     id: 9,
-    title: "1.Pera",
-    price: 120,
-    imageSrc: "assets/sina-piryae-bBzjWthTqb8-unsplash.jpg",
-    category: "lorem-type"
+    title: "Brócolis",
+    price: 14.99,
+    imageSrc: "../assets/imgs_vdd/verduras_Nutritivas/brocolis.png",
+    category: "lorem-type",
   },
   {
     id: 10,
-    title: "2.Pera",
-    price: 120,
-    imageSrc: "assets/imgs_vdd/produto2.jpg",
-    category: "lorem-type"
+    title: "Alface",
+    price: 5.99,
+    imageSrc: "../assets/imgs_vdd/verduras_Nutritivas/alface.png",
+    category: "lorem-type",
   },
   {
     id: 11,
-    title: "3.Pera",
-    price: 120,
-    imageSrc: "assets/sina-piryae-bBzjWthTqb8-unsplash.jpg",
-    category: "lorem-type"
+    title: "Pepino",
+    price: 17.99,
+    imageSrc: "../assets/imgs_vdd/verduras_Nutritivas/pepino.png",
+    category: "lorem-type",
   },
   {
     id: 12,
-    title: "4.Pera",
-    price: 120,
-    imageSrc: "assets/sina-piryae-bBzjWthTqb8-unsplash.jpg",
-    category: "lorem-type"
+    title: "Couve-Flor",
+    price: 3.99,
+    imageSrc: "../assets/imgs_vdd/verduras_Nutritivas/couve-flor.png",
+    category: "lorem-type",
   },
   {
     id: 13,
-    title: "5.Pera",
-    price: 120,
-    imageSrc: "assets/sina-piryae-bBzjWthTqb8-unsplash.jpg",
-    category: "lorem-type"
+    title: "Abobora",
+    price: 17.99,
+    imageSrc: "../assets/imgs_vdd/verduras_Nutritivas/abobora.png",
+    category: "lorem-type",
   },
   {
     id: 14,
-    title: "6.Pera",
-    price: 120,
-    imageSrc: "assets/sina-piryae-bBzjWthTqb8-unsplash.jpg",
-    category: "lorem-type"
+    title: "Pimentão",
+    price: 12.99,
+    imageSrc: "../assets/imgs_vdd/verduras_Nutritivas/pimentao.png",
+    category: "lorem-type",
   },
   {
     id: 15,
-    title: "7.Pera",
-    price: 120,
-    imageSrc: "assets/sina-piryae-bBzjWthTqb8-unsplash.jpg",
-    category: "lorem-type"
+    title: "Berinjela",
+    price: 20.99,
+    imageSrc: "../assets/imgs_vdd/verduras_Nutritivas/berinjela.png",
+    category: "lorem-type",
   },
   {
     id: 16,
-    title: "8.Pera",
-    price: 120,
-    imageSrc: "assets/sina-piryae-bBzjWthTqb8-unsplash.jpg",
-    category: "lorem-type"
+    title: "Cenoura",
+    price: 6.99,
+    imageSrc: "../assets/imgs_vdd/verduras_Nutritivas/cenoura.png",
+    category: "lorem-type",
   },
+  // Ofertas Especiais
   {
     id: 17,
-    title: "1.Ofertas",
-    price: 120,
-    imageSrc: "assets/carly-jayne-Lv174o7fn7Y-unsplash.jpg",
-    category: "dolor-type"
+    title: "Cereja",
+    price: 3.99,
+    imageSrc: "../assets/imgs_vdd/cereja.png",
+    category: "dolor-type",
   },
   {
     id: 18,
-    title: "2. Ofertas",
-    price: 120,
-    imageSrc: "assets/imgs_vdd/frescos/abacaxiFresca.jpg",
-    category: "dolor-type"
+    title: "Maça Verde",
+    price: 3.99,
+    imageSrc: "../assets/imgs_vdd/macaverde.png",
+    category: "dolor-type",
   },
   {
     id: 19,
-    title: "3.Ofertas",
-    price: 120,
-    imageSrc: "assets/carly-jayne-Lv174o7fn7Y-unsplash.jpg",
-    category: "dolor-type"
+    title: "Tomate",
+    price: 3.99,
+    imageSrc: "../assets/imgs_vdd/tomate.png",
+    category: "dolor-type",
   },
   {
     id: 20,
-    title: "4.Ofertas",
-    price: 120,
-    imageSrc: "assets/carly-jayne-Lv174o7fn7Y-unsplash.jpg",
-    category: "dolor-type"
+    title: "Pêssego",
+    price: 3.99,
+    imageSrc: "../assets/imgs_vdd/pessego.png",
+    category: "dolor-type",
   },
   {
     id: 21,
-    title: "5.Ofertas",
-    price: 120,
-    imageSrc: "assets/carly-jayne-Lv174o7fn7Y-unsplash.jpg",
-    category: "dolor-type"
+    title: "Limão",
+    price: 3.99,
+    imageSrc: "../assets/imgs_vdd/limao.png",
+    category: "dolor-type",
   },
   {
     id: 22,
-    title: "6.Ofertas",
-    price: 120,
-    imageSrc: "assets/carly-jayne-Lv174o7fn7Y-unsplash.jpg",
-    category: "dolor-type"
+    title: "Manga",
+    price: 3.99,
+    imageSrc: "../assets/imgs_vdd/manga.png",
+    category: "dolor-type",
   },
   {
     id: 23,
-    title: "7.Ofertas",
-    price: 120,
-    imageSrc: "assets/carly-jayne-Lv174o7fn7Y-unsplash.jpg",
-    category: "dolor-type"
+    title: "Melão",
+    price: 3.99,
+    imageSrc: "../assets/imgs_vdd/melao.png",
+    category: "dolor-type",
   },
   {
     id: 24,
-    title: "8.Ofertas",
-    price: 120,
-    imageSrc: "assets/carly-jayne-Lv174o7fn7Y-unsplash.jpg",
-    category: "dolor-type"
-  }
+    title: "Mamão",
+    price: 3.99,
+    imageSrc: "../assets/imgs_vdd/mamao.png",
+    category: "dolor-type",
+  },
+  // Bebidas
+  {
+    id: 25,
+    title: "Skol",
+    price: 6.99,
+    imageSrc: "../assets/imgs/drinks/skol.png",
+    category: "beverages-type",
+  },
+  {
+    id: 26,
+    title: "Monster",
+    price: 19.99,
+    imageSrc: "../assets/imgs/drinks/monster.png",
+    category: "beverages-type",
+  },
+  {
+    id: 27,
+    title: "Sprite",
+    price: 8.99,
+    imageSrc: "../assets/imgs/drinks/sprite.png",
+    category: "beverages-type",
+  },
+  {
+    id: 28,
+    title: "Heineken",
+    price: 12.99,
+    imageSrc: "../assets/imgs/drinks/heineken.png",
+    category: "beverages-type",
+  },
+  {
+    id: 29,
+    title: "Whisky",
+    price: 29.99,
+    imageSrc: "../assets/imgs/drinks/whisky.png",
+    category: "beverages-type",
+  },
+  {
+    id: 30,
+    title: "Brahma",
+    price: 14.99,
+    imageSrc: "../assets/imgs/drinks/brahma.png",
+    category: "beverages-type",
+  },
+  {
+    id: 31,
+    title: "Coca-Cola",
+    price: 9.99,
+    imageSrc: "../assets/imgs/drinks/cocacola.png",
+    category: "beverages-type",
+  },
+  {
+    id: 32,
+    title: "Red Bull",
+    price: 39.99,
+    imageSrc: "../assets/imgs/drinks/redbull.png",
+    category: "beverages-type",
+  },
 ];
 
-const foods = document.querySelector('.food-item-wrap');
+$(document).ready(function () {
+  const $foods = $(".food-item-wrap");
 
-// render products
-products.forEach(product => {
-  foods.innerHTML += `
-    <div class="food-item ${product.category}" data-id=${product.id}>
-      <div class="item-wrap bottom-up play-on-scroll">
-        <div class="item-img">
-          <div class="img-holder bg-img" style="
-                background-image: url(${product.imageSrc});
-              "></div>
-        </div>
-        <div class="item-info">
-          <div>
-            <h3>${product.title}</h3>
-            <span> ${product.price}$ </span>
+  // Render products
+  products.forEach((product) => {
+    $foods.append(`
+      <div class="food-item ${product.category}" data-id=${product.id}>
+        <div class="item-wrap">
+          <div class="item-img">
+            <div class="img-holder">
+              <img src="${product.imageSrc}">
+            </div>
           </div>
-          <div class="cart-btn">
-            <i class="bx bx-cart-alt"></i>
+          <div class="item-info">
+            <div>
+              <h3>${product.title}</h3>
+              <span> R$ ${product.price.toFixed(2)} </span>
+            </div>
+            <div class="cart-btn">
+              <h4>+</h4>
+              <i class="fal fa-shopping-cart"></i>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    `);
+  });
+
+  // Adiciona um evento de clique nos botões de adicionar ao carrinho
+  const addToCartButtons = document.querySelectorAll(".cart-btn");
+  addToCartButtons.forEach((button) => {
+    button.addEventListener("click", addToCartClicked);
+  });
+});
+
+// render products for swiper
+const swiperWrapperFood = document.getElementById("swiper-wrapper-food");
+const swiperWrapperDrinks = document.getElementById("swiper-wrapper-drinks");
+
+products.forEach((product) => {
+  if (product.category === "dolor-type") {
+    swiperWrapperFood.innerHTML += `
+      <div class="swiper-slide ${product.category}" data-id=${product.id}>
+        <div class="item-wrap">
+          <div class="item-img">
+            <div class="img-holder">
+              <img src="${product.imageSrc}">
+            </div>
+          </div>
+          <div class="item-info">
+            <div>
+              <h3>${product.title}</h3>
+              <span> R$ ${product.price.toFixed(2)} </span>
+            </div>
+          </div>
+        </div>
+      </div>
     `;
-})
+  } else if (product.category === "beverages-type") {
+    swiperWrapperDrinks.innerHTML += `
+      <div class="swiper-slide ${product.category}" data-id=${product.id}>
+        <div class="item-wrap">
+          <div class="item-img">
+            <div class="img-holder">
+              <img src="${product.imageSrc}">
+            </div>
+          </div>
+          <div class="item-info">
+            <div>
+              <h3>${product.title}</h3>
+              <span> R$ ${product.price.toFixed(2)} </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+});

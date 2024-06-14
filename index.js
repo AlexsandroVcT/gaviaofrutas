@@ -1,5 +1,3 @@
-// back tot top
-
 let backToTopBtn = document.querySelector(".back-to-top");
 
 window.onscroll = () => {
@@ -100,19 +98,6 @@ bottomNavItems.forEach((item, index) => {
   };
 });
 
-// Swal.fire({
-//   icon: "info",
-//   title: "Site em Reforma",
-//   text: "Estamos trabalhando para melhorar sua experiência. O site estará de volta em breve. Obrigado pela compreensão!",
-//   timerProgressBar: true,
-//   showConfirmButton: true, // Mostra o botão de confirmação padrão
-//   confirmButtonText: "Entendi",
-//   showCancelButton: false, // Esconde o botão de cancelamento
-//   customClass: {
-//     confirmButton: "green-button", // Adiciona a classe 'green-button' ao botão de confirmação
-//   },
-// });
-
 // MENU SCROLL
 
 $(window).scroll(function () {
@@ -140,15 +125,6 @@ $("#btnCloseMenu").click(function () {
   $("#btnCloseMenu").css("display", "none");
   $(".iconProfile").css("display", "flex");
 });
-
-// $("#linksMenu a").click(function () {
-//   $("#linksMenu").css("display", "none");
-//   $("#btnOpenMenu").css("display", "flex");
-//   $("#btnCloseMenu").css("display", "none");
-//   $(".iconProfile").css("display", "flex");
-// });
-
-// btnCloseMenu
 
 // CARROSSEL
 var swiper1 = new Swiper(".mySwiper", {

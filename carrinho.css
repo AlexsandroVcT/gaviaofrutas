@@ -1,231 +1,245 @@
 /* Estilos CSS para o carrinho */
 .cart {
-    border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 5px;
-    max-width: 300px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  max-width: 300px;
+}
+
+.cart h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #333; /* Cor do texto */
+}
+
+.cart-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.cart-list li {
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--background-color-secondary);
+  border-radius: 10px;
+  padding: 10px;
+  align-items: center;
+}
+
+/* Estilos para o menu de carrinho */
+.cart-menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 400px;
+  height: 100%;
+  background-color: var(--background-color); /* Cor de fundo do menu */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  display: none; /* Inicia oculto por padrão */
+  animation: menuAnimation 0.5s alternate;
+}
+
+@keyframes menuAnimation {
+  0% {
+    right: -100%;
   }
-  
-  .cart h2 {
-    font-size: 18px;
-    margin-bottom: 10px;
-    color: #333; /* Cor do texto */
-  }
-  
-  .cart-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 20px;
-  }
-  
-  .cart-list li {
-    display: flex;
-    justify-content: space-between;
-    background-color: var(--background-color-secondary);
-    border-radius: 10px;
-    padding: 10px;
-    align-items: center;
-  }
-  
-  /* Estilos para o menu de carrinho */
-  .cart-menu {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 400px;
-    height: 100%;
-    background-color: var(--background-color); /* Cor de fundo do menu */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    display: none; /* Inicia oculto por padrão */
-  }
-  
-  /* Mostra o menu quando ele é focado ou algum de seus descendentes está focado */
-  .cart-menu:focus-within {
-    display: block;
-  }
-  
-  /* Estilos para o conteúdo do menu de carrinho */
-  .cart-menu-content {
-    padding: 20px;
-  }
-  
-  .cart-menu-content h2 {
-    color: #7a7a7b;
-  }
-  
-  .cart-menu.open {
-    display: block; /* Mostra o menu quando a classe .open é aplicada */
-  }
-  
-  /* Estilos para o botão de fechar */
+}
+
+/* Mostra o menu quando ele é focado ou algum de seus descendentes está focado */
+.cart-menu:focus-within {
+  display: block;
+}
+
+/* Estilos para o conteúdo do menu de carrinho */
+.cart-menu-content {
+  padding: 20px;
+}
+
+.cart-menu.open {
+  display: block; /* Mostra o menu quando a classe .open é aplicada */
+}
+
+/* Estilos para o botão de fechar */
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  font-size: 24px;
+  color: #333; /* Cor do ícone de fechar */
+}
+
+/* Estilos para o ícone do carrinho */
+#cart-icon {
+  position: relative;
+  left: -15%;
+}
+
+/* Estilos CSS para o carrinho */
+.cart-menu-content h2 {
+  margin-top: 1px;
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  left: 20px;
+  text-transform: uppercase;
+  color: var(--font-color);
+}
+
+.cart-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 50px;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.cart-item img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  margin-right: 10px;
+  border-radius: 10px;
+  border: 2px solid var(--background-color);
+  background-color: var(--primary-color);
+}
+.cart-item-image img {
+  width: 50%;
+}
+
+.cart-item .item-details {
+  flex: 1;
+  text-align: left;
+}
+
+.cart-item .item-actions {
+  display: flex; /* Exibe os elementos em linha */
+  align-items: center; /* Alinha os itens verticalmente */
+  border: 1px solid #f2f2f2; /* Adiciona uma borda ao redor do contêiner */
+  border-radius: var(--borderRadius) !important; /* Adiciona um raio à borda */
+  overflow: hidden; /* Esconde qualquer conteúdo que vá além do contêiner */
+}
+
+.quantity-btn {
+  padding: 5px; /* Adiciona espaço interno aos botões */
+  cursor: pointer; /* Define o cursor como ponteiro ao passar por cima */
+  border: none; /* Remove a borda dos botões */
+  background-color: transparent; /* Define o fundo como transparente */
+  transition: background-color 0.3s ease; /* Adiciona uma transição suave ao fundo */
+}
+
+.quantity-btn:hover {
+  background-color: #0d8048; /* Cor de fundo ao passar o mouse */
+  color: #fff; /* Muda a cor do texto ao passar o mouse */
+}
+
+.item-quantity {
+  padding: 5px; /* Adiciona espaço interno à quantidade */
+  font-weight: bold; /* Define a quantidade em negrito */
+}
+
+.cart-discount {
+  margin-top: 20px;
+}
+
+.cart-discount span {
+  text-decoration: line-through;
+  margin-right: 10px;
+}
+
+.cart-summary button {
+  width: 100%;
+  padding: 15px 0px;
+  margin-top: 20px;
+}
+.cart-item-details {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.nameProducts {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+}
+
+.nameProducts .cart-item-title {
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.nameProducts .cart-item-price {
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--grey);
+}
+
+.cart-item-price {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.item-actions {
+  bottom: 0px;
+  border: none !important;
+  font-size: 0.8rem;
+  height: max-content !important;
+}
+
+.item-quantity {
+  margin: 0px 5px;
+}
+
+.quantity-btn {
+  background-color: var(--primary-color);
+  width: 20px;
+  border-radius: 3px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--background-color);
+  font-weight: 600;
+}
+
+.cart-subtotal {
+  font-weight: 600;
+}
+
+.subtotal-value {
+  color: #dd3636;
+}
+
+.remove-btn {
+  margin-right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.remove-btn:hover i {
+  transition: 0.3s;
+  color: #dd3636 !important;
+}
+
+@media all and (max-width: 768px) {
   .close-btn {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    cursor: pointer;
-    font-size: 24px;
-    color: #333; /* Cor do ícone de fechar */
+    right: 20px !important;
+    font-size: 2rem;
   }
-  
-  /* Estilos para o ícone do carrinho */
-  #cart-icon {
-    position: relative;
-    left: -15%;
-  }
-  
-  /* Estilos CSS para o carrinho */
-  .cart-menu-content h2 {
-    margin-top: 1px;
-    margin-bottom: 20px;
-    font-size: 24px;
-    display: flex;
-    justify-content: center;
-    left: 26px;
-    margin-left: 43px;
-    color: var(--font-color);
-  }
-  
-  .cart-list {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .cart-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0;
-  }
-  
-  .cart-item img {
-    width: 60px;
-    height: 60px;
-    object-fit: cover;
-    margin-right: 10px;
-    border-radius: 10px;
-    border: 2px solid var(--background-color);
-  }
-  
-  .cart-item .item-details {
-    flex: 1;
-    text-align: left;
-  }
-  
-  .cart-item .item-actions {
-    display: flex; /* Exibe os elementos em linha */
-    align-items: center; /* Alinha os itens verticalmente */
-    border: 1px solid #f2f2f2; /* Adiciona uma borda ao redor do contêiner */
-    border-radius: var(--borderRadius) !important; /* Adiciona um raio à borda */
-    overflow: hidden; /* Esconde qualquer conteúdo que vá além do contêiner */
-  }
-  
-  .quantity-btn {
-    padding: 5px; /* Adiciona espaço interno aos botões */
-    cursor: pointer; /* Define o cursor como ponteiro ao passar por cima */
-    border: none; /* Remove a borda dos botões */
-    background-color: transparent; /* Define o fundo como transparente */
-    transition: background-color 0.3s ease; /* Adiciona uma transição suave ao fundo */
-  }
-  
-  .quantity-btn:hover {
-    background-color: #0d8048; /* Cor de fundo ao passar o mouse */
-    color: #fff; /* Muda a cor do texto ao passar o mouse */
-  }
-  
-  .item-quantity {
-    padding: 5px; /* Adiciona espaço interno à quantidade */
-    font-weight: bold; /* Define a quantidade em negrito */
-  }
-  
-  .cart-discount {
-    margin-top: 20px;
-  }
-  
-  .cart-discount span {
-    text-decoration: line-through;
-    margin-right: 10px;
-  }
-  
-  .cart-summary button {
-    width: 100%;
-    padding: 15px 0px;
-    margin-top: 20px;
-  }
-  .cart-item-details {
-    display: flex;
-    align-items: center;
-    position: relative;
-  }
-  
-  .nameProducts {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 5px;
-  }
-  
-  .nameProducts .cart-item-title {
-    text-transform: uppercase;
-    font-weight: 600;
-  }
-  
-  .nameProducts .cart-item-price {
-    text-transform: uppercase;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: var(--grey);
-  }
-  
-  .cart-item-price {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-  }
-  
-  .item-actions {
-    bottom: 0px;
-    border: none !important;
-    font-size: 0.8rem;
-    height: max-content !important;
-  }
-  
-  .item-quantity {
-    margin: 0px 5px;
-  }
-  
-  .quantity-btn {
-    background-color: var(--primary-color);
-    width: 20px;
-    border-radius: 3px;
-    height: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--background-color);
-    font-weight: 600;
-  }
-  
-  .cart-subtotal {
-    font-weight: 600;
-  }
-  
-  .subtotal-value {
-    color: #dd3636;
-  }
-  
-  .remove-btn {
-    margin-right: 10px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 1.2rem;
-  }
-  
-  .remove-btn:hover i {
-    transition: 0.3s;
-    color: #dd3636 !important;
-  }
-  
+}

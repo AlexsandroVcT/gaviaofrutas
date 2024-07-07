@@ -139,12 +139,12 @@ var swiper1 = new Swiper(".mySwiper", {
     disableOnInteraction: false,
   },
   breakpoints: {
-    640: {
+    500: {
       slidesPerView: 2,
       spaceBetween: 20,
     },
     768: {
-      slidesPerView: 2,
+      slidesPerView: 3,
       spaceBetween: 40,
     },
     1024: {
@@ -156,9 +156,9 @@ var swiper1 = new Swiper(".mySwiper", {
 
 // DROP MENU CATALOG
 var swiper2 = new Swiper(".swiper", {
-  slidesPerView: 1,
-  spaceBetween: 10,
-  loop: true,
+  // slidesPerView: 1,
+  // spaceBetween: 10,
+
   pagination: {
     el: ".swiper-pagination-beverages",
     clickable: true,
@@ -168,12 +168,20 @@ var swiper2 = new Swiper(".swiper", {
     disableOnInteraction: false,
   },
   breakpoints: {
-    640: {
+    100: {
+      slidesPerView: 1,
+      spaceBetween: 20,
+    },
+    360: {
+      slidesPerView: 2,
+      spaceBetween: 20,
+    },
+    500: {
       slidesPerView: 2,
       spaceBetween: 20,
     },
     768: {
-      slidesPerView: 2,
+      slidesPerView: 3,
       spaceBetween: 40,
     },
     1024: {
@@ -182,3 +190,17 @@ var swiper2 = new Swiper(".swiper", {
     },
   },
 });
+
+// CLICK LINKS MENU AND CART
+
+// $(".btnCart").click(function () {
+//   $("#linksMenu").css("display", "none");
+//   $("#btnOpenMenu").css("display", "flex");
+//   $("#btnCloseMenu").css("display", "none");
+// });
+
+// $("#linksMenu a").click(function () {
+//   $("#linksMenu").css("display", "none");
+//   $("#btnOpenMenu").css("display", "flex");
+//   $("#btnCloseMenu").css("display", "none");
+// });

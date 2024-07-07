@@ -4,56 +4,56 @@ const products = [
     id: 1,
     title: "Maçã",
     price: 5.99,
-    imageSrc: "../assets/imgs_vdd/maça.png",
+    imageSrc: "../assets/imgs_vdd/frutas/maça.png",
     category: "salad-type",
   },
   {
     id: 2,
     title: "Abacaxi",
     price: 12.99,
-    imageSrc: "../assets/imgs_vdd/abacaxi.png",
+    imageSrc: "../assets/imgs_vdd/frutas/abacaxi.png",
     category: "salad-type",
   },
   {
     id: 3,
     title: "Pera",
     price: 12.99,
-    imageSrc: "../assets/imgs_vdd/pera.png",
+    imageSrc: "../assets/imgs_vdd/frutas/pera.png",
     category: "salad-type",
   },
   {
     id: 4,
     title: "Melancia",
     price: 10.99,
-    imageSrc: "../assets/imgs_vdd/melancia.png",
+    imageSrc: "../assets/imgs_vdd/frutas/melancia.png",
     category: "salad-type",
   },
   {
     id: 5,
     title: "Banana",
     price: 3.99,
-    imageSrc: "../assets/imgs_vdd/banana.png",
+    imageSrc: "../assets/imgs_vdd/frutas/banana.png",
     category: "salad-type",
   },
   {
     id: 6,
     title: "Uva",
     price: 7.99,
-    imageSrc: "../assets/imgs_vdd/uva.png",
+    imageSrc: "../assets/imgs_vdd/frutas/uva.png",
     category: "salad-type",
   },
   {
     id: 7,
     title: "Abacate",
     price: 20.99,
-    imageSrc: "../assets/imgs_vdd/abacate.png",
+    imageSrc: "../assets/imgs_vdd/frutas/abacate.png",
     category: "salad-type",
   },
   {
     id: 8,
     title: "Morango",
     price: 22.99,
-    imageSrc: "../assets/imgs_vdd/morango.png",
+    imageSrc: "../assets/imgs_vdd/frutas/morango.png",
     category: "salad-type",
   },
   // Verduras Nutritivas
@@ -118,56 +118,56 @@ const products = [
     id: 17,
     title: "Cereja",
     price: 3.99,
-    imageSrc: "../assets/imgs_vdd/cereja.png",
+    imageSrc: "../assets/imgs_vdd/ofertas_especiais/cereja.png",
     category: "dolor-type",
   },
   {
     id: 18,
     title: "Maça Verde",
     price: 3.99,
-    imageSrc: "../assets/imgs_vdd/macaverde.png",
+    imageSrc: "../assets/imgs_vdd/ofertas_especiais/macaverde.png",
     category: "dolor-type",
   },
   {
     id: 19,
     title: "Tomate",
     price: 3.99,
-    imageSrc: "../assets/imgs_vdd/tomate.png",
+    imageSrc: "../assets/imgs_vdd/ofertas_especiais/tomate.png",
     category: "dolor-type",
   },
   {
     id: 20,
     title: "Pêssego",
     price: 3.99,
-    imageSrc: "../assets/imgs_vdd/pessego.png",
+    imageSrc: "../assets/imgs_vdd/ofertas_especiais/pessego.png",
     category: "dolor-type",
   },
   {
     id: 21,
     title: "Limão",
     price: 3.99,
-    imageSrc: "../assets/imgs_vdd/limao.png",
+    imageSrc: "../assets/imgs_vdd/ofertas_especiais/limao.png",
     category: "dolor-type",
   },
   {
     id: 22,
     title: "Manga",
     price: 3.99,
-    imageSrc: "../assets/imgs_vdd/manga.png",
+    imageSrc: "../assets/imgs_vdd/ofertas_especiais/manga.png",
     category: "dolor-type",
   },
   {
     id: 23,
     title: "Melão",
     price: 3.99,
-    imageSrc: "../assets/imgs_vdd/melao.png",
+    imageSrc: "../assets/imgs_vdd/ofertas_especiais/melao.png",
     category: "dolor-type",
   },
   {
     id: 24,
     title: "Mamão",
     price: 3.99,
-    imageSrc: "../assets/imgs_vdd/mamao.png",
+    imageSrc: "../assets/imgs_vdd/ofertas_especiais/mamao.png",
     category: "dolor-type",
   },
   // Bebidas
@@ -175,56 +175,56 @@ const products = [
     id: 25,
     title: "Skol",
     price: 6.99,
-    imageSrc: "../assets/imgs/drinks/skol.png",
+    imageSrc: "../assets/imgs_vdd/bebidas/skol.png",
     category: "beverages-type",
   },
   {
     id: 26,
     title: "Monster",
     price: 19.99,
-    imageSrc: "../assets/imgs/drinks/monster.png",
+    imageSrc: "../assets/imgs_vdd/bebidas/monster.png",
     category: "beverages-type",
   },
   {
     id: 27,
     title: "Sprite",
     price: 8.99,
-    imageSrc: "../assets/imgs/drinks/sprite.png",
+    imageSrc: "../assets/imgs_vdd/bebidas/sprite.png",
     category: "beverages-type",
   },
   {
     id: 28,
     title: "Heineken",
     price: 12.99,
-    imageSrc: "../assets/imgs/drinks/heineken.png",
+    imageSrc: "../assets/imgs_vdd/bebidas/heineken.png",
     category: "beverages-type",
   },
   {
     id: 29,
     title: "Whisky",
     price: 29.99,
-    imageSrc: "../assets/imgs/drinks/whisky.png",
+    imageSrc: "../assets/imgs_vdd/bebidas/whisky.png",
     category: "beverages-type",
   },
   {
     id: 30,
     title: "Brahma",
     price: 14.99,
-    imageSrc: "../assets/imgs/drinks/brahma.png",
+    imageSrc: "../assets/imgs_vdd/bebidas/brahma.png",
     category: "beverages-type",
   },
   {
     id: 31,
     title: "Coca-Cola",
     price: 9.99,
-    imageSrc: "../assets/imgs/drinks/cocacola.png",
+    imageSrc: "../assets/imgs_vdd/bebidas/cocacola.png",
     category: "beverages-type",
   },
   {
     id: 32,
     title: "Red Bull",
     price: 39.99,
-    imageSrc: "../assets/imgs/drinks/redbull.png",
+    imageSrc: "../assets/imgs_vdd/bebidas/redbull.png",
     category: "beverages-type",
   },
 ];
@@ -239,7 +239,7 @@ $(document).ready(function () {
         <div class="item-wrap">
           <div class="item-img">
             <div class="img-holder">
-              <img src="${product.imageSrc}">
+              <img src="${product.imageSrc}" alt="${product.title}" loading="lazy">
             </div>
           </div>
           <div class="item-info">
@@ -275,7 +275,7 @@ products.forEach((product) => {
         <div class="item-wrap">
           <div class="item-img">
             <div class="img-holder">
-              <img src="${product.imageSrc}">
+              <img src="${product.imageSrc}" alt="${product.title}" loading="lazy">
             </div>
           </div>
           <div class="item-info">
@@ -293,7 +293,7 @@ products.forEach((product) => {
         <div class="item-wrap">
           <div class="item-img">
             <div class="img-holder">
-              <img src="${product.imageSrc}">
+              <img src="${product.imageSrc}" alt="Produto - ${product.title}" loading="lazy">
             </div>
           </div>
           <div class="item-info">

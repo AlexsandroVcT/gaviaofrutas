@@ -5,21 +5,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Ícone da página (favicon) -->
-    <link rel="shortcut icon" href="assets/imgs/icon.png" type="image/x-icon" />
+    <link
+      rel="shortcut icon"
+      href="assets/imgs/icon.webp"
+      type="image/x-icon"
+    />
 
-    <!-- Título otimizado -->
     <title>
       Gavião Frutas e Alimentos - Atacadista de Frutas em Santa Luzia do Norte
     </title>
 
-    <!-- Meta descrição -->
     <meta
       name="description"
       content="Gavião Frutas e Alimentos - Atacadista de frutas e verduras frescas em Santa Luzia do Norte. Visite-nos e descubra a melhor qualidade em frutas. CEP: 57130-000."
     />
 
-    <!-- Meta tags adicionais -->
     <meta
       name="keywords"
       content="gaviao frutas, frutas, Gavião Frutas, frutas e verduras, Frutas e Verduras gaviao, gavião, Gavião Verduras, Atacadista de Frutas, Santa Luzia do Norte, Frutas Frescas, Verduras Frescas, CEP 57130-000"
@@ -27,7 +27,6 @@
     <meta name="author" content="Gavião Frutas e Alimentos" />
     <meta name="robots" content="index, follow" />
 
-    <!-- Open Graph meta tags para redes sociais -->
     <meta
       property="og:title"
       content="Gavião Frutas e Alimentos - Atacadista de Frutas em Santa Luzia do Norte"
@@ -38,12 +37,10 @@
     />
     <meta
       property="og:image"
-      content="https://i.ibb.co/JzsHKTv/Filing-system-amico.png"
+      content="https://i.ibb.co/JzsHKTv/Filing-system-amico.webp"
     />
     <meta property="og:url" content="https://www.gaviaofrutas.com.br" />
     <meta property="og:type" content="website" />
-
-    <!-- Twitter Card meta tags -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
@@ -55,10 +52,9 @@
     />
     <meta
       name="twitter:image"
-      content="https://gaviaofrutas.com.br/assets/dan-gold-4_jhDO54BYg-unsplash.jpg"
+      content="https://gaviaofrutas.com.br/assets/dan-gold-4_jhDO54BYg-unsplash.webp"
     />
 
-    <!-- Links para fontes e ícones -->
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap"
@@ -73,20 +69,16 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     />
 
-    <!-- SweetAlert2 CSS -->
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
     />
 
-    <!-- Links para estilos -->
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="carrinho.css" />
 
-    <!-- Script deferido -->
     <script src="carrinho.js" defer></script>
 
-    <!-- Google Tag Manager -->
     <script>
       (function (w, d, s, l, i) {
         w[l] = w[l] || [];
@@ -99,21 +91,18 @@
         f.parentNode.insertBefore(j, f);
       })(window, document, "script", "dataLayer", "GTM-T2X3JWG");
     </script>
-    <!-- End Google Tag Manager -->
 
-    <!-- Prefetch DNS -->
     <link rel="dns-prefetch" href="//fonts.googleapis.com" />
     <link rel="dns-prefetch" href="//fonts.gstatic.com" />
     <link rel="dns-prefetch" href="//cdnjs.cloudflare.com" />
 
-    <!-- Structured Data -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Organization",
         "name": "Gavião Frutas e Alimentos",
         "url": "https://www.gaviaofrutas.com.br",
-        "logo": "https://i.ibb.co/JzsHKTv/Filing-system-amico.png",
+        "logo": "https://i.ibb.co/JzsHKTv/Filing-system-amico.webp",
         "description": "Gavião Frutas e Alimentos é um atacadista de frutas e verduras localizado em Santa Luzia do Norte, AL. Oferecemos uma ampla variedade de produtos frescos, cuidadosamente selecionados para garantir qualidade e sabor. Nosso compromisso é fornecer aos nossos clientes os melhores alimentos para uma vida saudável e equilibrada.",
         "contactPoint": {
           "@type": "ContactPoint",
@@ -129,7 +118,6 @@
       }
     </script>
 
-    <!-- Link Swiper's CSS -->
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
@@ -137,7 +125,6 @@
   </head>
 
   <body>
-    <!-- Google Tag Manager (noscript) -->
     <noscript
       ><iframe
         src="https://www.googletagmanager.com/ns.html?id=GTM-T2X3JWG"
@@ -146,19 +133,16 @@
         style="display: none; visibility: hidden"
       ></iframe
     ></noscript>
-    <!-- End Google Tag Manager (noscript) -->
 
-    <!-- BACK TO TOP BTN -->
     <a href="#home" class="back-to-top">
       <i class="fal fa-arrow-to-top"></i>
     </a>
-    <!-- MENU -->
+
     <header class="nav">
       <nav class="menu-wrap">
-        <!-- LOGO -->
         <a href="#home" class="logo">
           <img
-            src="assets/imgs/logo.png"
+            src="assets/imgs/logo.webp"
             alt="Logo Gavião Frutas"
             loading="lazy"
           />
@@ -172,29 +156,24 @@
           <li><a href="#contacts">Contatos</a></li>
           <li><a class="loginLink" href="pages/login.html">Login</a></li>
         </ul>
-        <!-- CARRINHO ICONE -->
+
         <div class="btnCart" onclick="openCartMenu()">
           <i class="fal fa-shopping-bag"></i>
           <span class="cart-count">0</span>
         </div>
 
         <div class="iconsMenuMobile">
-          <!-- <li class="iconProfile">
-            <a href="pages/login.html"><i class="fal fa-user"></i></a>
-          </li> -->
           <i id="btnOpenMenu" class="fal fa-bars"></i>
           <i id="btnCloseMenu" class="fal fa-times"></i>
         </div>
       </nav>
     </header>
-    <!-- SISTEMA DE CARRINHO-->
+
     <div class="cart-menu" id="cart-menu">
       <div class="cart-menu-content">
         <h2>Meu Carrinho</h2>
 
-        <ul class="cart-list">
-          <!-- Os itens do carrinho serão adicionados aqui -->
-        </ul>
+        <ul class="cart-list"></ul>
         <span class="close-btn" onclick="closeCartMenu()">
           <i class="fal fa-times"></i>
         </span>
@@ -207,7 +186,7 @@
         </div>
       </div>
     </div>
-    <!-- SECTION HOME -->
+
     <section id="home" class="bannerInitial">
       <div class="bannerTexts">
         <h1>
@@ -230,14 +209,14 @@
 
       <figure>
         <img
-          src="assets/imgs/womanfruit.png"
+          src="assets/imgs/womanfruit.webp"
           alt="Página Inicial"
           loading="lazy"
         />
         <div></div>
       </figure>
     </section>
-    <!-- CARROSSEL PROMOÇÕES -->
+
     <section class="carrossel container" id="carrossel1">
       <div class="food-menu">
         <div>
@@ -254,12 +233,12 @@
         <div class="swiper-pagination swiper-pagination-food"></div>
       </div>
     </section>
-    <!-- SECION ABOUT -->
+
     <section class="about container" id="about">
       <div class="boxAbout">
         <figure>
           <img
-            src="assets/imgs/backgroundAbout.jpg"
+            src="assets/imgs/backgroundAbout.webp"
             alt="Escolha Saudável"
             loading="lazy"
           />
@@ -284,7 +263,7 @@
         </figcaption>
       </div>
     </section>
-    <!-- CARROSSEL BEBIDAS -->
+
     <section class="carrossel container" id="carrossel2">
       <div class="food-menu">
         <div>
@@ -301,7 +280,7 @@
         <div class="swiper-pagination swiper-pagination-drinks"></div>
       </div>
     </section>
-    <!-- CONTACTS -->
+
     <div class="boxContacts" id="contacts">
       <div class="container">
         <figcaption>
@@ -327,10 +306,10 @@
           </ul>
         </figcaption>
 
-        <img src="assets/imgs/contacts.png" alt="Contato" loading="lazy" />
+        <img src="assets/imgs/contacts.webp" alt="Contato" loading="lazy" />
       </div>
     </div>
-    <!-- INFORMATIONS -->
+
     <section class="boxInformations">
       <div class="container">
         <ul>
@@ -362,7 +341,7 @@
         </ul>
       </div>
     </section>
-    <!-- GOOGLE MAPS -->
+
     <section id="googleMaps">
       <iframe
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3933.938522561456!2d-35.82500931691304!3d-9.600562277432925!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x701490160ded679%3A0xa06f375f5c8af1c8!2sGavi%C3%A3o%20frutas!5e0!3m2!1spt-BR!2sbr!4v1716677738880!5m2!1spt-BR!2sbr"
@@ -371,7 +350,7 @@
         referrerpolicy="no-referrer-when-downgrade"
       ></iframe>
     </section>
-    <!-- FOOTER -->
+
     <footer>
       <div class="inforsFooter">
         <div class="aboutFooter">
@@ -424,7 +403,6 @@
       <h6>© 2024 Gavião Frutas - Todos os direitos reservados</h6>
     </footer>
 
-    <!-- SCRIPTS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script

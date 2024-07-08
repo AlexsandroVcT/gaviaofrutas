@@ -11,8 +11,6 @@ window.onscroll = () => {
   }
 };
 
-// top nav menu
-
 let menuItems = document.getElementsByClassName("menu-item");
 
 Array.from(menuItems).forEach((item, index) => {
@@ -23,7 +21,6 @@ Array.from(menuItems).forEach((item, index) => {
   };
 });
 
-// Atualizar a seleção da categoria de alimentos para incluir bebidas
 $(document).ready(function () {
   const $foodMenuList = $(".food-item-wrap");
   const $categories = $(".food-category button");
@@ -43,13 +40,7 @@ $(document).ready(function () {
   });
 });
 
-// on scroll animation
-
-let scroll =
-  window.requestAnimationFrame ||
-  function (callback) {
-    // window.setTimeout(callback, 1000 / 60);
-  };
+let scroll = window.requestAnimationFrame || function (callback) {};
 
 let elToShow = document.querySelectorAll(".play-on-scroll");
 
@@ -82,8 +73,6 @@ loop = () => {
 
 loop();
 
-// mobile nav
-
 let bottomNavItems = document.querySelectorAll(".mb-nav-item");
 
 let bottomMove = document.querySelector(".mb-move-item");
@@ -98,8 +87,6 @@ bottomNavItems.forEach((item, index) => {
   };
 });
 
-// MENU SCROLL
-
 $(window).scroll(function () {
   var height = $(window).scrollTop();
   var header = document.querySelector("header");
@@ -111,7 +98,6 @@ $(window).scroll(function () {
   }
 });
 
-// MENU MOBILE
 $("#btnOpenMenu").click(function () {
   $("#linksMenu").css("display", "flex");
   $("#btnOpenMenu").css("display", "none");
@@ -126,7 +112,6 @@ $("#btnCloseMenu").click(function () {
   $(".iconProfile").css("display", "flex");
 });
 
-// CARROSSEL
 var swiper1 = new Swiper(".mySwiper", {
   slidesPerView: 4,
   spaceBetween: 10,
@@ -154,11 +139,7 @@ var swiper1 = new Swiper(".mySwiper", {
   },
 });
 
-// DROP MENU CATALOG
 var swiper2 = new Swiper(".swiper", {
-  // slidesPerView: 1,
-  // spaceBetween: 10,
-
   pagination: {
     el: ".swiper-pagination-beverages",
     clickable: true,
@@ -190,17 +171,3 @@ var swiper2 = new Swiper(".swiper", {
     },
   },
 });
-
-// CLICK LINKS MENU AND CART
-
-// $(".btnCart").click(function () {
-//   $("#linksMenu").css("display", "none");
-//   $("#btnOpenMenu").css("display", "flex");
-//   $("#btnCloseMenu").css("display", "none");
-// });
-
-// $("#linksMenu a").click(function () {
-//   $("#linksMenu").css("display", "none");
-//   $("#btnOpenMenu").css("display", "flex");
-//   $("#btnCloseMenu").css("display", "none");
-// });

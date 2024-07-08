@@ -1,29 +1,25 @@
-// Adiciona um evento de clique nos botões de adicionar ao carrinho
 const addToCartButtons = document.querySelectorAll(".cart-btn");
 addToCartButtons.forEach((button) => {
   button.addEventListener("click", addToCartClicked);
 });
 
-// Função para abrir o menu do carrinho
 function openCartMenu(event) {
   if (event) {
-    event.stopPropagation(); // Impede a propagação do evento para evitar o fechamento imediato do menu
+    event.stopPropagation();
   }
   const cartMenu = document.querySelector(".cart-menu");
-  cartMenu.classList.add("open"); // Adiciona a classe 'open' para exibir o menu
-  // Adiciona um event listener para fechar o menu quando o usuário clicar fora dele
+  cartMenu.classList.add("open");
+
   document.addEventListener("click", closeCartMenuOnClickOutside);
 }
 
-// Função para fechar o menu do carrinho
 function closeCartMenu() {
   const cartMenu = document.querySelector(".cart-menu");
-  cartMenu.classList.remove("open"); // Remove a classe 'open' para ocultar o menu
-  // Remove o event listener para fechar o menu quando o usuário clicar fora dele
+  cartMenu.classList.remove("open");
+
   document.removeEventListener("click", closeCartMenuOnClickOutside);
 }
 
-// Função para fechar o menu do carrinho quando o usuário clicar fora dele
 function closeCartMenuOnClickOutside(event) {
   const cartMenu = document.querySelector(".cart-menu");
   if (!cartMenu.contains(event.target)) {
@@ -31,7 +27,6 @@ function closeCartMenuOnClickOutside(event) {
   }
 }
 
-// Adiciona um event listener para abrir o menu quando o usuário clicar no ícone
 const cartIcon = document.querySelector(".btnCart");
 cartIcon.addEventListener("click", openCartMenu);
 
@@ -63,7 +58,6 @@ function createCartItem({ id, title, imageSrc, price }, quantity = 1) {
   return cartItem;
 }
 
-// Função para adicionar um item ao carrinho quando o botão "Adicionar ao carrinho" é clicado
 function addToCartClicked(event) {
   const button = event.target;
   const foodItem = button.closest(".food-item");
@@ -72,7 +66,6 @@ function addToCartClicked(event) {
   addToCart(product);
 }
 
-// Função para adicionar um item ao carrinho
 function addToCart(product) {
   const { id, title, price } = product;
   const existingProduct = getProducts().find((e) => e.id == id);
@@ -92,9 +85,8 @@ function addToCart(product) {
   updateCart(result);
 }
 
-// Função para remover um item do carrinho quando o botão "Remover" é clicado
 function removeCartItem(event) {
-  event.stopPropagation(); // Impede a propagação do evento para evitar o fechamento do menu
+  event.stopPropagation();
   const button = event.target;
   const item = button.closest(".cart-item");
   const updatedProduct = deleteProduct(item.dataset.id);
@@ -103,7 +95,6 @@ function removeCartItem(event) {
   }
 }
 
-// Função para aumentar a quantidade de um item no carrinho
 function increaseQuantity(button) {
   const item = button.closest(".cart-item");
   const quantityElement = button.parentElement.querySelector(".item-quantity");
@@ -113,7 +104,6 @@ function increaseQuantity(button) {
   updateCart();
 }
 
-// Função para diminuir a quantidade de um item no carrinho
 function decreaseQuantity(button) {
   const item = button.closest(".cart-item");
   const quantityElement = button.parentElement.querySelector(".item-quantity");
@@ -127,13 +117,11 @@ function decreaseQuantity(button) {
   updateCart();
 }
 
-// Função para atualizar o contador do carrinho
 function updateCartCount(count) {
   const cartCount = document.querySelector(".cart-count");
   cartCount.innerText = count;
 }
 
-// Função para calcular e atualizar o total do carrinho
 function updateCartTotal(cartItems) {
   let subtotal = 0;
   cartItems.forEach((item) => {
@@ -141,16 +129,14 @@ function updateCartTotal(cartItems) {
     subtotal += item.quantity * price;
   });
 
-  const discount = subtotal * 0.1; // Exemplo de desconto de 10%
+  const discount = subtotal * 0.1;
   const total = subtotal - discount;
 
-  // Verifica se o elemento de subtotal existe antes de atualizá-lo
   const subtotalElement = document.querySelector(".subtotal-value");
   if (subtotalElement) {
     subtotalElement.innerText = `R$ ${subtotal.toFixed(2)}`;
   }
 
-  // Atualiza o desconto e o total apenas se os elementos existirem
   const discountElement = document.querySelector(".discount-value");
   const totalElement = document.querySelector(".total-value");
   if (discountElement && totalElement) {

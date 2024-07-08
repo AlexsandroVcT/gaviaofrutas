@@ -93,6 +93,7 @@ function removeCartItem(event) {
   if (updatedProduct == null) {
     item.remove();
   }
+  updateCart()
 }
 
 function increaseQuantity(button) {

@@ -19,10 +19,16 @@ signUpForm.addEventListener("submit", async (event) => {
   const usernameInput = signUpForm.querySelector("#signupUsername");
   const emailInput = signUpForm.querySelector("#signupEmail");
   const passwordInput = signUpForm.querySelector("#signupPassword");
+  const telInput = signUpForm.querySelector("#signupTel");
+  const bairroInput = signUpForm.querySelector("#signupBairro");
+
 
   const username = usernameInput.value;
   const email = emailInput.value;
   const password = passwordInput.value;
+  const tel = telInput.value;
+  const bairro = bairroInput.value;
+
 
   // Validar o nome de usuário
   if (!username || username.trim().length < 3) {
@@ -43,12 +49,12 @@ signUpForm.addEventListener("submit", async (event) => {
   }
 
   try {
-    const response = await fetch("https://gaviao-frutas.vercel.app/register", {
+    const response = await fetch("http://localhost:3000/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ username, email, password }),
+      body: JSON.stringify({ username, email, password, tel, bairro }),
     });
 
     if (!response.ok) {

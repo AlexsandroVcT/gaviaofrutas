@@ -101,6 +101,7 @@ function removeCartItem(event) {
   if (updatedProduct == null) {
     item.remove();
   }
+  updateCart()
 }
 
 // Função para aumentar a quantidade de um item no carrinho

@@ -14,4 +14,10 @@ export class User {
 
   @Column()
   password!: string;
+
+  @Column()
+  telefone!: string;
+
+  @Column()
+  bairro!: string;
 }

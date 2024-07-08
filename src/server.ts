@@ -46,7 +46,7 @@ createConnection({
 
 app.post('/register', async (req: Request, res: Response) => {
   try {
-    const { username, email, password } = req.body;
+    const { username, email, password, tel, bairro } = req.body;
     console.log(`Recebido POST request para registro de usuário: ${username}, ${email}`);
 
     // Validar o nome de usuário
@@ -80,6 +80,8 @@ if (!email || typeof email !== 'string' || email.trim().length < 6 || !validate(
       username,
       email,
       password: hashedPassword,
+      telefone: tel,
+      bairro
     });
 
     await userRepository.save(newUser);

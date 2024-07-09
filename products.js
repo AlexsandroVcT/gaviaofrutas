@@ -237,9 +237,7 @@ $(document).ready(function () {
         <div class="item-wrap">
           <div class="item-img">
             <div class="img-holder">
-              <img src="${product.imageSrc}" alt="${
-      product.title
-    }" loading="lazy">
+              <img src="${product.imageSrc}" alt="${product.title}"  >
             </div>
           </div>
           <div class="item-info">
@@ -273,9 +271,7 @@ products.forEach((product) => {
         <div class="item-wrap">
           <div class="item-img">
             <div class="img-holder">
-              <img src="${product.imageSrc}" alt="${
-      product.title
-    }" loading="lazy">
+              <img src="${product.imageSrc}" alt="${product.title}"  >
             </div>
           </div>
           <div class="item-info">
@@ -293,9 +289,7 @@ products.forEach((product) => {
         <div class="item-wrap">
           <div class="item-img">
             <div class="img-holder">
-              <img src="${product.imageSrc}" alt="Produto - ${
-      product.title
-    }" loading="lazy">
+              <img src="${product.imageSrc}" alt="Produto - ${product.title}"  >
             </div>
           </div>
           <div class="item-info">

@@ -83,7 +83,7 @@ html {
 }
 
 .linkActive {
-  color: var(--primary-color);
+  color: #368800;
 }
 
 .logo {
@@ -311,7 +311,7 @@ section {
   margin: 20px 0px;
   width: 80%;
   font-weight: 600;
-  color: var(--grey);
+  color: var(--font-color);
 }
 
 .bannerInitial a {
@@ -360,7 +360,7 @@ section {
   border: none;
   /* border: 2px solid var(--primary-color); */
   border-radius: 10px;
-  color: var(--background-color);
+  color: #fff !important;
   background-color: var(--primary-color);
   cursor: pointer;
   font-weight: 600;
@@ -434,7 +434,7 @@ section {
 }
 
 .carrossel .food-menu div p,
-.carrossel .food-menu div h1 {
+.carrossel .food-menu div h2 {
   text-align: left;
   width: max-content;
 }
@@ -450,13 +450,13 @@ section {
   bottom: 0px !important;
   --swiper-pagination-color: var(--primary-color);
   --swiper-pagination-bullet-size: 10px;
-  --swiper-pagination-bullet-width: 8px;
-  --swiper-pagination-bullet-height: 8px;
+  --swiper-pagination-bullet-width: 10px;
+  --swiper-pagination-bullet-height: 10px;
   --swiper-pagination-bullet-inactive-color: #000;
   --swiper-pagination-bullet-inactive-opacity: 0.1;
   --swiper-pagination-bullet-opacity: 0.8;
-  --swiper-pagination-bullet-horizontal-gap: 4px;
-  --swiper-pagination-bullet-vertical-gap: 6px;
+  --swiper-pagination-bullet-horizontal-gap: 8px;
+  --swiper-pagination-bullet-vertical-gap: 10px;
 }
 
 /* ABOUT */
@@ -517,10 +517,6 @@ section {
   color: var(--font-color);
   font-size: 2rem;
   margin-bottom: 30px;
-}
-
-.about figcaption h3 strong {
-  color: var(--primary-color);
 }
 
 .primary-color {
@@ -832,7 +828,7 @@ footer {
   font-size: 0.9rem;
 }
 
-footer h6 {
+footer h5 {
   background-color: var(--background-color-secondary);
   width: 100%;
   height: 40px;
@@ -850,8 +846,8 @@ section#food-menu-section {
 }
 
 .textsCatalog {
-  padding-left: 0px;
   width: 35%;
+  padding-left: 0px;
   margin-left: 100px;
 }
 
@@ -1002,7 +998,7 @@ section#food-menu-section {
 }
 
 .item-info span {
-  color: var(--grey);
+  color: var(--font-color);
   font-weight: 600;
 }
 
@@ -1682,6 +1678,24 @@ section#food-menu-section {
   }
 }
 
+#linksMenu {
+  display: none;
+  flex-direction: column;
+}
+#btnCloseMenu {
+  display: none;
+}
+@media (min-width: 768px) {
+  #linksMenu {
+    display: flex;
+    flex-direction: row;
+  }
+  #btnOpenMenu,
+  #btnCloseMenu {
+    display: none;
+  }
+}
+
 @media all and (max-width: 768px) {
   .btnCart {
     width: 0px;
@@ -1856,28 +1870,26 @@ section#food-menu-section {
   /* BANNER INITIAL */
   .bannerInitial {
     position: relative;
-    height: 800px !important;
-    background-color: var(--primary-color);
+    height: 600px !important;
   }
 
   .bannerTexts {
-    background: linear-gradient(
-      0deg,
-      rgba(0, 0, 0, 0.9220063025210083) 0%,
-      rgba(0, 0, 0, 0.5410539215686274) 53%,
-      rgba(0, 0, 0, 0) 100%
-    );
     position: absolute;
     z-index: 2;
+    top: 0px;
     left: 0px;
-    bottom: 0px;
-    padding: 50px;
+    padding: 0px 20px;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center !important;
     width: 100% !important;
+    height: 100%;
   }
 
   .bannerTexts h1,
   .bannerTexts p {
-    color: var(--background-color);
+    text-align: center;
   }
 
   .bannerInitial figure {
@@ -1886,6 +1898,7 @@ section#food-menu-section {
     position: absolute;
     left: 0px;
     text-align: center;
+    display: none;
   }
 
   .bannerInitial figure img {
@@ -1959,6 +1972,11 @@ section#food-menu-section {
   .boxTestimonial div {
     height: max-content;
     padding-bottom: 40px;
+  }
+  footer h4 {
+    font-size: 0.8rem;
+    text-align: center;
+    padding: 30px 20px;
   }
 }
 

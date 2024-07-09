@@ -925,6 +925,15 @@ section#food-menu-section {
   gap: 20px;
 }
 
+.boxCategory div button {
+  width: max-content; /* Largura fixa para os botões */
+  color: var(--primary-color) !important;
+}
+
+.boxCategory .active {
+  color: var(--background-color) !important;
+}
+
 .food-item-wrap {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -1670,6 +1679,7 @@ section#food-menu-section {
 
   .boxCategory div button {
     width: max-content; /* Largura fixa para os botões */
+    color: var(--primary-color);
   }
 
   .titleFoodCategory h1,
@@ -2167,7 +2177,7 @@ section#food-menu-section {
   }
 }
 
-@media all and (max-width: 337px) {
+@media all and (max-width: 330px) {
   .item-wrap {
     height: 160px !important;
   }
@@ -2176,7 +2186,7 @@ section#food-menu-section {
   }
 }
 
-@media all and (max-width: 300px) {
+@media all and (max-width: 336px) {
   .food-item-wrap {
     gap: 20px;
     grid-template-columns: 1fr !important;

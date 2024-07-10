@@ -1695,6 +1695,7 @@ section#food-menu-section {
 #btnCloseMenu {
   display: none;
 }
+
 @media (min-width: 768px) {
   #linksMenu {
     display: flex;
@@ -2040,7 +2041,7 @@ section#food-menu-section {
   }
 }
 
-@media all and (max-width: 425px) {
+@media all and (max-width: 490px) {
   /* SOBRE */
 
   .about {
@@ -2121,7 +2122,6 @@ section#food-menu-section {
 
   .food-item-wrap {
     gap: 20px;
-
     grid-template-columns: 1fr 1fr !important;
   }
   .item-wrap {
@@ -2177,7 +2177,7 @@ section#food-menu-section {
   }
 }
 
-@media all and (max-width: 330px) {
+@media all and (max-width: 490px) {
   .item-wrap {
     height: 160px !important;
   }

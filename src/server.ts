@@ -7,6 +7,7 @@ import { DataSource } from 'typeorm';
 import { User } from './entities/User';
 import { login } from './scripts/login';
 import { register } from './scripts/register';
+import { errorHandler } from './middlewares/error-handler'; // Certifique-se de que o caminho está correto
 
 dotenv.config({ path: '.env.development.local' });
 
@@ -14,8 +15,8 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 const corsOptions = {
-    origin: "*",
-    optionsSuccessStatus: 200,
+  origin: "*",
+  optionsSuccessStatus: 200,
 };
 
 app.use(cors(corsOptions));
@@ -43,7 +44,6 @@ const main = async () => {
   app.use(express.static(path.join(__dirname, '../')));
   app.use(express.json());
 
-
   app.use(register);
   app.use(login);
 
@@ -51,11 +51,14 @@ const main = async () => {
     res.sendFile(path.join(__dirname, '../public/login.html'));
   });
 
+  // Middleware de tratamento de erros
+  app.use(errorHandler);
+
   app.listen(port, () => {
     console.log(`Servidor rodando em http://localhost:${port}`);
   });
 }
 
-main().catch (error => {
+main().catch(error => {
   console.error('Erro ao inicializar a conexão com o banco de dados:', error);
 });

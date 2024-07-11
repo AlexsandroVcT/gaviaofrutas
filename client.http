@@ -1,0 +1,26 @@
+@baseUrl = http://localhost:3000
+# @authToken = {{Login_with_password.response.body.token}}
+
+
+# @name create_account
+POST {{baseUrl}}/register
+Content-Type: application/json
+
+{
+    "username": "Juan",
+    "email": "juan@gmail.com",
+    "password": "1236547j",
+    "tel": "35997321370",
+    "bairro": "bairro 3"
+}
+
+###
+
+# @name Login_with_password
+POST {{baseUrl}}/login
+Content-Type: application/json
+
+{
+    "email": "juann@gmail.com",
+    "password": "1236547j"
+}

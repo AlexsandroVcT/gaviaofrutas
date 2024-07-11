@@ -84,7 +84,7 @@ app.post('/register', async (req: Request, res: Response) => {
       return res.status(400).json({ message: 'Usuário já existe.' });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hashSync(password, 10);
 
     const newUser = userRepository.create({
       username,
@@ -117,7 +117,7 @@ app.post('/register', async (req: Request, res: Response) => {
         return res.status(401).json({ message: 'Email ou senha incorretos.' });
       }
 
-      const isPasswordValid = await bcrypt.compare(password, user.password);
+      const isPasswordValid = await bcrypt.compareSync(password, user.password);
 
       if (!isPasswordValid) {
         console.log('Email ou senha incorretos.');

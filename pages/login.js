@@ -156,7 +156,7 @@ loginForm.addEventListener("submit", async (event) => {
   }
 
   try {
-    const response = await fetch("http://localhost:3000/login", {
+    const response = await fetch("https://gaviao-frutas.vercel.app/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -175,10 +175,15 @@ loginForm.addEventListener("submit", async (event) => {
         response.body.message || "Erro ao enviar dados para o servidor."
       );
     }
+    const data = await response.json();
+    const user = data.user;
+
+    // Armazenar o token no localStorage
+    localStorage.setItem("userData", JSON.stringify(user));
 
     // Exibir notificação de login bem-sucedido
     Swal.fire({
-      title: "Login efetuado!",
+      title: `Login efetuado! Bem-vindo ${user.username}`,
       icon: "success",
       position: "top-end", // Posição no canto superior direito
       showConfirmButton: false, // Não mostrar botão de confirmação
@@ -195,7 +200,7 @@ loginForm.addEventListener("submit", async (event) => {
 
     // Aguardar 2 segundos antes de redirecionar para a página principal
     setTimeout(() => {
-      window.location.href = "../index.html";
+      window.location.href='../bem-vindo.html'
     }, 2000);
   } catch (error) {
     console.error("Erro:", error.message);

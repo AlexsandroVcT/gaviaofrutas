@@ -36,7 +36,14 @@ login.post('/login', async (req, res, next) => {
     }
 
     console.log('Login bem-sucedido.');
-    res.status(200).json({ message: 'Login bem-sucedido.' });
+    res.status(200).json({
+      message: 'Login bem-sucedido.', user: {
+      id: user.id,
+      username: user.username,
+      email: user.email,
+      telefone: user.telefone,
+      bairro: user.bairro,
+    } });
   } catch (error) {
     next(error);
   }

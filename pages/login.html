@@ -19,6 +19,8 @@
     />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+
+
     <title>Formulário de login e inscrição</title>
   </head>
 
@@ -132,5 +134,15 @@
     ></script>
     <script src="login.js"></script>
     <script src="../icons/fontawesome.js"></script>
+    <script src="getUserData.js"></script>
+    <script>
+      const user = getUserLogged();
+      const usernameElement = document.getElementById("username");
+      if (user) {
+        window.location.href='../bem-vindo.html'
+      } 
+    </script>
+
+    
   </body>
 </html>

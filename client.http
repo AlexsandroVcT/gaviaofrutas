@@ -7,7 +7,7 @@ POST {{baseUrl}}/register
 Content-Type: application/json
 
 {
-    "username": "Ju",
+    "username": "juan",
     "email": "juan@gmail.com",
     "password": "1236547j",
     "tel": "35997321370",
@@ -21,6 +21,6 @@ POST {{baseUrl}}/login
 Content-Type: application/json
 
 {
-    "email": "juan@gmail.com",
+    "email": "juan",
     "password": "1236547j"
 }

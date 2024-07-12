@@ -1,8 +1,8 @@
 import express from 'express';
 import { hash } from 'bcryptjs';
-import { appDataSource } from '../server';
 import { User } from '../entities/User';
 import { z } from 'zod';
+import { appDataSource } from '../database';
 
 export const register = express.Router();
 

@@ -1,9 +1,9 @@
 import express from 'express';
 import { compare } from 'bcryptjs';
-import { appDataSource } from '../server';
 import { User } from '../entities/User';
 import { z } from 'zod';
 import { UnauthorizedError } from '../errors/unauthorized-error';
+import { appDataSource } from '../database';
 
 export const login = express.Router();
 

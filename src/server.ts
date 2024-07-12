@@ -8,6 +8,7 @@ import { User } from './entities/User';
 import { login } from './scripts/login';
 import { register } from './scripts/register';
 import { errorHandler } from './middlewares/error-handler'; // Certifique-se de que o caminho está correto
+import { appDataSource } from './database';
 
 dotenv.config({ path: '.env.development.local' });
 
@@ -25,23 +26,6 @@ app.use(cors(corsOptions));
 app.options('*', cors(corsOptions));
 
 // Inicialização do DataSource do TypeORM
-export const appDataSource = new DataSource({
-  type: 'postgres',
-  host: process.env.GAVIAO_FRUTAS_DB_HOST,
-  port: parseInt(process.env.GAVIAO_FRUTAS_DB_PORT || '0'),
-  username: process.env.GAVIAO_FRUTAS_DB_USER,
-  password: process.env.GAVIAO_FRUTAS_DB_PASSWORD,
-  database: process.env.GAVIAO_FRUTAS_DB_DATABASE,
-  synchronize: true,
-  logging: true,
-  entities: [User],
-  migrations: [],
-  subscribers: [],
-  ssl: {
-    rejectUnauthorized: false,
-  },
-});
-
 const main = async () => {
   await appDataSource.initialize();
 

@@ -55,6 +55,7 @@ signUpForm.addEventListener("submit", async (event) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ username, email, password, tel, bairro }),
+      mode: 'no-cors'
     });
 
     if (!response.ok) {
@@ -162,6 +163,7 @@ loginForm.addEventListener("submit", async (event) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ email, password }),
+      mode: 'no-cors'
     });
 
     if (!response.ok) {

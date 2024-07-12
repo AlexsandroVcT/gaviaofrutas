@@ -10,9 +10,12 @@ export const errorHandler = (
   next: NextFunction
 ) => {
   if (error instanceof ZodError) {
+    const firstError = Object.values(error.flatten().fieldErrors)?.[0]?.[0];
+
     return res.status(400).send({
       errors: error.flatten().fieldErrors,
-      message: 'Validation error',
+      message: firstError || 'Error de validação',
+
     })
   }
   if (error instanceof BadRequestError) {

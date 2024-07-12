@@ -3,8 +3,6 @@ import 'reflect-metadata';
 import express from 'express';
 import path from 'path';
 import dotenv from 'dotenv';
-import { DataSource } from 'typeorm';
-import { User } from './entities/User';
 import { login } from './scripts/login';
 import { register } from './scripts/register';
 import { errorHandler } from './middlewares/error-handler'; // Certifique-se de que o caminho está correto

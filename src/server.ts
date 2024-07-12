@@ -14,13 +14,15 @@ dotenv.config({ path: '.env.development.local' });
 const app = express();
 const port = process.env.PORT || 3000;
 
+// Configuração do CORS
 const corsOptions = {
-  origin: "*",
+  origin: '*', // Ajuste conforme necessário para maior segurança
   optionsSuccessStatus: 200,
 };
 
 app.use(cors(corsOptions));
 
+// Inicialização do DataSource do TypeORM
 export const appDataSource = new DataSource({
   type: 'postgres',
   host: process.env.GAVIAO_FRUTAS_DB_HOST,
@@ -35,18 +37,21 @@ export const appDataSource = new DataSource({
   subscribers: [],
   ssl: {
     rejectUnauthorized: false,
-  }
+  },
 });
 
 const main = async () => {
   await appDataSource.initialize();
 
+  // Middleware para servir arquivos estáticos
   app.use(express.static(path.join(__dirname, '../')));
   app.use(express.json());
 
+  // Registro de rotas
   app.use(register);
   app.use(login);
 
+  // Rota raiz
   app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/login.html'));
   });
@@ -54,11 +59,12 @@ const main = async () => {
   // Middleware de tratamento de erros
   app.use(errorHandler);
 
+  // Inicialização do servidor
   app.listen(port, () => {
     console.log(`Servidor rodando em http://localhost:${port}`);
   });
-}
+};
 
-main().catch(error => {
+main().catch((error) => {
   console.error('Erro ao inicializar a conexão com o banco de dados:', error);
 });

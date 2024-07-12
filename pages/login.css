@@ -21,7 +21,7 @@
 body {
   width: 100%;
 
-  background-color: var(--background-color-secondary);
+  /* background-color: var(--background-color-secondary); */
 }
 
 ::-webkit-scrollbar {
@@ -82,7 +82,7 @@ body {
   width: 100%;
 }
 
-.container {
+.boxForms {
   width: 90%;
   max-width: 1440px;
   height: 700px;
@@ -139,7 +139,7 @@ body {
   margin-top: 30px;
 }
 
-.container {
+.boxForms {
   position: relative;
 }
 
@@ -357,14 +357,49 @@ input[type="submit"] {
   }
 }
 
+.buttonBack{
+  height: 50px;
+  background-color: #fff;
+  justify-content: center;
+  border-radius: 5px;
+  position: absolute;
+  padding: 0px 20px;
+  left: 10px;
+  top: 0px;
+  box-shadow: 10px 10px 20px 0px #00000010;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--font-color);
+  cursor: pointer;
+  z-index: 999;
+} 
+
 @media all and (max-width: 1020px) {
+
+  body{
+    background-color: var(--background-color-secondary);
+  }
+
   .separateInputs {
     flex-direction: column;
     gap: 0px !important;
     height: max-content !important;
   }
 
-  .container {
+  .buttonBack{
+    left: 10px;
+    top: 0px;
+    position:fixed;
+  } 
+
+  .buttonBack p{
+    display: none;
+  }
+
+  .boxForms {
     width: 100%;
     height: 700px !important;
     margin: 50px 0px !important;

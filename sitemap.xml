@@ -7,8 +7,14 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://www.gaviaofrutas.com.br/produtos</loc>
-    <lastmod>2024-05-21</lastmod>
+    <loc>https://gaviaofrutas.com.br/pages/catalogo</loc>
+    <lastmod>2024-07-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://gaviaofrutas.com.br/pages/login</loc>
+    <lastmod>2024-07-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

@@ -63,6 +63,11 @@ signUpForm.addEventListener("submit", async (event) => {
         errorMessage.message || "Erro ao enviar dados para o servidor."
       );
     }
+    if (response.body.errors) { 
+      throw new Error(
+        response.body.message || "Erro ao enviar dados para o servidor."
+      );
+    }
 
     signUpForm.reset();
     Swal.fire({
@@ -130,26 +135,44 @@ function validateEmail(email) {
 
 // Manipulador de evento para o formulário de login
 const loginForm = document.querySelector(".sign-in-form");
-
 loginForm.addEventListener("submit", async (event) => {
   event.preventDefault(); // Evita o envio do formulário
 
-  const username = document.querySelector("#loginUsername").value;
-  const password = document.querySelector("#loginPassword").value;
+  const usernameInput = loginForm.querySelector("#loginUsername");
+  const passwordInput = loginForm.querySelector("#loginPassword");
+
+  const email = usernameInput.value;
+  const password = passwordInput.value;
+
+  if (!email || !validateEmail(email)) {
+    showError("O e-mail fornecido não é válido.");
+    return;
+  }
+
+  // Validar a senha
+  if (!password || password.trim().length < 6) {
+    showError("A senha deve ter pelo menos 6 caracteres.");
+    return;
+  }
 
   try {
-    const response = await fetch("https://gaviao-frutas.vercel.app/login", {
+    const response = await fetch("http://localhost:3000/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify({ email, password }),
     });
 
     if (!response.ok) {
       const errorMessage = await response.json(); // Obter mensagem de erro do corpo da resposta
       throw new Error(
         errorMessage.message || "Erro ao enviar dados para o servidor."
+      );
+    }
+    if (response.body.errors) { 
+      throw new Error(
+        response.body.message || "Erro ao enviar dados para o servidor."
       );
     }
 
@@ -180,7 +203,7 @@ loginForm.addEventListener("submit", async (event) => {
       title: error.message,
       icon: "error",
       position: "top-end", // Posição no canto superior direito
-      timer: 3000, // Exibir por 2 segundos
+      timer: 3000, // Exibir por 3 segundos
       showConfirmButton: false, // Não mostrar botão de confirmação
       toast: true, // Configurar como notificação toast
       width: "20rem", // Largura da notificação

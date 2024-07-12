@@ -202,7 +202,7 @@ loginForm.addEventListener("submit", async (event) => {
 
     // Aguardar 2 segundos antes de redirecionar para a página principal
     setTimeout(() => {
-      window.location.href='../bem-vindo.html'
+      window.location.href='../../index.html'
     }, 2000);
   } catch (error) {
     console.error("Erro:", error.message);

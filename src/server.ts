@@ -22,6 +22,8 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
+app.options('*', cors(corsOptions));
+
 // Inicialização do DataSource do TypeORM
 export const appDataSource = new DataSource({
   type: 'postgres',

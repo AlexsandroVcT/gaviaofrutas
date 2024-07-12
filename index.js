@@ -142,24 +142,32 @@ $(document).ready(function () {
   });
 
   $("#btnCloseMenu, #linksMenu a").click(function () {
-    $("#linksMenu").hide();
-    $("#btnOpenMenu").show();
-    $("#btnCloseMenu").hide();
+    if ($(window).width() <= 768) {
+      $("#linksMenu").hide();
+      $("#btnOpenMenu").show();
+      $("#btnCloseMenu").hide();
+    }
   });
 
-  $(window)
-    .resize(function () {
-      if ($(window).width() >= 768) {
-        $("#linksMenu").css("display", "flex");
-        $("#btnOpenMenu, #btnCloseMenu").hide();
-      } else {
-        $("#linksMenu").hide();
-        $("#btnOpenMenu").show();
-        $("#btnCloseMenu").hide();
-      }
-    })
-    .resize();
+  $("#linksMenu a").click(function () {
+    // Remove 'linkAtive' class from all links
+    $("#linksMenu a").removeClass("linkActive");
+    // Add 'linkAtive' class to the clicked link
+    $(this).addClass("linkActive");
+  });
+
+  $(window).resize(function () {
+    if ($(window).width() > 768) {
+      $("#linksMenu").css("display", "flex");
+      $("#btnOpenMenu, #btnCloseMenu").hide();
+    } else {
+      $("#linksMenu").hide();
+      $("#btnOpenMenu").show();
+      $("#btnCloseMenu").hide();
+    }
+  }).resize();
 });
+
 
 var swiper1 = new Swiper(".mySwiper", {
   slidesPerView: 4,

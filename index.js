@@ -17,15 +17,12 @@ function updateUsernameOrRedirect() {
     const usernameElement = document.getElementById("username");
 
     if (!usernameElement) {
-      console.error('Elemento com ID "username" não encontrado.');
       return;
     }
 
     if (user) {
-      console.log('Usuário logado:', user); // Verifica o objeto de usuário
       usernameElement.innerText = user.username;
     } else {
-      console.log('Usuário não logado, redirecionando...'); // Log antes de redirecionar
     }
   } catch (error) {
     console.error('Erro ao atualizar nome de usuário ou redirecionar:', error);

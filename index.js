@@ -10,27 +10,40 @@ window.onscroll = () => {
     backToTopBtn.style.display = "none";
   }
 };
-// Funcionalidade para mostrar o usuário logado na página do carrinho
+// Funcionalidade que faz parte para mostrar o username logado na página
 function updateUsernameOrRedirect() {
   try {
     const user = getUserLogged();
     const usernameElement = document.getElementById("username");
+    const logoutButton = document.getElementById("logoutButton");
+    const loginButton = document.getElementById("loginButton");
 
-    if (!usernameElement) {
+    if (!usernameElement || !logoutButton || !loginButton) {
       return;
     }
 
     if (user) {
       usernameElement.innerText = user.username;
+      logoutButton.style.display = 'inline-block';
+      loginButton.style.display = 'none';
     } else {
+      usernameElement.innerText = 'Visitante';
+      logoutButton.style.display = 'none';
+      loginButton.style.display = 'inline-block';
     }
   } catch (error) {
     console.error('Erro ao atualizar nome de usuário ou redirecionar:', error);
   }
 }
 
+// Função para redirecionar para a página de login
+function login() {
+  window.location.href = '/pages/login.html';
+}
+
 // Chama a função ao carregar a página
 document.addEventListener('DOMContentLoaded', updateUsernameOrRedirect);
+
 
 
 

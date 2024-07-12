@@ -229,13 +229,14 @@
           <button class="checkout-btn buttonAll">Finalizar Compra</button>
         </div>
       </div>
-            <!-- Mostrando usuario logado na page -->
-            <form action="#" class="sign-in-form" id="loginForm">
-              <h2 class="title">Bem vindo <span id="username"></span></h2>
-              <div class="buttons">
-                <button type="button" class="btn solid buttonAll" onclick="logout()">Deslogar</button>
-              </div>
-            </form>
+        <!-- Mostrando usuario logado na page -->
+        <form action="#" class="sign-in-form" id="loginForm">
+          <h2 class="title">Bem vindo <span id="username"></span></h2>
+          <div class="buttons">
+            <button type="button" class="btn solid buttonAll" id="logoutButton" onclick="logout()">Deslogar</button>
+            <button type="button" class="btn solid buttonAll" id="loginButton" onclick="login()" style="display: none;">Logar</button>
+          </div>
+        </form>
     </div>
     <!-- CARROSSEL PROMOÇÕES -->
     <section class="carrossel container" id="carrossel1">

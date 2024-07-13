@@ -231,3 +231,36 @@ var swiper2 = new Swiper(".swiper", {
     },
   },
 });
+
+
+// LOGIN OPEN CONFIG USER
+$(document).ready(function() {
+  let isMouseOverButton = false;
+
+  $(".buttonConfigUser").mouseover(function() {
+    isMouseOverButton = true;
+    $(".buttons").show();
+  }).mouseout(function() {
+    isMouseOverButton = false;
+  });
+
+  $(document).click(function(event) {
+    // Verifica se o clique foi fora do elemento .buttons e do botão .buttonConfigUser
+    if (!$(event.target).closest(".buttons, .buttonConfigUser").length) {
+      $(".buttons").hide();
+    } else if (isMouseOverButton) {
+      $(".buttons").show();
+    }
+  });
+
+  $(window).scroll(function() {
+    $(".buttons").hide();
+  });
+});
+
+$(document).ready(function() {
+  var nomeLogin = $('#username').text();
+  var primeiraLetra = nomeLogin.charAt(0);
+  $('.buttonConfigUser i').hide()
+  $('.buttonConfigUser p').append(primeiraLetra)
+});

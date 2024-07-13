@@ -142,6 +142,8 @@ loginForm.addEventListener("submit", async (event) => {
   const usernameInput = loginForm.querySelector("#loginUsername");
   const passwordInput = loginForm.querySelector("#loginPassword");
 
+
+
   const email = usernameInput.value;
   const password = passwordInput.value;
 
@@ -182,6 +184,8 @@ loginForm.addEventListener("submit", async (event) => {
 
     // Armazenar o token no localStorage
     localStorage.setItem("userData", JSON.stringify(user));
+
+    
 
     // Exibir notificação de login bem-sucedido
     Swal.fire({
@@ -224,6 +228,7 @@ loginForm.addEventListener("submit", async (event) => {
   }
 });
 
+
 $(".sign-in-form").css("z-index", 2);
 $(".sign-in-form").css("display", "flex");
 $(".sign-up-form").css("display", "none");
@@ -244,3 +249,4 @@ $("#sign-in-btn").click(function () {
   $(".right-panel").css("display", "flex");
   $(".sign-up-form").css("z-index", 1);
 });
+

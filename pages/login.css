@@ -123,6 +123,122 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  
+}
+
+.userConfig{
+  width: 170px;
+  height: 40px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 5px;
+  position: absolute !important;
+  right: 50px !important;
+  
+}
+
+
+
+.userConfig h2{
+  width: 150px !important;
+  margin-left: 60px !important;
+  font-size: 0.8rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 20px;
+  font-weight: 300;
+}
+
+.buttons{
+  width: 150px;
+  height: 40px;
+  position: absolute;
+  top: 40px;
+  left: -30px !important;
+  background-color: var(--background-color);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+  z-index: -2 !important;
+  display: none;
+  align-items: center;
+}
+
+.buttons button{
+  width: 100%;
+  height: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  transition: .3s;
+}
+
+.buttons button:hover{
+  background-color: var(--primary-color);
+  color: var(--background-color) !important;
+}
+
+.buttons button:hover i{
+  color: var(--background-color);
+}
+
+.buttonMenuUser h2 span{
+  width: 100% !important;
+
+}
+
+.buttonMenuUser h2 strong{
+  margin-top: 3px !important;
+}
+
+.buttonConfigUser{
+  background-color: var(--primary-color);
+  position: absolute;
+  left: 0px;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  box-shadow: 0px 10px 20px 0px #00000010;
+  transition: 0.5s !important;
+  display: flex;
+  z-index: 999;
+  align-items: center;
+  justify-content: center;
+}
+
+.buttonConfigUser p{
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--background-color);
+}
+
+.buttonConfigUser:hover{
+  background-color: var(--primary-color) !important;
+  transition: .5s !important;
+}
+
+.buttonConfigUser:hover i{
+  color: var(--background-color);
+  transition: .5s !important;
+}
+
+.menu-scroll .buttonConfigUser{
+  background-color: var(--primary-color) !important;
+}
+
+.menu-scroll .buttonConfigUser i{
+  color: var(--background-color);
 }
 
 .title {
@@ -301,6 +417,7 @@ input[type="submit"] {
   opacity: 0.8;
 }
 
+
 .panel button {
   background-color: var(--background-color);
   margin-top: 20px;
@@ -377,11 +494,22 @@ input[type="submit"] {
   z-index: 999;
 } 
 
+
+.menu-scroll .buttons{
+  background-color: #f5fff7;
+}
+
 @media all and (max-width: 1020px) {
 
   body{
-    background-color: var(--background-color-secondary);
+    background-color: var(--background-color);
   }
+
+  .sign-in-form,
+.sign-up-form {
+  width: 100% !important;
+}
+
 
   .separateInputs {
     flex-direction: column;
@@ -407,11 +535,12 @@ input[type="submit"] {
     margin-top: 0px;
     border-radius: 0px;
     box-shadow: none;
-    background-color: var(--background-color-secondary);
+    /* background-color: var(--background-color-secondary); */
   }
 
   .forms-container {
     width: 100%;
+    left: 0px;
     position: absolute;
     height: max-content;
   }
@@ -420,15 +549,50 @@ input[type="submit"] {
     display: none;
   }
 
-  .sign-in-form,
-  .sign-up-form {
-    width: 100%;
-    padding: 0px 50px;
-  }
 
+  
   .alternateLoginRegister h5,
   .sign-in-form p,
   .sign-up-form p {
     text-align: center;
   }
+}
+
+@media all and (max-width: 920px) {
+  
+  .userConfig{
+    width: 40px  !important;
+    right: 50px !important;
+    align-items: flex-start !important;
+  }
+  
+  .userConfig button{
+    margin: 0px !important;
+      position:relative !important;
+    }
+  
+    .userConfig h2{
+      display: none;
+    }
+
+    .buttons{
+      left: 50px !important;
+      top: 50px;
+    }
+  }
+
+
+@media all and (max-width: 768px) {
+
+
+  .buttons{
+    left: 100px !important;
+    top: 50px;
+    box-shadow: 0px 10px 20px 0px #00000010;
+  }
+
+  .userConfig{
+    right: 115px !important;
+  }
+
 }

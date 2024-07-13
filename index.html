@@ -153,7 +153,7 @@
           <li><a href="#about">Sobre Nós</a></li>
           <li><a href="pages/catalogo.html">Catálogo</a></li>
           <li><a href="#contacts">Contatos</a></li>
-          <li id="loginLink"><a class="loginLink" href="pages/login.html">Login</a></li>
+          <!-- <li id="loginLink"><a class="loginLink" href="pages/login.html">Login</a></li> -->
         </ul>
 
         <div class="btnCart" onclick="openCartMenu()">
@@ -161,7 +161,26 @@
           <span class="cart-count">0</span>
         </div>
 
+        <div class="userConfig">
+
+          <div class="buttonConfigUser">
+            <i class="fal fa-user" ></i>
+            <p></p>
+          </div>
+
+          <form action="#" class="sign-in-form buttonMenuUser" id="loginForm">
+            <div class="buttons">
+              <button type="button" title="Sair" class="btn solid" id="logoutButton" onclick="logout()"><i class="far fa-sign-out"></i> Sair </button>
+              <button type="button" class="btn solid" id="loginButton" onclick="login()" title="Fazer Login" style="display: none;"><i class="far fa-sign-out"></i> Fazer Login</button>
+            </div>
+          </form>
+          <h2 class="title"><span>Bem-vindo(a)</span> <strong id="username"></strong></h2>
+        </div>
+
         <div class="iconsMenuMobile">
+
+          <!-- Mostrando usuario logado na page -->
+      
           <i id="btnOpenMenu" class="fal fa-bars"></i>
           <i id="btnCloseMenu" class="fal fa-times"></i>
         </div>
@@ -184,14 +203,7 @@
           <button class="checkout-btn buttonAll">Finalizar Compra</button>
         </div>
       </div>
-      <!-- Mostrando usuario logado na page -->
-      <form action="#" class="sign-in-form" id="loginForm">
-        <h2 class="title">Bem vindo <span id="username"></span></h2>
-        <div class="buttons">
-          <button type="button" class="btn solid buttonAll" id="logoutButton" onclick="logout()">Deslogar</button>
-          <button type="button" class="btn solid buttonAll" id="loginButton" onclick="login()" style="display: none;">Logar</button>
-        </div>
-      </form>
+      
     </div>
 
     <section id="home" class="bannerInitial">
@@ -419,5 +431,6 @@
     <script src="storage.js"></script>
     <script src="icons/fontawesome.js"></script>
     <script src="index.js"></script>
+
   </body>
 </html>

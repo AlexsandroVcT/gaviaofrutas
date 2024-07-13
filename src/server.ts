@@ -37,7 +37,7 @@ const main = async () => {
 
   // Rota raiz
   app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../public/login.html'));
+    res.sendFile(path.join(__dirname, '../pages/login.html'));
   });
 
   // Middleware de tratamento de erros

@@ -20,35 +20,49 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-
 app.options('*', cors(corsOptions));
 
 // Inicialização do DataSource do TypeORM
 const main = async () => {
-  await appDataSource.initialize();
+  try {
+    await appDataSource.initialize();
+    console.log('Conexão com o banco de dados inicializada com sucesso.');
 
-  // Middleware para servir arquivos estáticos
-  app.use(express.static(path.join(__dirname, '../')));
-  app.use(express.json());
+    // Middleware para servir arquivos estáticos
+    app.use(express.static(path.join(__dirname, '../pages')));
+    app.use(express.json());
 
-  // Registro de rotas
-  app.use(register);
-  app.use(login);
+    // Middleware para servir arquivos estáticos da pasta pages
+    app.use('/pages', express.static(path.join(__dirname, '../pages')));
 
-  // Rota raiz
-  app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../public/login.html'));
-  });
+    // Registro de rotas
+    app.use(register);
+    app.use(login);
 
-  // Middleware de tratamento de erros
-  app.use(errorHandler);
+    // Rota raiz
+    app.get('/', (req, res) => {
+      const loginFilePath = path.join(__dirname, '../pages/login.html');
+      console.log('Caminho do arquivo login.html:', loginFilePath);
+      res.sendFile(loginFilePath, (err) => {
+        if (err) {
+          console.error('Erro ao enviar login.html:', err);
+          res.status(res.statusCode).end();
+        }
+      });
+    });
 
-  // Inicialização do servidor
-  app.listen(port, () => {
-    console.log(`Servidor rodando em http://localhost:${port}`);
-  });
+    // Middleware de tratamento de erros
+    app.use(errorHandler);
+
+    // Inicialização do servidor
+    app.listen(port, () => {
+      console.log(`Servidor rodando em http://localhost:${port}`);
+    });
+  } catch (error) {
+    console.error('Erro ao inicializar a conexão com o banco de dados:', error);
+  }
 };
 
 main().catch((error) => {
-  console.error('Erro ao inicializar a conexão com o banco de dados:', error);
+  console.error('Erro ao inicializar a aplicação:', error);
 });

@@ -191,7 +191,7 @@ function sendWhatsAppMessage() {
   
   message += `\n*Estou aguardando o atendimento!*`;
 
-  const whatsappLink = `https://wa.me/5561998610854?text=${encodeURIComponent(message)}`;
+  const whatsappLink = `https://wa.me/5582987114659?text=${encodeURIComponent(message)}`;
   
   // Verifique se o link está correto no console
   console.log(whatsappLink);

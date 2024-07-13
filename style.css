@@ -387,10 +387,11 @@ section {
   color: var(--primary-color);
 }
 
-.buttonAll:hover {
+.buttonAll:hover,
+.buttonAllActive:hover {
   box-shadow: 0px 20px 30px 0px #72b34650;
   scale: 1.05;
-  color: var(--background-color);
+  color: var(--background-color) !important;
 }
 
 .slogan button:hover {
@@ -1682,6 +1683,10 @@ section#food-menu-section {
     display: none;
   }
 
+  .food-menu div{
+    text-align: center;
+  }
+
   .iconProfile {
     width: 35px;
     height: 35px;
@@ -1726,6 +1731,7 @@ section#food-menu-section {
   .bannerInitial {
     position: relative;
     height: 600px !important;
+
   }
 
   .bannerTexts {
@@ -1733,18 +1739,32 @@ section#food-menu-section {
     z-index: 2;
     top: 0px;
     left: 0px;
-    padding: 0px 20px;
+    padding: 0px 50px;
     display: flex !important;
     flex-direction: column;
     justify-content: center;
-    align-items: center !important;
     width: 100% !important;
     height: 100%;
+    background-image: url(assets/imgs/mobile-image-home.webp);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center top;
+    backdrop-filter: brightness(10%);
   }
 
   .bannerTexts h1,
-  .bannerTexts p {
-    text-align: center;
+  .bannerTexts p{
+    width: 100%;
+    color: var(--background-color);
+  }
+  .bannerTexts a{
+    height: 60px;
+    font-size: 0.8rem;
+    border-radius: 5px;
+  }
+
+  .bannerTexts a i{
+    font-size: 1.8rem;
   }
 
   .bannerInitial figure {
@@ -1900,7 +1920,12 @@ section#food-menu-section {
   /* BANNER */
   .bannerTexts h1 {
     width: 100%;
-    font-size: 2rem;
+    font-size: 3rem;
+  }
+
+  .bannerTexts p {
+    width: 100%;
+    font-size: 0.8rem;
   }
   /* PRODUCTS */
 
@@ -2027,6 +2052,12 @@ section#food-menu-section {
   }
   .item-img {
     height: 100px !important;
+  }
+}
+
+@media all and (max-width: 360px) {
+  .bannerTexts h1{
+    font-size: 2.4rem;
   }
 }
 

@@ -155,13 +155,11 @@
         style="display: none; visibility: hidden"
       ></iframe
     ></noscript>
-    <!-- End Google Tag Manager (noscript) -->
 
-    <!-- BACK TO TOP BTN -->
     <a href="#home" class="back-to-top">
       <i class="fal fa-arrow-to-top"></i>
     </a>
-    <!-- MENU -->
+
     <header class="nav">
       <nav class="menu-wrap">
         <a href="index.html#home" class="logo">
@@ -174,9 +172,9 @@
           <li><a href="../index.html#about">Sobre Nós</a></li>
           <li><a href="#" class="linkActive">Catálogo</a></li>
           <li><a href="../index.html#contacts">Contatos</a></li>
-          <li class="loginLink"><a href="../pages/login.html">Login</a></li>
+          <!-- <li class="loginLink"><a href="../pages/login.html">Login</a></li> -->
         </ul>
-        <!-- CARRINHO ICONE -->
+
         <div class="btnCart" onclick="openCartMenu()">
           <i class="fal fa-shopping-bag"></i>
           <span class="cart-count">0</span>
@@ -199,17 +197,11 @@
         </div>
 
         <div class="iconsMenuMobile">
-          <!-- <li class="iconProfile">
-            <a href="../pages/login.html"><i class="fal fa-user"></i></a>
-          </li> -->
           <i id="btnOpenMenu" class="fal fa-bars"></i>
           <i id="btnCloseMenu" class="fal fa-times"></i>
         </div>
       </nav>
-      <!-- <div class="cartButton buttonAll" id="cart-icon" >
-    </div> -->
     </header>
-    <!-- BANNER INITIAL -->
     <section id="home" class="bannerInitial">
       <figure class="imgBannerCatalog">
         <img src="../assets/imgs/manFruit.webp" alt="Página Catálogo" />
@@ -218,9 +210,7 @@
       <div class="bannerTexts textsCatalog">
         <h1>Nosso Catálogo</h1>
         <p>
-          Bem-vindo à Gavião Frutas! Entregamos frutas e verduras frescas
-          diretamente na sua casa. Encomende agora e desfrute de alimentos
-          saudáveis e saborosos.
+          Frutas e verduras frescas entregues na sua casa. Encomende agora e desfrute de alimentos saudáveis e saborosos.
         </p>
         <a
           href="https://api.whatsapp.com/send/?phone=5582987114659&text&type=phone_number&app_absent=0"
@@ -231,7 +221,7 @@
         >
       </div>
     </section>
-    <!-- SISTEMA DE CARRINHO-->
+    
     <div class="cart-menu" id="cart-menu">
       <div class="cart-menu-content">
         <span class="close-btn" onclick="closeCartMenu()">
@@ -239,18 +229,16 @@
         </span>
         <h2>Meu Carrinho</h2>
         <ul class="cart-list">
-          <!-- Os itens do carrinho serão adicionados aqui -->
         </ul>
         <div class="cart-summary">
           <div class="cart-subtotal">
             <span>Subtotal:</span>
             <span class="subtotal-value">$0.00</span>
           </div>
-          <button class="checkout-btn buttonAll">Finalizar Compra</button>
+          <button target="_blank" class="checkout-btn buttonAll" onclick="sendWhatsAppMessage()">Finalizar Compra</button>
         </div>
       </div>
     </div>
-    <!-- CARROSSEL PROMOÇÕES -->
     <section class="carrossel container" id="carrossel1">
       <div class="food-menu">
         <div>
@@ -266,7 +254,6 @@
         <div class="swiper-pagination swiper-pagination-food"></div>
       </div>
     </section>
-    <!-- FOOD MENU SECTION -->
     <section id="food-menu-section">
       <div class="container">
         <div class="titleFoodCategory">
@@ -288,26 +275,26 @@
               Catálogo Completo
             </button>
           </div>
-          <div>
-            <button data-food-type="lorem-type" class="buttonAllActive">
-              Verduras Nutritivas
-            </button>
-          </div>
-          <div>
-            <button data-food-type="salad-type" class="buttonAllActive">
-              Frutas Frescas
-            </button>
-          </div>
-          <div>
+          <!-- <div>
             <button data-food-type="dolor-type" class="buttonAllActive">
               Ofertas Especiais
             </button>
+          </div> -->
+          <div>
+            <button data-food-type="salad-type" class="buttonAllActive">
+              Frutas
+            </button>
           </div>
           <div>
+            <button data-food-type="lorem-type" class="buttonAllActive">
+              Verduras
+            </button>
+          </div>
+          <!-- <div>
             <button data-food-type="beverages-type" class="buttonAllActive">
               Bebidas
             </button>
-          </div>
+          </div> -->
           <div id="categ"></div>
         </div>
       </div>
@@ -317,7 +304,6 @@
         </div>
       </div>
     </section>
-    <!-- GOOGLE MAPS -->
     <section id="googleMaps">
       <iframe
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3933.938522561456!2d-35.82500931691304!3d-9.600562277432925!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x701490160ded679%3A0xa06f375f5c8af1c8!2sGavi%C3%A3o%20frutas!5e0!3m2!1spt-BR!2sbr!4v1716677738880!5m2!1spt-BR!2sbr"
@@ -325,7 +311,6 @@
         referrerpolicy="no-referrer-when-downgrade"
       ></iframe>
     </section>
-    <!-- FOOTER -->
     <footer>
       <div class="inforsFooter">
         <div class="aboutFooter">
@@ -379,10 +364,7 @@
       </div>
       <h5>© 2024 Gavião Frutas - Todos os direitos reservados</h5>
     </footer>
-
-    <!-- SCRIPTS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <!-- SweetAlert2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"

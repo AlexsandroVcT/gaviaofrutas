@@ -1353,6 +1353,10 @@ section#food-menu-section {
   font-size: 3rem;
 }
 
+.boxContacts li a p {
+  display: none;
+}
+
 /* LOGIN PAGE */
 
 /* RESPONSIVIDADE */
@@ -1675,7 +1679,7 @@ section#food-menu-section {
     display: none;
   }
 
-  .food-menu div{
+  .food-menu div {
     text-align: center;
   }
 
@@ -1723,7 +1727,6 @@ section#food-menu-section {
   .bannerInitial {
     position: relative;
     height: 600px !important;
-
   }
 
   .bannerTexts {
@@ -1745,17 +1748,17 @@ section#food-menu-section {
   }
 
   .bannerTexts h1,
-  .bannerTexts p{
+  .bannerTexts p {
     width: 100%;
     color: var(--background-color);
   }
-  .bannerTexts a{
+  .bannerTexts a {
     height: 60px;
     font-size: 0.8rem;
     border-radius: 5px;
   }
 
-  .bannerTexts a i{
+  .bannerTexts a i {
     font-size: 1.8rem;
   }
 
@@ -1870,7 +1873,6 @@ section#food-menu-section {
     display: flex;
     align-items: center;
   }
-
 
   .swiper-slide .item-info span {
     font-size: 0.1rem;
@@ -2051,12 +2053,99 @@ section#food-menu-section {
   .item-img {
     height: 100px !important;
   }
-  
+
+  header,
+  .menu-scroll {
+    padding-right: 30px !important;
+    padding-left: 30px !important;
+  }
+
+  .boxContacts {
+    padding: 0px 30px;
+    height: max-content;
+  }
+
+  .boxContacts ul {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 30px;
+  }
+
+  .boxContacts li {
+    width: 100% !important;
+  }
+
+  .boxContacts li a {
+    width: 100% !important;
+    background-color: var(--background-color-secondary);
+    display: flex;
+    border-radius: 10px;
+    align-items: center;
+  }
+
+  .boxContacts li a p {
+    display: flex;
+    padding-left: 30px;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
+  .boxContacts .buttonAll {
+    width: 75px !important;
+  }
+
+  .bannerTexts {
+    padding: 30px;
+  }
 }
 
 @media all and (max-width: 360px) {
-  .bannerTexts h1{
+  .bannerTexts h1 {
     font-size: 2.4rem;
+  }
+
+  .boxContacts {
+    padding: 0px 30px;
+    height: max-content;
+  }
+
+  .boxContacts ul {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .boxContacts li {
+    width: 100% !important;
+  }
+
+  .boxContacts li a {
+    width: 100% !important;
+    background-color: var(--background-color-secondary);
+    display: flex;
+    border-radius: 5px;
+    align-items: center;
+    height: 50px !important;
+  }
+
+  .boxContacts li a p {
+    padding-left: 30px;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .boxContacts .buttonAll {
+    height: 50px !important;
+    width: 50px !important;
+    border-radius: 5px;
+  }
+
+  .bannerTexts {
+    padding: 30px;
   }
 }
 
@@ -2089,5 +2178,11 @@ section#food-menu-section {
     width: 40px !important;
     height: 40px;
     border-radius: 3px !important;
+  }
+
+  .boxContacts li a p {
+    padding-left: 10px;
+    font-size: 0.8rem;
+    font-weight: 600;
   }
 }

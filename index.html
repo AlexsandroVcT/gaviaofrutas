@@ -94,7 +94,7 @@
       })(window, document, "script", "dataLayer", "GTM-T2X3JWG");
     </script>
 
-    <link rel="dns-prefetch" href="//fonts.googleapis.com" defer/>
+    <link rel="dns-prefetch" href="//fonts.googleapis.com" defer />
     <link rel="dns-prefetch" href="//fonts.gstatic.com" />
     <link rel="dns-prefetch" href="//cdnjs.cloudflare.com" />
 
@@ -161,25 +161,42 @@
         </div>
 
         <div class="userConfig">
-
           <div class="buttonConfigUser">
-            <i class="fal fa-user" ></i>
+            <i class="fal fa-user"></i>
             <p></p>
           </div>
 
           <form action="#" class="sign-in-form buttonMenuUser" id="loginForm">
             <div class="buttons">
-              <button type="button" title="Sair" class="btn solid" id="logoutButton" onclick="logout()"><i class="far fa-sign-out"></i> Sair </button>
-              <button type="button" class="btn solid" id="loginButton" onclick="login()" title="Fazer Login" style="display: none;"><i class="far fa-sign-out"></i> Fazer Login</button>
+              <button
+                type="button"
+                title="Sair"
+                class="btn solid"
+                id="logoutButton"
+                onclick="logout()"
+              >
+                <i class="far fa-sign-out"></i> Sair
+              </button>
+              <button
+                type="button"
+                class="btn solid"
+                id="loginButton"
+                onclick="login()"
+                title="Fazer Login"
+                style="display: none"
+              >
+                <i class="far fa-sign-out"></i> Fazer Login
+              </button>
             </div>
           </form>
-          <h2 class="title"><span>Bem-vindo(a)</span> <strong id="username"></strong></h2>
+          <h2 class="title">
+            <span>Bem-vindo(a)</span> <strong id="username"></strong>
+          </h2>
         </div>
 
         <div class="iconsMenuMobile">
-
           <!-- Mostrando usuario logado na page -->
-      
+
           <i id="btnOpenMenu" class="fal fa-bars"></i>
           <i id="btnCloseMenu" class="fal fa-times"></i>
         </div>
@@ -199,18 +216,20 @@
             <span>TOTAL:</span>
             <span class="subtotal-value">$0.00</span>
           </div>
-          <button target="_blank" class="checkout-btn buttonAll" onclick="sendWhatsAppMessage()">Finalizar Compra</button>
+          <button
+            target="_blank"
+            class="checkout-btn buttonAll"
+            onclick="sendWhatsAppMessage()"
+          >
+            Finalizar Compra
+          </button>
         </div>
       </div>
-      
     </div>
 
     <section id="home" class="bannerInitial">
       <div class="bannerTexts">
-        <h1>
-          Gavião Frutas
-          e Verduras
-        </h1>
+        <h1>Gavião Frutas e Verduras</h1>
         <p>
           Bem-vindo à Gavião Frutas! Frutas e verduras frescas entregues em
           <strong></strong>. Encomende agora e desfrute de alimentos saudáveis e
@@ -306,16 +325,18 @@
                 title="Whatsapp"
                 href="https://api.whatsapp.com/send/?phone=5582987114659&text&type=phone_number&app_absent=0"
                 target="_blank"
-                ><i class="fab fa-whatsapp buttonAll active"></i
-              ></a>
+                ><i class="fab fa-whatsapp buttonAll active"></i>
+                <p>(82) 98711-4659</p>
+              </a>
             </li>
             <li>
               <a
                 href="https://www.instagram.com/gaviao_fr/"
                 title="Instagram"
                 target="_blank"
-                ><i class="fab fa-instagram buttonAll active"></i
-              ></a>
+                ><i class="fab fa-instagram buttonAll active"></i>
+                <p>@gaviao_fr</p>
+              </a>
             </li>
           </ul>
         </figcaption>
@@ -430,6 +451,5 @@
     <script src="storage.js"></script>
     <script src="icons/fontawesome.js"></script>
     <script src="index.js"></script>
-
   </body>
 </html>

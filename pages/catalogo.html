@@ -110,7 +110,7 @@
     <!-- End Google Tag Manager -->
 
     <!-- Prefetch DNS -->
-    <link rel="dns-prefetch" href="//fonts.googleapis.com" async/>
+    <link rel="dns-prefetch" href="//fonts.googleapis.com" async />
     <link rel="dns-prefetch" href="//fonts.gstatic.com" />
     <link rel="dns-prefetch" href="//cdnjs.cloudflare.com" />
 
@@ -162,7 +162,7 @@
 
     <header class="nav">
       <nav class="menu-wrap">
-        <a href="index.html#home" class="logo">
+        <a href="../index.html#home" class="logo">
           <img src="../assets/imgs/logo.webp" alt="logo gavião frutas" />
           <h2>Gavião Frutas</h2>
         </a>
@@ -181,19 +181,37 @@
         </div>
 
         <div class="userConfig">
-
           <div class="buttonConfigUser">
-            <i class="fal fa-user" ></i>
+            <i class="fal fa-user"></i>
             <p></p>
           </div>
 
           <form action="#" class="sign-in-form buttonMenuUser" id="loginForm">
             <div class="buttons">
-              <button type="button" title="Sair" class="btn solid" id="logoutButton" onclick="logout()"><i class="far fa-sign-out"></i> Sair </button>
-              <button type="button" class="btn solid" id="loginButton" onclick="login()" title="Fazer Login" style="display: none;"><i class="far fa-sign-out"></i> Fazer Login</button>
+              <button
+                type="button"
+                title="Sair"
+                class="btn solid"
+                id="logoutButton"
+                onclick="logout()"
+              >
+                <i class="far fa-sign-out"></i> Sair
+              </button>
+              <button
+                type="button"
+                class="btn solid"
+                id="loginButton"
+                onclick="login()"
+                title="Fazer Login"
+                style="display: none"
+              >
+                <i class="far fa-sign-out"></i> Fazer Login
+              </button>
             </div>
           </form>
-          <h2 class="title"><span>Bem-vindo(a)</span> <strong id="username"></strong></h2>
+          <h2 class="title">
+            <span>Bem-vindo(a)</span> <strong id="username"></strong>
+          </h2>
         </div>
 
         <div class="iconsMenuMobile">
@@ -210,10 +228,11 @@
       <div class="bannerTexts textsCatalog">
         <h1>Nosso Catálogo</h1>
         <p>
-          Frutas e verduras frescas entregues na sua casa. Encomende agora e desfrute de alimentos saudáveis e saborosos.
+          Frutas e verduras frescas entregues na sua casa. Encomende agora e
+          desfrute de alimentos saudáveis e saborosos.
         </p>
         <a
-          href="https://api.whatsapp.com/send/?phone=5582987114659&text&type=phone_number&app_absent=0"
+          href="https://api.whatsapp.com/send/?phone=5582987114659&text=Ol%C3%A1%2C%20Gavi%C3%A3o%20Frutas%20e%20Verduras%21%20Estou%20interessado%20em%20saber%20mais%20sobre%20os%20produtos%20frescos%20que%20voc%C3%AAs%20oferecem.%20Poderiam%20me%20fornecer%20mais%20informa%C3%A7%C3%B5es%20e%20pre%C3%A7os%3F%20Obrigado%21&type=phone_number&app_absent=0"
           target="_blank"
           class="buttonAll"
         >
@@ -221,21 +240,26 @@
         >
       </div>
     </section>
-    
+
     <div class="cart-menu" id="cart-menu">
       <div class="cart-menu-content">
         <span class="close-btn" onclick="closeCartMenu()">
           <i class="fal fa-times"></i>
         </span>
         <h2>Meu Carrinho</h2>
-        <ul class="cart-list">
-        </ul>
+        <ul class="cart-list"></ul>
         <div class="cart-summary">
           <div class="cart-subtotal">
             <span>Subtotal:</span>
             <span class="subtotal-value">$0.00</span>
           </div>
-          <button target="_blank" class="checkout-btn buttonAll" onclick="sendWhatsAppMessage()">Finalizar Compra</button>
+          <button
+            target="_blank"
+            class="checkout-btn buttonAll"
+            onclick="sendWhatsAppMessage()"
+          >
+            Finalizar Compra
+          </button>
         </div>
       </div>
     </div>

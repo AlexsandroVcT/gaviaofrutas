@@ -951,14 +951,12 @@ section#food-menu-section {
   border-radius: 10px;
   transition: 0.3s ease-in !important;
 }
-.food-item:hover,
-.swiper-slide:hover {
+.food-item:hover {
   background-color: var(--primary-color);
 }
 
 .item-wrap {
   /* transition: 0.4s ease-in-out; */
-  cursor: pointer;
   height: 300px;
   border-radius: 2rem;
   padding: 10px;

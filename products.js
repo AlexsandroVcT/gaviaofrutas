@@ -33,7 +33,7 @@ const products = [
   {
     id: 5,
     title: "Melancia",
-    price: 2.50,
+    price: 2.5,
     imageSrc: "../assets/imgs_products/frutas/melancia.webp",
     category: "salad-type",
   },
@@ -47,14 +47,14 @@ const products = [
   {
     id: 7,
     title: "Maça pequena",
-    price: 1.00,
+    price: 0.8,
     imageSrc: "../assets/imgs_products/frutas/macapequena.webp",
     category: "salad-type",
   },
   {
     id: 8,
     title: "Maracujá",
-    price: 2.99,
+    price: 1.99,
     imageSrc: "../assets/imgs_products/frutas/maracuja.webp",
     category: "salad-type",
   },
@@ -74,22 +74,22 @@ const products = [
   },
   {
     id: 11,
-    title: "Mamão",
-    price: 6.99,
+    title: "Mamão Formoza",
+    price: 3.49,
     imageSrc: "../assets/imgs_products/frutas/mamaopapaia.webp",
     category: "salad-type",
   },
   {
     id: 12,
     title: "Manga",
-    price: 2.99,
+    price: 4.99,
     imageSrc: "../assets/imgs_products/frutas/mangatommy.webp",
     category: "salad-type",
   },
   {
     id: 13,
     title: "Limão",
-    price: 2.00,
+    price: 0.5,
     imageSrc: "../assets/imgs_products/frutas/limao.webp",
     category: "salad-type",
   },
@@ -117,7 +117,7 @@ const products = [
   {
     id: 17,
     title: "Melão",
-    price: 4.99,
+    price: 3.99,
     imageSrc: "../assets/imgs_products/frutas/melao.webp",
     category: "salad-type",
   },
@@ -131,198 +131,204 @@ const products = [
   {
     id: 19,
     title: "Tomate",
-    price: 4.99,
+    price: 2.49,
     imageSrc: "../assets/imgs_products/frutas/tomate.webp",
+    category: "salad-type",
+  },
+  {
+    id: 20,
+    title: "Laranja-Cravo",
+    price: 1.99,
+    imageSrc: "../assets/imgs_products/frutas/laranjacravo.webp",
     category: "salad-type",
   },
 
   // Verduras Nutritivas
   {
-    id: 20,
+    id: 21,
     title: "Alface",
-    price: 3.49,
+    price: 2.99,
     imageSrc: "../assets/imgs_products/verduras_Nutritivas/alface.webp",
     category: "lorem-type",
   },
   {
-    id: 21,
+    id: 22,
     title: "Cenoura",
-    price: 9.99,
+    price: 3.99,
     imageSrc: "../assets/imgs_products/verduras_Nutritivas/cenoura.webp",
     category: "lorem-type",
   },
   {
-    id: 22,
+    id: 23,
     title: "Cebola",
-    price: 8.99,
+    price: 6.99,
     imageSrc: "../assets/imgs_products/verduras_Nutritivas/cebola.webp",
     category: "lorem-type",
   },
   {
-    id: 23,
+    id: 24,
     title: "Repolho",
-    price: 6.99,
+    price: 5.99,
     imageSrc: "../assets/imgs_products/verduras_Nutritivas/repolho.webp",
     category: "lorem-type",
   },
   {
-    id: 24,
+    id: 25,
     title: "Beterraba",
-    price: 6.99,
+    price: 7.99,
     imageSrc: "../assets/imgs_products/verduras_Nutritivas/beterraba.webp",
     category: "lorem-type",
   },
   {
-    id: 25,
+    id: 26,
     title: "Batatinha",
-    price: 9.99,
+    price: 7.99,
     imageSrc: "../assets/imgs_products/verduras_Nutritivas/batatinha.webp",
     category: "lorem-type",
   },
   {
-    id: 26,
+    id: 27,
     title: "Pepino",
-    price: 2.49,
+    price: 2.99,
     imageSrc: "../assets/imgs_products/verduras_Nutritivas/pepino.webp",
     category: "lorem-type",
   },
   {
-    id: 27,
+    id: 28,
     title: "Pimentão",
-    price: 1.49,
+    price: 0.99,
     imageSrc: "../assets/imgs_products/verduras_Nutritivas/pimentao.webp",
     category: "lorem-type",
   },
   {
-    id: 28,
+    id: 29,
     title: "Gengibre",
     price: 29.99,
     imageSrc: "../assets/imgs_products/verduras_Nutritivas/gengibre.webp",
     category: "lorem-type",
   },
   {
-    id: 29,
+    id: 30,
     title: "Chuchu",
     price: 1.99,
     imageSrc: "../assets/imgs_products/verduras_Nutritivas/chuchu.webp",
     category: "lorem-type",
   },
   {
-    id: 30,
+    id: 31,
     title: "Alho",
     price: 1.99,
     imageSrc: "../assets/imgs_products/verduras_Nutritivas/alho.webp",
     category: "lorem-type",
   },
   {
-    id: 31,
+    id: 32,
     title: "Abóbora",
-    price: 4.99,
+    price: 3.99,
     imageSrc: "../assets/imgs_products/verduras_Nutritivas/abobora.webp",
     category: "lorem-type",
   },
 
   // Bebidas
-// Bebidas
-{
-  id: 32,
-  title: "Redbull",
-  price: 9.99,
-  imageSrc: "../assets/imgs_products/bebidas/redbull.webp",
-  category: "beverages-type",
-},
-{
-  id: 33,
-  title: "Monster",
-  price: 9.99,
-  imageSrc: "../assets/imgs_products/bebidas/monster.webp",
-  category: "beverages-type",
-},
-{
-  id: 34,
-  title: "Nordoff Ice",
-  price: 3.99,
-  imageSrc: "../assets/imgs_products/bebidas/nordoffice.webp",
-  category: "beverages-type",
-},
-{
-  id: 35,
-  title: "Cabaré Ice",
-  price: 6.99,
-  imageSrc: "../assets/imgs_products/bebidas/cabareice.webp",
-  category: "beverages-type",
-},
-{
-  id: 36,
-  title: "Cabaré Puro malte",
-  price: 4.49,
-  imageSrc: "../assets/imgs_products/bebidas/cabarepuromalte.webp",
-  category: "beverages-type",
-},
-{
-  id: 37,
-  title: "Heineken",
-  price: 7.00,
-  imageSrc: "../assets/imgs_products/bebidas/heineken.webp",
-  category: "beverages-type",
-},
-{
-  id: 38,
-  title: "Heineken lata",
-  price: 5.49,
-  imageSrc: "../assets/imgs_products/bebidas/heinekenlata.webp",
-  category: "beverages-type",
-},
-{
-  id: 39,
-  title: "Amstel lata",
-  price: 4.99,
-  imageSrc: "../assets/imgs_products/bebidas/amstellata.webp",
-  category: "beverages-type",
-},
-{
-  id: 40,
-  title: "Itaipava lata",
-  price: 3.99,
-  imageSrc: "../assets/imgs_products/bebidas/itaipava.webp",
-  category: "beverages-type",
-},
-{
-  id: 41,
-  title: "Schin lata",
-  price: 3.99,
-  imageSrc: "../assets/imgs_products/bebidas/schinlata.webp",
-  category: "beverages-type",
-},
-{
-  id: 42,
-  title: "Coca-cola lata",
-  price: 3.49,
-  imageSrc: "../assets/imgs_products/bebidas/cocacolalata.webp",
-  category: "beverages-type",
-},
-{
-  id: 43,
-  title: "Fanta lata",
-  price: 2.99,
-  imageSrc: "../assets/imgs_products/bebidas/fantalata.webp",
-  category: "beverages-type",
-},
-{
-  id: 44,
-  title: "Pérgola",
-  price: 19.99,
-  imageSrc: "../assets/imgs_products/bebidas/pergola.webp",
-  category: "beverages-type",
-},
-{
-  id: 45,
-  title: "Água cristal",
-  price: 1.49,
-  imageSrc: "../assets/imgs_products/bebidas/aguacristal.webp",
-  category: "beverages-type",
-},
-
+  // Bebidas
+  {
+    id: 33,
+    title: "Redbull",
+    price: 9.99,
+    imageSrc: "../assets/imgs_products/bebidas/redbull.webp",
+    category: "beverages-type",
+  },
+  {
+    id: 34,
+    title: "Monster",
+    price: 9.99,
+    imageSrc: "../assets/imgs_products/bebidas/monster.webp",
+    category: "beverages-type",
+  },
+  {
+    id: 35,
+    title: "Nordoff Ice",
+    price: 3.99,
+    imageSrc: "../assets/imgs_products/bebidas/nordoffice.webp",
+    category: "beverages-type",
+  },
+  {
+    id: 36,
+    title: "Cabaré Ice",
+    price: 6.99,
+    imageSrc: "../assets/imgs_products/bebidas/cabareice.webp",
+    category: "beverages-type",
+  },
+  {
+    id: 37,
+    title: "Cabaré Puro malte",
+    price: 4.49,
+    imageSrc: "../assets/imgs_products/bebidas/cabarepuromalte.webp",
+    category: "beverages-type",
+  },
+  {
+    id: 38,
+    title: "Heineken",
+    price: 7.0,
+    imageSrc: "../assets/imgs_products/bebidas/heineken.webp",
+    category: "beverages-type",
+  },
+  {
+    id: 39,
+    title: "Heineken lata",
+    price: 5.49,
+    imageSrc: "../assets/imgs_products/bebidas/heinekenlata.webp",
+    category: "beverages-type",
+  },
+  {
+    id: 40,
+    title: "Amstel lata",
+    price: 4.99,
+    imageSrc: "../assets/imgs_products/bebidas/amstellata.webp",
+    category: "beverages-type",
+  },
+  {
+    id: 41,
+    title: "Itaipava lata",
+    price: 3.99,
+    imageSrc: "../assets/imgs_products/bebidas/itaipava.webp",
+    category: "beverages-type",
+  },
+  {
+    id: 42,
+    title: "Schin lata",
+    price: 3.99,
+    imageSrc: "../assets/imgs_products/bebidas/schinlata.webp",
+    category: "beverages-type",
+  },
+  {
+    id: 43,
+    title: "Coca-cola lata",
+    price: 3.49,
+    imageSrc: "../assets/imgs_products/bebidas/cocacolalata.webp",
+    category: "beverages-type",
+  },
+  {
+    id: 44,
+    title: "Fanta lata",
+    price: 2.99,
+    imageSrc: "../assets/imgs_products/bebidas/fantalata.webp",
+    category: "beverages-type",
+  },
+  {
+    id: 45,
+    title: "Pérgola",
+    price: 19.99,
+    imageSrc: "../assets/imgs_products/bebidas/pergola.webp",
+    category: "beverages-type",
+  },
+  {
+    id: 46,
+    title: "Água cristal",
+    price: 1.49,
+    imageSrc: "../assets/imgs_products/bebidas/aguacristal.webp",
+    category: "beverages-type",
+  },
 
   // Ofertas Especiais (Produtos que não estão nas categorias anteriores)
   // {
@@ -355,7 +361,6 @@ const products = [
   // }
 ];
 
-
 $(document).ready(function () {
   const $foods = $(".food-item-wrap");
 
@@ -371,7 +376,7 @@ $(document).ready(function () {
           <div class="item-info">
             <div>
               <h3>${product.title}</h3>
-              <span> R$ ${product.price.toFixed(2).replace('.', ',')} </span>
+              <span> R$ ${product.price.toFixed(2).replace(".", ",")} </span>
             </div>
             <div class="cart-btn">
               <h4>+</h4>
@@ -393,7 +398,7 @@ const swiperWrapperFood = document.getElementById("swiper-wrapper-food");
 const swiperWrapperDrinks = document.getElementById("swiper-wrapper-drinks");
 
 products.forEach((product) => {
-  if (product.category === "dolor-type") {
+  if (product.category === "salad-type") {
     swiperWrapperFood.innerHTML += `
       <div class="swiper-slide ${product.category}" data-id=${product.id}>
         <div class="item-wrap">
@@ -405,7 +410,7 @@ products.forEach((product) => {
           <div class="item-info">
             <div>
               <h3>${product.title}</h3>
-              <span> R$ ${product.price.toFixed(2).replace('.', ',')} </span>
+              <span> R$ ${product.price.toFixed(2).replace(".", ",")} </span>
             </div>
           </div>
         </div>
@@ -423,7 +428,7 @@ products.forEach((product) => {
           <div class="item-info">
             <div>
               <h3>${product.title}</h3>
-              <span> R$ ${product.price.toFixed(2).replace('.', ',')} </span>
+              <span> R$ ${product.price.toFixed(2).replace(".", ",")} </span>
             </div>
           </div>
         </div>

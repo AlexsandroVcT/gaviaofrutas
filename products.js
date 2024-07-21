@@ -397,8 +397,12 @@ $(document).ready(function () {
 const swiperWrapperFood = document.getElementById("swiper-wrapper-food");
 const swiperWrapperDrinks = document.getElementById("swiper-wrapper-drinks");
 
+let maxProductsToShow = 8; // Número máximo de produtos a serem exibidos
+let saladCount = 0;
+let beverageCount = 0;
+
 products.forEach((product) => {
-  if (product.category === "salad-type") {
+  if (product.category === "salad-type" && saladCount < maxProductsToShow) {
     swiperWrapperFood.innerHTML += `
       <div class="swiper-slide ${product.category}" data-id=${product.id}>
         <div class="item-wrap">
@@ -416,7 +420,11 @@ products.forEach((product) => {
         </div>
       </div>
     `;
-  } else if (product.category === "beverages-type") {
+    saladCount++;
+  } else if (
+    product.category === "beverages-type" &&
+    beverageCount < maxProductsToShow
+  ) {
     swiperWrapperDrinks.innerHTML += `
       <div class="swiper-slide ${product.category}" data-id=${product.id}>
         <div class="item-wrap">
@@ -434,5 +442,6 @@ products.forEach((product) => {
         </div>
       </div>
     `;
+    beverageCount++;
   }
 });

@@ -25,30 +25,27 @@ function updateUsernameOrRedirect() {
 
     if (user) {
       usernameElement.innerText = user.username;
-      logoutButton.style.display = 'inline-block';
-      loginButton.style.display = 'none';
-      loginLink.style.display = 'none';
+      logoutButton.style.display = "inline-block";
+      loginButton.style.display = "none";
+      loginLink.style.display = "none";
     } else {
-      usernameElement.innerText = 'Visitante';
-      logoutButton.style.display = 'none';
-      loginButton.style.display = 'inline-block';
-      loginLink.style.display = 'inline-block';
+      usernameElement.innerText = "Visitante";
+      logoutButton.style.display = "none";
+      loginButton.style.display = "inline-block";
+      loginLink.style.display = "inline-block";
     }
   } catch (error) {
-    console.error('Erro ao atualizar nome de usuário ou redirecionar:', error);
+    console.error("Erro ao atualizar nome de usuário ou redirecionar:", error);
   }
 }
 
 // Função para redirecionar para a página de login
 function login() {
-  window.location.href = '/pages/login.html';
+  window.location.href = "/pages/login.html";
 }
 
 // Chama a função ao carregar a página
-document.addEventListener('DOMContentLoaded', updateUsernameOrRedirect);
-
-
-
+document.addEventListener("DOMContentLoaded", updateUsernameOrRedirect);
 
 let menuItems = document.getElementsByClassName("menu-item");
 
@@ -159,18 +156,19 @@ $(document).ready(function () {
     $(this).addClass("linkActive");
   });
 
-  $(window).resize(function () {
-    if ($(window).width() > 768) {
-      $("#linksMenu").css("display", "flex");
-      $("#btnOpenMenu, #btnCloseMenu").hide();
-    } else {
-      $("#linksMenu").hide();
-      $("#btnOpenMenu").show();
-      $("#btnCloseMenu").hide();
-    }
-  }).resize();
+  $(window)
+    .resize(function () {
+      if ($(window).width() > 768) {
+        $("#linksMenu").css("display", "flex");
+        $("#btnOpenMenu, #btnCloseMenu").hide();
+      } else {
+        $("#linksMenu").hide();
+        $("#btnOpenMenu").show();
+        $("#btnCloseMenu").hide();
+      }
+    })
+    .resize();
 });
-
 
 var swiper1 = new Swiper(".mySwiper", {
   slidesPerView: 4,
@@ -204,6 +202,7 @@ var swiper2 = new Swiper(".swiper", {
     el: ".swiper-pagination-beverages",
     clickable: true,
   },
+  loop: true,
   autoplay: {
     delay: 2500,
     disableOnInteraction: false,
@@ -232,19 +231,20 @@ var swiper2 = new Swiper(".swiper", {
   },
 });
 
-
 // LOGIN OPEN CONFIG USER
-$(document).ready(function() {
+$(document).ready(function () {
   let isMouseOverButton = false;
 
-  $(".buttonConfigUser").mouseover(function() {
-    isMouseOverButton = true;
-    $(".buttons").show();
-  }).mouseout(function() {
-    isMouseOverButton = false;
-  });
+  $(".buttonConfigUser")
+    .mouseover(function () {
+      isMouseOverButton = true;
+      $(".buttons").show();
+    })
+    .mouseout(function () {
+      isMouseOverButton = false;
+    });
 
-  $(document).click(function(event) {
+  $(document).click(function (event) {
     // Verifica se o clique foi fora do elemento .buttons e do botão .buttonConfigUser
     if (!$(event.target).closest(".buttons, .buttonConfigUser").length) {
       $(".buttons").hide();
@@ -253,14 +253,14 @@ $(document).ready(function() {
     }
   });
 
-  $(window).scroll(function() {
+  $(window).scroll(function () {
     $(".buttons").hide();
   });
 });
 
-$(document).ready(function() {
-  var nomeLogin = $('#username').text();
+$(document).ready(function () {
+  var nomeLogin = $("#username").text();
   var primeiraLetra = nomeLogin.charAt(0);
-  $('.buttonConfigUser i').hide()
-  $('.buttonConfigUser p').append(primeiraLetra)
+  $(".buttonConfigUser i").hide();
+  $(".buttonConfigUser p").append(primeiraLetra);
 });

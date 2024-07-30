@@ -24,7 +24,8 @@
     "@types/express-validator": "^3.0.0",
     "@types/jsonwebtoken": "^9.0.6",
     "@types/node": "^20.14.2",
-    "@vercel/postgres": "^0.8.0",
+    "@vercel/postgres": "^0.9.0",
+    "ws": "^8.17.1",
     "Validator": "^1.1.4",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
@@ -38,5 +39,10 @@
     "sweetalert2": "^11.11.0",
     "typeorm": "^0.3.20",
     "zod": "^3.23.8"
+    
+  },
+  "resolutions": {
+    "ws": "^8.17.1"
   }
+  
 }

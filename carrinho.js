@@ -40,7 +40,7 @@ function createCartItem({ id, title, imageSrc, price }, quantity = 1) {
             <img class="cart-item-image" src="${imageSrc}" alt="${title}">
             <div class="nameProducts">
               <span class="cart-item-title">${title}</span>
-              <span class="cart-item-price">R$ ${price.toFixed(2).replace('.', ',')}
+              
                 <div class="item-actions">
                   <button class="quantity-btn" onclick="decreaseQuantity(this)">-</button>
                   <span class="item-quantity">${quantity}</span>
@@ -93,7 +93,7 @@ function removeCartItem(event) {
   if (updatedProduct == null) {
     item.remove();
   }
-  updateCart()
+  updateCart();
 }
 
 function increaseQuantity(button) {
@@ -135,14 +135,14 @@ function updateCartTotal(cartItems) {
 
   const subtotalElement = document.querySelector(".subtotal-value");
   if (subtotalElement) {
-    subtotalElement.innerText = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+    subtotalElement.innerText = `R$ ${subtotal.toFixed(2).replace(".", ",")}`;
   }
 
   const discountElement = document.querySelector(".discount-value");
   const totalElement = document.querySelector(".total-value");
   if (discountElement && totalElement) {
-    discountElement.innerText = `-$${discount.toFixed(2).replace('.', ',')}`;
-    totalElement.innerText = `$${total.toFixed(2).replace('.', ',')}`;
+    discountElement.innerText = `-$${discount.toFixed(2).replace(".", ",")}`;
+    totalElement.innerText = `$${total.toFixed(2).replace(".", ",")}`;
   }
 }
 
@@ -164,40 +164,30 @@ cartItems.forEach(function ({ id, quantity }) {
 
 function sendWhatsAppMessage() {
   const cartItems = getProducts();
-  let message = "🛒 *Olá, tudo bem? Gostaria de comprar os seguintes produtos:*\n\n";
+  let message =
+    "🛒 *Olá, tudo bem? Gostaria de saber os valores dos seguintes produtos:*\n\n";
 
   if (cartItems.length === 0) {
     message += "Seu carrinho está vazio.";
   } else {
     cartItems.forEach(({ id, quantity }) => {
-      const product = products.find(e => e.id === id);
+      const product = products.find((e) => e.id === id);
       if (product) {
-        message += ` *- ${product.title}* - ${quantity}x R$ ${product.price.toFixed(2).replace('.', ',')}\n`;
+        message += ` *- ${product.title}* - ${quantity} Und \n`;
       }
     });
-
-    const subtotal = cartItems.reduce((total, item) => {
-      const product = products.find(e => e.id === item.id);
-      return total + (product.price * item.quantity);
-    }, 0);
-
-    const discount = subtotal * 0.1;
-    const total = subtotal - discount;
-
-    message += `\n *- Subtotal:* R$ ${subtotal.toFixed(2).replace('.', ',')}\n`;
-    message += ` *- Desconto:* -R$ ${discount.toFixed(2).replace('.', ',')}\n`;
-    message += ` *- Total:* R$ ${total.toFixed(2).replace('.', ',')}\n`;
   }
 
   message += `\n*Estou aguardando o atendimento!*`;
 
-  const whatsappLink = `https://wa.me/5582987114659?text=${encodeURIComponent(message)}`;
+  const whatsappLink = `https://wa.me/5582987114659?text=${encodeURIComponent(
+    message
+  )}`;
 
   // Verifique se o link está correto no console
   console.log(whatsappLink);
 
   window.open(whatsappLink);
 }
-
 
 updateCart();

@@ -123,10 +123,9 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  
 }
 
-.userConfig{
+.userConfig {
   width: 170px;
   height: 40px !important;
   display: flex;
@@ -136,12 +135,9 @@ body {
   border-radius: 5px;
   position: absolute !important;
   right: 50px !important;
-  
 }
 
-
-
-.userConfig h2{
+.userConfig h2 {
   width: 150px !important;
   margin-left: 60px !important;
   font-size: 0.8rem;
@@ -153,7 +149,7 @@ body {
   font-weight: 300;
 }
 
-.buttons{
+.buttons {
   width: 150px;
   height: 40px;
   position: absolute;
@@ -168,7 +164,7 @@ body {
   align-items: center;
 }
 
-.buttons button{
+.buttons button {
   width: 100%;
   height: 100%;
   background: none;
@@ -177,28 +173,27 @@ body {
   border-top-right-radius: 10px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-  transition: .3s;
+  transition: 0.3s;
 }
 
-.buttons button:hover{
+.buttons button:hover {
   background-color: var(--primary-color);
   color: var(--background-color) !important;
 }
 
-.buttons button:hover i{
+.buttons button:hover i {
   color: var(--background-color);
 }
 
-.buttonMenuUser h2 span{
+.buttonMenuUser h2 span {
   width: 100% !important;
-
 }
 
-.buttonMenuUser h2 strong{
+.buttonMenuUser h2 strong {
   margin-top: 3px !important;
 }
 
-.buttonConfigUser{
+.buttonConfigUser {
   background-color: var(--primary-color);
   position: absolute;
   left: 0px;
@@ -216,28 +211,28 @@ body {
   justify-content: center;
 }
 
-.buttonConfigUser p{
+.buttonConfigUser p {
   text-transform: uppercase;
   font-weight: 700;
   font-size: 1.4rem;
   color: var(--background-color);
 }
 
-.buttonConfigUser:hover{
+.buttonConfigUser:hover {
   background-color: var(--primary-color) !important;
-  transition: .5s !important;
+  transition: 0.5s !important;
 }
 
-.buttonConfigUser:hover i{
+.buttonConfigUser:hover i {
   color: var(--background-color);
-  transition: .5s !important;
+  transition: 0.5s !important;
 }
 
-.menu-scroll .buttonConfigUser{
+.menu-scroll .buttonConfigUser {
   background-color: var(--primary-color) !important;
 }
 
-.menu-scroll .buttonConfigUser i{
+.menu-scroll .buttonConfigUser i {
   color: var(--background-color);
 }
 
@@ -417,7 +412,6 @@ input[type="submit"] {
   opacity: 0.8;
 }
 
-
 .panel button {
   background-color: var(--background-color);
   margin-top: 20px;
@@ -474,7 +468,7 @@ input[type="submit"] {
   }
 }
 
-.buttonBack{
+.buttonBack {
   height: 50px;
   background-color: #fff;
   justify-content: center;
@@ -492,24 +486,21 @@ input[type="submit"] {
   color: var(--font-color);
   cursor: pointer;
   z-index: 999;
-} 
+}
 
-
-.menu-scroll .buttons{
+.menu-scroll .buttons {
   background-color: #f5fff7;
 }
 
 @media all and (max-width: 1020px) {
-
-  body{
+  body {
     background-color: var(--background-color);
   }
 
   .sign-in-form,
-.sign-up-form {
-  width: 100% !important;
-}
-
+  .sign-up-form {
+    width: 100% !important;
+  }
 
   .separateInputs {
     flex-direction: column;
@@ -517,13 +508,13 @@ input[type="submit"] {
     height: max-content !important;
   }
 
-  .buttonBack{
+  .buttonBack {
     left: 10px;
     top: 0px;
-    position:fixed;
-  } 
+    position: fixed;
+  }
 
-  .buttonBack p{
+  .buttonBack p {
     display: none;
   }
 
@@ -549,8 +540,6 @@ input[type="submit"] {
     display: none;
   }
 
-
-  
   .alternateLoginRegister h5,
   .sign-in-form p,
   .sign-up-form p {
@@ -559,40 +548,41 @@ input[type="submit"] {
 }
 
 @media all and (max-width: 920px) {
-  
-  .userConfig{
-    width: 40px  !important;
+  .userConfig {
+    width: 40px !important;
     right: 50px !important;
     align-items: flex-start !important;
   }
-  
-  .userConfig button{
-    margin: 0px !important;
-      position:relative !important;
-    }
-  
-    .userConfig h2{
-      display: none;
-    }
 
-    .buttons{
-      left: 50px !important;
-      top: 50px;
-    }
+  .userConfig button {
+    margin: 0px !important;
+    position: relative !important;
   }
 
+  .userConfig h2 {
+    display: none;
+  }
+
+  .buttons {
+    left: 50px !important;
+    top: 50px;
+  }
+}
 
 @media all and (max-width: 768px) {
-
-
-  .buttons{
+  .buttons {
     left: 100px !important;
     top: 50px;
     box-shadow: 0px 10px 20px 0px #00000010;
   }
 
-  .userConfig{
+  .userConfig {
     right: 115px !important;
   }
+}
 
+@media all and (max-width: 375px) {
+  .boxForms {
+    width: 100% !important;
+  }
 }

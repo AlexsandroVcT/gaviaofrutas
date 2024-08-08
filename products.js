@@ -376,7 +376,7 @@ $(document).ready(function () {
           <div class="item-info">
             <div>
               <h3>${product.title}</h3>
-              <span> R$ ${product.price.toFixed(2).replace(".", ",")} </span>
+              
             </div>
             <div class="cart-btn">
               <h4>+</h4>
@@ -414,7 +414,7 @@ products.forEach((product) => {
           <div class="item-info">
             <div>
               <h3>${product.title}</h3>
-              <span> R$ ${product.price.toFixed(2).replace(".", ",")} </span>
+              
             </div>
           </div>
         </div>

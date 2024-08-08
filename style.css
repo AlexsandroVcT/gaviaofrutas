@@ -960,6 +960,7 @@ section#food-menu-section {
   height: 300px;
   border-radius: 2rem;
   padding: 10px;
+  padding-bottom: 0px;
 }
 
 /* .item-wrap:hover {
@@ -995,7 +996,7 @@ section#food-menu-section {
   height: 20%;
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
   /* background-color: orange; */
 }
 
@@ -1006,7 +1007,6 @@ section#food-menu-section {
 
 .item-info h3 {
   color: var(--font-color);
-  margin-bottom: 5px;
 }
 
 .food-item:hover h3,

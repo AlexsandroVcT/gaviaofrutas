@@ -27,12 +27,16 @@ function updateUsernameOrRedirect() {
       usernameElement.innerText = user.username;
       logoutButton.style.display = "inline-block";
       loginButton.style.display = "none";
-      loginLink.style.display = "none";
+      if (loginLink) {
+        loginLink.style.display = "none";
+      }
     } else {
       usernameElement.innerText = "Visitante";
       logoutButton.style.display = "none";
       loginButton.style.display = "inline-block";
-      loginLink.style.display = "inline-block";
+      if (loginLink) {
+        loginLink.style.display = "inline-block";
+      }
     }
   } catch (error) {
     console.error("Erro ao atualizar nome de usuário ou redirecionar:", error);

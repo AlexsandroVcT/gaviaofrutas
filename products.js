@@ -380,7 +380,7 @@ $(document).ready(function () {
             </div>
             <div class="cart-btn">
               <h4>+</h4>
-              <i class="fal fa-shopping-cart"></i>
+              <i class="fas fa-shopping-cart"></i>
             </div>
           </div>
         </div>
@@ -402,7 +402,11 @@ let saladCount = 0;
 let beverageCount = 0;
 
 products.forEach((product) => {
-  if (product.category === "salad-type" && saladCount < maxProductsToShow) {
+  if (
+    swiperWrapperFood &&
+    product.category === "salad-type" &&
+    saladCount < maxProductsToShow
+  ) {
     swiperWrapperFood.innerHTML += `
       <div class="swiper-slide ${product.category}" data-id=${product.id}>
         <div class="item-wrap">
@@ -422,6 +426,7 @@ products.forEach((product) => {
     `;
     saladCount++;
   } else if (
+    swiperWrapperDrinks &&
     product.category === "beverages-type" &&
     beverageCount < maxProductsToShow
   ) {

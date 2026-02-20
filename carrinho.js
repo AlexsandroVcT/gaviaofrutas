@@ -28,7 +28,9 @@ function closeCartMenuOnClickOutside(event) {
 }
 
 const cartIcon = document.querySelector(".btnCart");
-cartIcon.addEventListener("click", openCartMenu);
+if (cartIcon) {
+  cartIcon.addEventListener("click", openCartMenu);
+}
 
 function createCartItem({ id, title, imageSrc, price }, quantity = 1) {
   const cartItem = document.createElement("li");
@@ -51,7 +53,7 @@ function createCartItem({ id, title, imageSrc, price }, quantity = 1) {
           
         </div>
         <button class="remove-btn" onclick="removeCartItem(event)">
-          <i class="fal fa-trash-alt"></i>
+          <i class="fas fa-trash-alt"></i>
         </button>
     `;
 

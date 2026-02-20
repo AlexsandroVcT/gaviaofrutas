@@ -1,0 +1,17 @@
+{
+  "name": "Gavião Frutas e Alimentos",
+  "short_name": "Gavião Frutas",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f0f3f7",
+  "theme_color": "#72b346",
+  "icons": [
+    {
+      "src": "/assets/imgs/icongaviaofrutas.webp?v=4",
+      "sizes": "256x256",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    }
+  ]
+}

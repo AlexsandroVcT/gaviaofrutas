@@ -139,6 +139,8 @@ $(window).scroll(function () {
 });
 
 $(document).ready(function () {
+  const MOBILE_BREAKPOINT = 820;
+
   $("#btnOpenMenu").click(function () {
     $("#linksMenu").css("display", "flex");
     $("#btnOpenMenu").hide();
@@ -146,7 +148,7 @@ $(document).ready(function () {
   });
 
   $("#btnCloseMenu, #linksMenu a").click(function () {
-    if ($(window).width() <= 768) {
+    if ($(window).width() <= MOBILE_BREAKPOINT) {
       $("#linksMenu").hide();
       $("#btnOpenMenu").show();
       $("#btnCloseMenu").hide();
@@ -162,7 +164,7 @@ $(document).ready(function () {
 
   $(window)
     .resize(function () {
-      if ($(window).width() > 768) {
+      if ($(window).width() > MOBILE_BREAKPOINT) {
         $("#linksMenu").css("display", "flex");
         $("#btnOpenMenu, #btnCloseMenu").hide();
       } else {

@@ -547,7 +547,7 @@ input[type="submit"] {
   }
 }
 
-@media all and (max-width: 920px) {
+@media all and (max-width: 958px) {
   .userConfig {
     width: 40px !important;
     right: 50px !important;
@@ -569,7 +569,7 @@ input[type="submit"] {
   }
 }
 
-@media all and (max-width: 768px) {
+@media all and (max-width: 820px) {
   .buttons {
     left: 100px !important;
     top: 50px;
@@ -577,7 +577,7 @@ input[type="submit"] {
   }
 
   .userConfig {
-    right: 115px !important;
+    right: 96px !important;
   }
 }
 

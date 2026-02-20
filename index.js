@@ -268,3 +268,38 @@ $(document).ready(function () {
   $(".buttonConfigUser i").hide();
   $(".buttonConfigUser p").append(primeiraLetra);
 });
+
+function copyStoreAddress() {
+  const address = "Rua São Pedro, Santa Luzia do Norte - AL, 57130-000";
+
+  const onSuccess = () => {
+    if (typeof Swal !== "undefined") {
+      Swal.fire({
+        title: "Endereço copiado!",
+        icon: "success",
+        position: "top-end",
+        toast: true,
+        timer: 2000,
+        showConfirmButton: false,
+      });
+      return;
+    }
+    alert("Endereço copiado!");
+  };
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard
+      .writeText(address)
+      .then(onSuccess)
+      .catch(() => alert(`Copie manualmente: ${address}`));
+    return;
+  }
+
+  const input = document.createElement("input");
+  input.value = address;
+  document.body.appendChild(input);
+  input.select();
+  document.execCommand("copy");
+  document.body.removeChild(input);
+  onSuccess();
+}

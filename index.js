@@ -18,6 +18,8 @@ function updateUsernameOrRedirect() {
     const logoutButton = document.getElementById("logoutButton");
     const loginButton = document.getElementById("loginButton");
     const loginLink = document.getElementById("loginLink");
+    const userBadgeText = document.querySelector(".buttonConfigUser p");
+    const userButton = document.querySelector(".buttonConfigUser");
 
     if (!usernameElement || !logoutButton || !loginButton) {
       return;
@@ -27,6 +29,14 @@ function updateUsernameOrRedirect() {
       usernameElement.innerText = user.username;
       logoutButton.style.display = "inline-block";
       loginButton.style.display = "none";
+      if (userBadgeText) {
+        userBadgeText.innerText = (user.username || "U").trim().charAt(0).toUpperCase();
+      }
+      if (userButton) {
+        userButton.setAttribute("title", `Conta de ${user.username}`);
+      }
+      document.body.classList.add("logged-in");
+      document.body.classList.remove("guest-user");
       if (loginLink) {
         loginLink.style.display = "none";
       }
@@ -34,6 +44,14 @@ function updateUsernameOrRedirect() {
       usernameElement.innerText = "Visitante";
       logoutButton.style.display = "none";
       loginButton.style.display = "inline-block";
+      if (userBadgeText) {
+        userBadgeText.innerText = "V";
+      }
+      if (userButton) {
+        userButton.setAttribute("title", "Entrar ou criar cadastro");
+      }
+      document.body.classList.add("guest-user");
+      document.body.classList.remove("logged-in");
       if (loginLink) {
         loginLink.style.display = "inline-block";
       }
@@ -240,17 +258,30 @@ var swiper2 = new Swiper(".swiper", {
 // LOGIN OPEN CONFIG USER
 $(document).ready(function () {
   let isMouseOverButton = false;
+  const ACCOUNT_MENU_BREAKPOINT = 958;
 
   $(".buttonConfigUser")
     .mouseover(function () {
+      if ($(window).width() <= ACCOUNT_MENU_BREAKPOINT) {
+        $(".buttons").hide();
+        return;
+      }
       isMouseOverButton = true;
       $(".buttons").show();
     })
     .mouseout(function () {
+      if ($(window).width() <= ACCOUNT_MENU_BREAKPOINT) {
+        $(".buttons").hide();
+        return;
+      }
       isMouseOverButton = false;
     });
 
   $(document).click(function (event) {
+    if ($(window).width() <= ACCOUNT_MENU_BREAKPOINT) {
+      $(".buttons").hide();
+      return;
+    }
     // Verifica se o clique foi fora do elemento .buttons e do botão .buttonConfigUser
     if (!$(event.target).closest(".buttons, .buttonConfigUser").length) {
       $(".buttons").hide();
@@ -262,13 +293,18 @@ $(document).ready(function () {
   $(window).scroll(function () {
     $(".buttons").hide();
   });
-});
 
-$(document).ready(function () {
-  var nomeLogin = $("#username").text();
-  var primeiraLetra = nomeLogin.charAt(0);
-  $(".buttonConfigUser i").hide();
-  $(".buttonConfigUser p").append(primeiraLetra);
+  $(".buttonConfigUser").on("click", function () {
+    const user = getUserLogged();
+    if (!user) {
+      login();
+      return;
+    }
+    if ($(window).width() <= ACCOUNT_MENU_BREAKPOINT) {
+      return;
+    }
+    $(".buttons").toggle();
+  });
 });
 
 function copyStoreAddress() {

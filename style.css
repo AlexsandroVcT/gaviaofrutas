@@ -354,10 +354,28 @@ section {
   width: 550px;
   position: absolute;
   bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 1;
   /* left: 60px; */
   animation: imgsBannerInitial 1s;
   filter: drop-shadow(20px 30px 20px #00000060);
+}
+
+.bannerInitial figure img.heroMainImage {
+  width: 660px;
+}
+
+@media all and (max-width: 1200px) {
+  .bannerInitial figure img.heroMainImage {
+    width: 600px;
+  }
+}
+
+@media all and (max-width: 958px) {
+  .bannerInitial figure img.heroMainImage {
+    width: 540px;
+  }
 }
 @keyframes imgsBannerInitial {
   0% {
@@ -366,10 +384,12 @@ section {
 }
 
 .bannerInitial figure div {
-  width: 700px;
-  height: 700px;
+  width: min(100%, 700px);
+  aspect-ratio: 1 / 1;
   position: absolute;
   bottom: -200px;
+  left: 50%;
+  transform: translateX(-50%);
   border-radius: 50%;
   background-color: var(--primary-color);
 }
@@ -1472,12 +1492,8 @@ section#food-menu-section {
   }
 
   .bannerInitial figure div {
-    right: 0px;
-  }
-
-  .bannerInitial figure img {
-    align-items: center;
-    right: 15%;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .container {
@@ -1499,7 +1515,11 @@ section#food-menu-section {
 @media all and (max-width: 1130px) {
   /* BANNER INITIAL */
   .bannerInitial .bannerTexts {
-    width: 60%;
+    width: 52%;
+  }
+
+  .bannerInitial figure {
+    width: 48%;
   }
   /* ABOUT */
   .boxAbout figcaption {
@@ -1933,17 +1953,34 @@ section#food-menu-section {
     justify-content: center;
     width: 100% !important;
     height: 100%;
-    background-image: url(assets/imgs/mobile-image-home.webp);
+    background-image: linear-gradient(
+        180deg,
+        rgba(15, 18, 20, 0.45) 5%,
+        rgba(15, 18, 20, 0.15) 38%,
+        rgba(15, 18, 20, 0.58) 100%
+      ),
+      linear-gradient(90deg, rgba(8, 10, 12, 0.42) 0%, rgba(8, 10, 12, 0.06) 62%),
+      url(assets/imgs/homemobile.webp);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center top;
-    backdrop-filter: brightness(10%);
+    backdrop-filter: none;
   }
 
   .bannerTexts h1,
   .bannerTexts p {
     width: 100%;
+    max-width: 620px;
     color: var(--background-color);
+    text-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  }
+
+  .bannerTexts h1 {
+    letter-spacing: 0.4px;
+  }
+
+  .bannerTexts p {
+    font-weight: 500;
   }
   .bannerTexts a {
     height: 60px;

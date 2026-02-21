@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
   <url>
-    <loc>https://www.gaviaofrutas.com.br/</loc>
-    <lastmod>2024-05-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
+       <loc>https://gaviaofrutas.com.br/</loc>
+       <lastmod>2026-02-20T16:32:45+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>1.0000</priority>
   </url>
   <url>
-    <loc>https://gaviaofrutas.com.br/pages/catalogo</loc>
-    <lastmod>2024-07-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+       <loc>https://gaviaofrutas.com.br/pages/catalogo.html</loc>
+       <lastmod>2026-02-20T16:32:45+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.8000</priority>
   </url>
   <url>
-    <loc>https://gaviaofrutas.com.br/pages/login</loc>
-    <lastmod>2024-07-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+       <loc>https://gaviaofrutas.com.br/index.html</loc>
+       <lastmod>2026-02-20T16:32:45+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.6400</priority>
   </url>
-  <!-- Adicione outras URLs relevantes -->
 </urlset>

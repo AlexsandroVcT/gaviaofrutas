@@ -12,6 +12,10 @@ dotenv.config({ path: '.env.development.local' });
 
 const app = express();
 const port = process.env.PORT || 3000;
+const rootDir = path.resolve(__dirname, '..');
+const pagesDir = path.join(rootDir, 'pages');
+const assetsDir = path.join(rootDir, 'assets');
+const iconPath = path.join(assetsDir, 'imgs', 'icongaviaofrutas.webp');
 
 // Configuração do CORS
 const corsOptions = {
@@ -28,12 +32,18 @@ const main = async () => {
     await appDataSource.initialize();
     console.log('Conexão com o banco de dados inicializada com sucesso.');
 
-    // Middleware para servir arquivos estáticos
-    app.use(express.static(path.join(__dirname, '../pages')));
+    // Middleware para servir arquivos estáticos do projeto (index, assets, manifest, css/js)
+    app.use(express.static(rootDir));
     app.use(express.json());
 
     // Middleware para servir arquivos estáticos da pasta pages
-    app.use('/pages', express.static(path.join(__dirname, '../pages')));
+    app.use('/pages', express.static(pagesDir));
+    app.use('/assets', express.static(assetsDir));
+
+    // Compatibilidade para evitar 404 de favicon em navegadores/crawlers
+    app.get(['/favicon.ico', '/favicon.png'], (_req, res) => {
+      res.sendFile(iconPath);
+    });
 
     // Registro de rotas
     app.use(register);
@@ -41,7 +51,7 @@ const main = async () => {
 
     // Rota raiz
     app.get('/', (req, res) => {
-      const loginFilePath = path.join(__dirname, '../pages/login.html');
+      const loginFilePath = path.join(pagesDir, 'login.html');
       console.log('Caminho do arquivo login.html:', loginFilePath);
       res.sendFile(loginFilePath, (err) => {
         if (err) {

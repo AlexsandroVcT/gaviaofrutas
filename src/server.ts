@@ -49,16 +49,9 @@ const main = async () => {
     app.use(register);
     app.use(login);
 
-    // Rota raiz
-    app.get('/', (req, res) => {
-      const loginFilePath = path.join(pagesDir, 'login.html');
-      console.log('Caminho do arquivo login.html:', loginFilePath);
-      res.sendFile(loginFilePath, (err) => {
-        if (err) {
-          console.error('Erro ao enviar login.html:', err);
-          res.status(res.statusCode).end();
-        }
-      });
+    // Rota raiz: redireciona para manter paths relativos de login.html funcionando
+    app.get('/', (_req, res) => {
+      res.redirect('/pages/login.html');
     });
 
     // Middleware de tratamento de erros

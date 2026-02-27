@@ -5,17 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <link rel="canonical" href="https://gaviaofrutas.com.br/" />
     <link
       rel="icon"
       type="image/webp"
-      href="assets/imgs/icongaviaofrutas.webp?v=4"
+      href="assets/imgs/favicon-48.webp?v=6"
     />
-    <link rel="shortcut icon" href="assets/imgs/icongaviaofrutas.webp?v=4" />
+    <link rel="shortcut icon" href="assets/imgs/favicon-48.webp?v=6" />
     <link
       rel="apple-touch-icon"
-      href="assets/imgs/icongaviaofrutas.webp?v=4"
+      href="assets/imgs/logo-mark.webp?v=6"
     />
-    <link rel="manifest" href="site.webmanifest?v=4" />
+    <link rel="manifest" href="site.webmanifest?v=6" />
 
     <title>
       Gavião Frutas e Alimentos - Atacadista de Frutas em Santa Luzia do Norte
@@ -43,9 +44,9 @@
     />
     <meta
       property="og:image"
-      content="https://i.ibb.co/JzsHKTv/Filing-system-amico.webp"
+      content="https://gaviaofrutas.com.br/assets/imgs/mulherabacaxi.webp"
     />
-    <meta property="og:url" content="https://www.gaviaofrutas.com.br" />
+    <meta property="og:url" content="https://gaviaofrutas.com.br/" />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta
@@ -58,20 +59,18 @@
     />
     <meta
       name="twitter:image"
-      content="https://gaviaofrutas.com.br/assets/dan-gold-4_jhDO54BYg-unsplash.webp"
+      content="https://gaviaofrutas.com.br/assets/imgs/mulherabacaxi.webp"
     />
 
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-      async
     />
 
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
-      async
     />
 
     <link rel="stylesheet" href="style.css" />
@@ -95,7 +94,7 @@
       })(window, document, "script", "dataLayer", "GTM-T2X3JWG");
     </script>
 
-    <link rel="dns-prefetch" href="//fonts.googleapis.com" defer />
+    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
     <link rel="dns-prefetch" href="//fonts.gstatic.com" />
     <link rel="dns-prefetch" href="//cdnjs.cloudflare.com" />
 
@@ -104,8 +103,8 @@
         "@context": "https://schema.org",
         "@type": "Organization",
         "name": "Gavião Frutas e Alimentos",
-        "url": "https://www.gaviaofrutas.com.br",
-        "logo": "https://i.ibb.co/JzsHKTv/Filing-system-amico.webp",
+        "url": "https://gaviaofrutas.com.br/",
+        "logo": "https://gaviaofrutas.com.br/assets/imgs/logogaviao.webp",
         "description": "Gavião Frutas e Alimentos é um atacadista de frutas e verduras localizado em Santa Luzia do Norte, AL. Oferecemos uma ampla variedade de produtos frescos, cuidadosamente selecionados para garantir qualidade e sabor. Nosso compromisso é fornecer aos nossos clientes os melhores alimentos para uma vida saudável e equilibrada.",
         "contactPoint": {
           "@type": "ContactPoint",
@@ -114,9 +113,7 @@
         },
         "sameAs": [
           "https://www.facebook.com/gaviao_fr",
-          "https://www.instagram.com/gaviao_fr/",
-          "https://www.twitter.com/gaviao_fr",
-          "https://www.linkedin.com/company/gaviao_fr"
+          "https://www.instagram.com/gaviao_fr/"
         ]
       }
     </script>
@@ -144,8 +141,14 @@
     <header class="nav">
       <nav class="menu-wrap">
         <a href="#home" class="logo">
-          <img src="assets/imgs/logooficial.webp" alt="Logo Gavião Frutas" />
-          <h2>Gavião Frutas</h2>
+          <picture class="logo-picture">
+            <source media="(max-width: 480px)" srcset="assets/imgs/logo-mark.webp" />
+            <source
+              media="(max-width: 1240px)"
+              srcset="assets/imgs/logo-header-mobile.webp"
+            />
+            <img src="assets/imgs/logogaviao.webp" alt="Logo Gavião Frutas" />
+          </picture>
         </a>
 
         <ul id="linksMenu">

@@ -157,7 +157,7 @@ $(window).scroll(function () {
 });
 
 $(document).ready(function () {
-  const MOBILE_BREAKPOINT = 820;
+  const MOBILE_BREAKPOINT = 900;
 
   $("#btnOpenMenu").click(function () {
     $("#linksMenu").css("display", "flex");

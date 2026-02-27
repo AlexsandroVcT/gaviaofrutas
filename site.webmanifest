@@ -8,10 +8,16 @@
   "theme_color": "#72b346",
   "icons": [
     {
-      "src": "/assets/imgs/icongaviaofrutas.webp?v=4",
+      "src": "/assets/imgs/logo-mark.webp?v=6",
       "sizes": "256x256",
       "type": "image/webp",
       "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/imgs/favicon-48.webp?v=6",
+      "sizes": "48x48",
+      "type": "image/webp",
+      "purpose": "any"
     }
   ]
 }

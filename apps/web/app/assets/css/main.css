@@ -1,0 +1,99 @@
+:root {
+  --accent-500: #63be49;
+  --accent-600: #3d9f34;
+  --accent-700: #257b2f;
+  --bg-page: #f3f5f8;
+  --bg-page-soft: #edf2eb;
+  --surface-1: #ffffff;
+  --surface-2: #f7faf8;
+  --surface-glass: rgba(255, 255, 255, 0.82);
+  --text-1: #1f2633;
+  --text-2: #536076;
+  --text-3: #7a869a;
+  --border-1: #dbe3ee;
+  --border-2: #e8edf3;
+  --shadow-1: 0 18px 44px rgba(26, 36, 56, 0.11);
+  --shadow-2: 0 8px 24px rgba(26, 36, 56, 0.09);
+  --hero-glow: radial-gradient(circle at 20% 5%, #dff6bf 0%, transparent 55%);
+  --cta-gradient: linear-gradient(135deg, var(--accent-600), var(--accent-700));
+}
+
+:root[data-theme="dark"] {
+  --accent-500: #74d35f;
+  --accent-600: #4ab446;
+  --accent-700: #2c8f3d;
+  --bg-page: #0c1118;
+  --bg-page-soft: #0f1621;
+  --surface-1: #111a26;
+  --surface-2: #182131;
+  --surface-glass: rgba(17, 26, 38, 0.83);
+  --text-1: #e6eefb;
+  --text-2: #b6c2d7;
+  --text-3: #8e9eb8;
+  --border-1: #283447;
+  --border-2: #1f2a3a;
+  --shadow-1: 0 18px 44px rgba(2, 7, 16, 0.5);
+  --shadow-2: 0 8px 24px rgba(2, 7, 16, 0.4);
+  --hero-glow: radial-gradient(circle at 20% 5%, rgba(70, 163, 78, 0.3) 0%, transparent 55%);
+  --cta-gradient: linear-gradient(135deg, #56bf4d, #2f8f3f);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#__nuxt {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Montserrat", "Segoe UI", Arial, sans-serif;
+  color: var(--text-1);
+  background:
+    var(--hero-glow),
+    radial-gradient(circle at 100% 10%, rgba(99, 190, 73, 0.09) 0%, transparent 42%),
+    linear-gradient(180deg, var(--bg-page) 0%, var(--bg-page-soft) 100%);
+  transition: background 0.24s ease, color 0.24s ease;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+::selection {
+  background: rgba(99, 190, 73, 0.28);
+}
+
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(82, 94, 120, 0.45);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}

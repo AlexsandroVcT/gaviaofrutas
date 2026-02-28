@@ -5,6 +5,7 @@ import path from 'path';
 import dotenv from 'dotenv';
 import { login } from './scripts/login';
 import { register } from './scripts/register';
+import { homeApi } from './scripts/home-api';
 import { errorHandler } from './middlewares/error-handler'; // Certifique-se de que o caminho está correto
 import { appDataSource } from './database';
 
@@ -62,6 +63,9 @@ app.get(['/favicon.ico', '/favicon.png'], (_req, res) => {
 app.get('/', (_req, res) => {
   res.redirect('/pages/login.html');
 });
+
+// API publica de home/produtos para o novo front-end em Nuxt
+app.use(homeApi);
 
 // Garante conexão com o banco antes das rotas de API
 app.use(async (_req, _res, next) => {

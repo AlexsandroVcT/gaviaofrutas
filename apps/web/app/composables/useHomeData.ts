@@ -1,11 +1,13 @@
 import type { HomeApiResponse } from '~/types/api';
 import {
+  announcements as fallbackAnnouncements,
   benefits as fallbackBenefits,
   categories as fallbackCategories,
   heroHighlights as fallbackHighlights,
   menuItems as fallbackMenuItems,
   offers as fallbackOffers,
   products as fallbackProducts,
+  store as fallbackStore,
 } from '~/data/home';
 
 const FALLBACK_HOME_DATA: HomeApiResponse = {
@@ -15,6 +17,8 @@ const FALLBACK_HOME_DATA: HomeApiResponse = {
   products: fallbackProducts,
   benefits: fallbackBenefits,
   offers: fallbackOffers,
+  announcements: fallbackAnnouncements,
+  store: fallbackStore,
 };
 
 function buildApiUrl(apiBase: string) {

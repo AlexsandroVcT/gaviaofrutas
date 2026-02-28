@@ -1,9 +1,11 @@
 import type {
+  AnnouncementItem,
   BenefitItem,
   CategoryItem,
   NavItem,
   OfferItem,
   ProductItem,
+  StoreInfo,
 } from "~/types/home";
 
 export const menuItems: NavItem[] = [
@@ -124,3 +126,85 @@ export const offers: OfferItem[] = [
     image: "/imgs/products/maracuja.webp",
   },
 ];
+
+export const announcements: AnnouncementItem[] = [
+  {
+    id: "retirada-rapida",
+    tag: "Anuncio",
+    title: "Retire hoje na loja",
+    description: "Peça no WhatsApp e retire rapido com Gaviao Frutas.",
+    image: "/imgs/products/abacaxi.webp",
+    ctaLabel: "Tracar rota",
+    ctaType: "maps",
+    isActive: true,
+    priority: 100,
+    weight: 3,
+    durationMs: 7000,
+    closedVariant: {
+      tag: "Retirada agendada",
+      title: "Agende agora e retire na abertura",
+      description: "Loja fechada no momento. Chame no WhatsApp e deixe seu pedido reservado.",
+      ctaLabel: "Agendar no WhatsApp",
+      ctaType: "whatsapp",
+    },
+  },
+  {
+    id: "hortifruti-fresco",
+    tag: "Selecao fresca",
+    title: "Frutas e verduras frescas todos os dias",
+    description: "Atendimento local com selecao diaria para sua semana.",
+    image: "/imgs/products/alface.webp",
+    ctaLabel: "Chamar no WhatsApp",
+    ctaType: "whatsapp",
+    isActive: true,
+    priority: 90,
+    weight: 2,
+    durationMs: 6500,
+  },
+  {
+    id: "google-maps",
+    tag: "Google Maps",
+    title: "Chegue facil ate Gaviao Frutas",
+    description: "Abra o mapa e veja a rota mais rapida ate a loja.",
+    image: "/imgs/products/maca.webp",
+    ctaLabel: "Abrir mapa",
+    ctaType: "maps",
+    isActive: true,
+    priority: 85,
+    weight: 2,
+    durationMs: 6000,
+  },
+  {
+    id: "catalogo-social",
+    tag: "Redes sociais",
+    title: "Confira novidades no catalogo",
+    description: "Veja os produtos e combine sua retirada pelo WhatsApp.",
+    image: "/imgs/products/banana.webp",
+    ctaLabel: "Ver produtos",
+    ctaType: "catalog",
+    isActive: true,
+    priority: 80,
+    weight: 1,
+    durationMs: 6500,
+  },
+];
+
+export const store: StoreInfo = {
+  name: "Gaviao Frutas",
+  cityState: "Santa Luzia do Norte - AL",
+  address: "R. Benedito Mascarenhas, 62 - Santa Luzia do Norte - AL",
+  phone: "5582998763021",
+  mapQuery: "Gaviao Frutas Santa Luzia do Norte AL",
+  latitude: -9.601911,
+  longitude: -35.823743,
+  timeZone: "America/Maceio",
+  hours: [
+    { day: 0, open: "07:00", close: "13:00" },
+    { day: 1, open: "07:00", close: "19:00" },
+    { day: 2, open: "07:00", close: "19:00" },
+    { day: 3, open: "07:00", close: "19:00" },
+    { day: 4, open: "07:00", close: "19:00" },
+    { day: 5, open: "07:00", close: "19:00" },
+    { day: 6, open: "07:00", close: "16:00" },
+  ],
+};

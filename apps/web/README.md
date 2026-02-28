@@ -1,75 +1,65 @@
-# Nuxt Minimal Starter
+# Gaviao Frutas - Front-end Nuxt
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Este front-end esta em `apps/web` usando **Nuxt 4 + Vue 3**.
 
-## Setup
-
-Make sure to install dependencies:
+## Como rodar local
 
 ```bash
-# npm
-npm install
-
-# pnpm
-pnpm install
-
-# yarn
+cd apps/web
 yarn install
-
-# bun
-bun install
+yarn dev --host 0.0.0.0 --port 3000
 ```
 
-## Development Server
+Abrir: `http://localhost:3000`
 
-Start the development server on `http://localhost:3000`:
+## Estrutura (padrao atual)
 
-```bash
-# npm
-npm run dev
+```txt
+app/
+  app.vue                    # entrada principal (NuxtLayout + NuxtPage)
+  layouts/
+    default.vue              # layout base global
+  pages/
+    index.vue                # pagina Home (compoe os blocos)
+  components/
+    common/
+      AppLogo.vue            # logo responsiva
+    layout/
+      SiteHeader.vue         # cabecalho/menu/busca
+    home/
+      HeroSection.vue        # secao principal
+      CategoriesSection.vue  # cards de categorias
+      ProductShowcase.vue    # vitrine + carrinho lateral
+      BenefitsSection.vue    # blocos de beneficios
+      OffersSection.vue      # cards de ofertas
+  data/
+    home.ts                  # conteudo da home (menu, produtos, ofertas, etc)
+  types/
+    home.ts                  # tipagem dos dados
+  composables/
+    useTheme.ts              # alternancia de tema light/dark com persistencia
+  utils/
+    format.ts                # funcoes utilitarias (ex: moeda)
+  assets/
+    css/main.css             # estilos globais e variaveis
 
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
+public/
+  imgs/                      # imagens estaticas da interface
 ```
 
-## Production
+## Regras praticas para editar
 
-Build the application for production:
+- Trocar textos/produtos/categorias: `app/data/home.ts`
+- Ajustar visual de uma secao: componente da secao em `app/components/...`
+- Ajustar regra global (fonte, reset, variaveis): `app/assets/css/main.css`
+- Paleta light/dark: `app/assets/css/main.css` e `app/composables/useTheme.ts`
+- Adicionar nova pagina: `app/pages/nome.vue`
+
+## Build
 
 ```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
 yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
 yarn preview
-
-# bun
-bun run preview
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+Observacao: nao precisa buildar a cada alteracao local; use `yarn dev` para iterar rapido.

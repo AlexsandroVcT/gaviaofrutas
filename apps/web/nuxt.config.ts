@@ -1,7 +1,9 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
-  devtools: { enabled: true },
+  devtools: { enabled: false },
+  css: ['~/assets/css/main.css'],
+  components: [{ path: '~/components', pathPrefix: false }],
   modules: ['@pinia/nuxt', '@nuxtjs/robots', '@nuxtjs/sitemap'],
   site: {
     name: 'Gaviao Frutas',
@@ -26,6 +28,9 @@ export default defineNuxtConfig({
           content:
             'Gaviao Frutas e Alimentos - produtos frescos com retirada na loja em Santa Luzia do Norte.'
         }
+      ],
+      link: [
+        { rel: 'icon', type: 'image/webp', href: '/imgs/favicon-48.webp' }
       ]
     }
   },

@@ -73,6 +73,7 @@ function buildWhatsAppLink(product: ProductItem) {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 12px;
+  min-width: 0;
 }
 
 .product-card {
@@ -83,6 +84,7 @@ function buildWhatsAppLink(product: ProductItem) {
   padding: 12px;
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 .product-card img {
@@ -99,6 +101,7 @@ function buildWhatsAppLink(product: ProductItem) {
   margin: 0;
   line-height: 1.1;
   font-size: 1.55rem;
+  overflow-wrap: anywhere;
 }
 
 .product-card h3 span {
@@ -118,6 +121,8 @@ function buildWhatsAppLink(product: ProductItem) {
 
 .order-btn {
   margin-top: 12px;
+  display: block;
+  width: 100%;
   border-radius: 999px;
   padding: 11px 12px;
   background: var(--cta-gradient);

@@ -665,6 +665,7 @@ onUnmounted(() => {
   grid-template-columns: 1.08fr 0.92fr;
   gap: clamp(16px, 2.6vw, 34px);
   align-items: start;
+  min-width: 0;
 }
 
 :global(:root[data-theme='dark']) .hero-section {
@@ -685,6 +686,7 @@ onUnmounted(() => {
   border-radius: 28px;
   padding: clamp(20px, 2.8vw, 38px);
   box-shadow: var(--shadow-1);
+  min-width: 0;
 }
 
 .hero-copy h1 {
@@ -772,6 +774,7 @@ onUnmounted(() => {
   display: grid;
   align-items: end;
   gap: 14px;
+  min-width: 0;
 }
 
 .hero-media {
@@ -793,6 +796,7 @@ onUnmounted(() => {
   grid-template-columns: 1.05fr 0.95fr;
   align-items: end;
   gap: 12px;
+  min-width: 0;
 }
 
 .announcement-copy {
@@ -804,6 +808,7 @@ onUnmounted(() => {
   padding: 14px 14px 12px;
   display: grid;
   gap: 10px;
+  min-width: 0;
 }
 
 .announcement-tag {
@@ -917,6 +922,7 @@ onUnmounted(() => {
 
 .pickup-hub {
   width: 100%;
+  min-width: 0;
   border-radius: 18px;
   border: 1px solid var(--hub-border);
   background: var(--hub-bg);

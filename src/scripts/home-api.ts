@@ -9,6 +9,7 @@ import {
   products,
   store,
 } from '../data/home-catalog';
+import { getStoreClockLabel, getStoreStatus } from './store-status';
 
 export const homeApi = express.Router();
 
@@ -69,6 +70,8 @@ function incrementEventCounter(key: string) {
 }
 
 homeApi.get('/api/home', (_req, res) => {
+  const now = new Date();
+
   res.status(200).json({
     menuItems,
     heroHighlights,
@@ -78,7 +81,9 @@ homeApi.get('/api/home', (_req, res) => {
     offers,
     announcements: getActiveAnnouncements(),
     store,
-    fetchedAt: new Date().toISOString(),
+    storeStatus: getStoreStatus(store, now),
+    storeClockLabel: getStoreClockLabel(store, now),
+    fetchedAt: now.toISOString(),
   });
 });
 
@@ -114,6 +119,17 @@ homeApi.get('/api/products', (req, res) => {
 
 homeApi.get('/api/categories', (_req, res) => {
   res.status(200).json({ items: categories, total: categories.length });
+});
+
+homeApi.get('/api/store/status', (_req, res) => {
+  const now = new Date();
+
+  res.status(200).json({
+    store,
+    storeStatus: getStoreStatus(store, now),
+    storeClockLabel: getStoreClockLabel(store, now),
+    fetchedAt: now.toISOString(),
+  });
 });
 
 homeApi.post('/api/events', (req, res) => {

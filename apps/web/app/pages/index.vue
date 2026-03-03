@@ -70,16 +70,18 @@ useHead({
 
 <template>
   <div class="home-page">
-    <SiteHeader :menu-items="homeData.menuItems" :cart-count="2" />
+    <SiteHeader :menu-items="homeData.menuItems" :cart-count="2" :whatsapp-phone="homeData.store.phone" />
 
     <main class="main-content">
       <HeroSection
         :highlights="homeData.heroHighlights"
         :announcements="homeData.announcements"
         :store="homeData.store"
+        :store-status="homeData.storeStatus"
+        :store-clock-label="homeData.storeClockLabel"
       />
       <CategoriesSection :categories="homeData.categories" />
-      <ProductShowcase :products="homeData.products" />
+      <ProductShowcase :products="homeData.products" :whatsapp-phone="homeData.store.phone" />
       <BenefitsSection :benefits="homeData.benefits" />
       <OffersSection :offers="homeData.offers" />
     </main>

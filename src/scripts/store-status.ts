@@ -1,4 +1,27 @@
-import type { StoreHour, StoreInfo, StoreSpecialHour, StoreStatus } from '~/types/home';
+type StoreHour = {
+  day: number;
+  open: string | null;
+  close: string | null;
+};
+
+type StoreSpecialHour = {
+  date: string;
+  open: string | null;
+  close: string | null;
+  note?: string;
+};
+
+type StoreLike = {
+  timeZone: string;
+  hours: StoreHour[];
+  specialHours?: StoreSpecialHour[];
+};
+
+type StoreStatus = {
+  isOpen: boolean;
+  text: string;
+  nextText: string;
+};
 
 const WEEKDAY_INDEX: Record<string, number> = {
   Sun: 0,
@@ -76,7 +99,7 @@ function getRegularHours(hours: StoreHour[], day: number): DailyHours | null {
   return { open: entry.open, close: entry.close };
 }
 
-function getHoursForDate(store: StoreInfo, day: number, dateKey: string): DailyHours | null {
+function getHoursForDate(store: StoreLike, day: number, dateKey: string): DailyHours | null {
   const special = findSpecialHours(store.specialHours, dateKey);
   if (special) {
     return { open: special.open, close: special.close };
@@ -84,7 +107,7 @@ function getHoursForDate(store: StoreInfo, day: number, dateKey: string): DailyH
   return getRegularHours(store.hours, day);
 }
 
-function getFutureOpening(store: StoreInfo, now: Date) {
+function getFutureOpening(store: StoreLike, now: Date) {
   for (let offset = 1; offset <= 14; offset += 1) {
     const candidate = new Date(now);
     candidate.setDate(now.getDate() + offset);
@@ -113,7 +136,7 @@ function isOpenNow(minutes: number, open: string, close: string) {
   return minutes >= openMinutes || minutes < closeMinutes;
 }
 
-export function getStoreStatus(store: StoreInfo, date = new Date()): StoreStatus {
+export function getStoreStatus(store: StoreLike, date = new Date()): StoreStatus {
   const clock = getLocalClock(date, store.timeZone);
   const currentHours = getHoursForDate(store, clock.day, clock.dateKey);
 
@@ -144,7 +167,7 @@ export function getStoreStatus(store: StoreInfo, date = new Date()): StoreStatus
   };
 }
 
-export function getStoreClockLabel(store: StoreInfo, date = new Date()) {
+export function getStoreClockLabel(store: StoreLike, date = new Date()) {
   return new Intl.DateTimeFormat('pt-BR', {
     timeZone: store.timeZone,
     hour: '2-digit',

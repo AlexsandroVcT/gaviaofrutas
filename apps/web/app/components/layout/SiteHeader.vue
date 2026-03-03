@@ -1,14 +1,16 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import type { NavItem } from "~/types/home";
 
 const props = withDefaults(
   defineProps<{
     menuItems: NavItem[];
     cartCount?: number;
+    whatsappPhone?: string;
   }>(),
   {
     cartCount: 0,
+    whatsappPhone: "5582998763021",
   },
 );
 
@@ -18,6 +20,8 @@ const { isDark, toggleTheme } = useTheme();
 function closeMobileMenu() {
   isMobileMenuOpen.value = false;
 }
+
+const whatsappHref = computed(() => `https://wa.me/${props.whatsappPhone}`);
 </script>
 
 <template>
@@ -72,7 +76,7 @@ function closeMobileMenu() {
 
           <a
             class="whatsapp-btn"
-            href="https://wa.me/5582999999999"
+            :href="whatsappHref"
             target="_blank"
             rel="noreferrer"
           >
@@ -105,7 +109,7 @@ function closeMobileMenu() {
 
         <a
           class="mobile-whatsapp"
-          href="https://wa.me/5582999999999"
+          :href="whatsappHref"
           target="_blank"
           rel="noreferrer"
           @click="closeMobileMenu"

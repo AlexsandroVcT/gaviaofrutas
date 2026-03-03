@@ -19,11 +19,13 @@ export type HomeApiResponse = {
   announcements: AnnouncementItem[];
   store: StoreInfo;
   storeStatus?: StoreStatus;
+  storeClockLabel?: string;
   fetchedAt?: string;
 };
 
 export type StoreStatusApiResponse = {
   store: StoreInfo;
   storeStatus: StoreStatus;
+  storeClockLabel: string;
   fetchedAt: string;
 };

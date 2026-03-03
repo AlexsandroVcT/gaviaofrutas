@@ -198,6 +198,7 @@ export const store: StoreInfo = {
   latitude: -9.601911,
   longitude: -35.823743,
   timeZone: "America/Maceio",
+  specialHours: [],
   hours: [
     { day: 0, open: "07:00", close: "19:00" },
     { day: 1, open: "07:00", close: "20:00" },

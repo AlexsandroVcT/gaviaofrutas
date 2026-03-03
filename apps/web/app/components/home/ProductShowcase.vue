@@ -4,11 +4,13 @@ import { formatPrice } from "~/utils/format";
 
 const props = defineProps<{
   products: ProductItem[];
+  whatsappPhone?: string;
 }>();
 
 function buildWhatsAppLink(product: ProductItem) {
   const message = `Ola! Quero pedir ${product.name} (${product.unit}).`;
-  return `https://wa.me/5582999999999?text=${encodeURIComponent(message)}`;
+  const phone = props.whatsappPhone || "5582998763021";
+  return `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 }
 </script>
 

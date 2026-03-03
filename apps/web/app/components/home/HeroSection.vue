@@ -1,11 +1,15 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
-import type { AnnouncementCtaType, AnnouncementItem, AnnouncementVariant, StoreInfo } from '~/types/home';
+import type { StoreStatusApiResponse } from '~/types/api';
+import type { AnnouncementCtaType, AnnouncementItem, AnnouncementVariant, StoreInfo, StoreStatus } from '~/types/home';
+import { getStoreClockLabel, getStoreStatus } from '~/utils/store-status';
 
 const props = defineProps<{
   highlights: string[];
   announcements: AnnouncementItem[];
   store: StoreInfo;
+  storeStatus?: StoreStatus;
+  storeClockLabel?: string;
 }>();
 
 const config = useRuntimeConfig();
@@ -13,21 +17,11 @@ const now = ref(new Date());
 const activeIndex = ref(0);
 const routeLoading = ref(false);
 const routeHint = ref('');
+const statusState = ref<StoreStatus>(props.storeStatus ?? getStoreStatus(props.store, now.value));
+const storeClockLabelState = ref(props.storeClockLabel ?? getStoreClockLabel(props.store, now.value));
 
 let clockTimer: ReturnType<typeof setInterval> | null = null;
 let rotationTimer: ReturnType<typeof setTimeout> | null = null;
-
-const weekdayIndex: Record<string, number> = {
-  Sun: 0,
-  Mon: 1,
-  Tue: 2,
-  Wed: 3,
-  Thu: 4,
-  Fri: 5,
-  Sat: 6,
-};
-
-const weekdayLabelPt = ['domingo', 'segunda', 'terca', 'quarta', 'quinta', 'sexta', 'sabado'];
 
 type AnnouncementDisplay = {
   id: string;
@@ -55,32 +49,6 @@ const FALLBACK_ANNOUNCEMENT: AnnouncementItem = {
   durationMs: 7000,
 };
 
-function parseMinutes(time: string) {
-  const [hh = '0', mm = '0'] = time.split(':');
-  const hour = Number.parseInt(hh, 10);
-  const minute = Number.parseInt(mm, 10);
-  return (Number.isFinite(hour) ? hour : 0) * 60 + (Number.isFinite(minute) ? minute : 0);
-}
-
-function getLocalClock(date: Date, timeZone: string) {
-  const parts = new Intl.DateTimeFormat('en-US', {
-    timeZone,
-    weekday: 'short',
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: false,
-  }).formatToParts(date);
-
-  const weekday = parts.find((part) => part.type === 'weekday')?.value ?? 'Mon';
-  const hour = Number.parseInt(parts.find((part) => part.type === 'hour')?.value ?? '0', 10);
-  const minute = Number.parseInt(parts.find((part) => part.type === 'minute')?.value ?? '0', 10);
-
-  return {
-    day: weekdayIndex[weekday] ?? 1,
-    minutes: hour * 60 + minute,
-  };
-}
-
 function isAnnouncementLive(item: AnnouncementItem, date: Date) {
   if (!item.isActive) return false;
 
@@ -97,57 +65,6 @@ function isAnnouncementLive(item: AnnouncementItem, date: Date) {
   return true;
 }
 
-function getStoreStatus(store: StoreInfo, date: Date) {
-  const { day, minutes } = getLocalClock(date, store.timeZone);
-  const today = store.hours.find((item) => item.day === day);
-
-  if (today?.open && today?.close) {
-    const openMinutes = parseMinutes(today.open);
-    const closeMinutes = parseMinutes(today.close);
-
-    const isOpen =
-      closeMinutes >= openMinutes
-        ? minutes >= openMinutes && minutes < closeMinutes
-        : minutes >= openMinutes || minutes < closeMinutes;
-
-    if (isOpen) {
-      return {
-        isOpen: true,
-        text: 'Aberto agora',
-        nextText: `Fecha as ${today.close}`,
-      };
-    }
-
-    if (minutes < openMinutes) {
-      return {
-        isOpen: false,
-        text: 'Fechado agora',
-        nextText: `Abre hoje as ${today.open}`,
-      };
-    }
-  }
-
-  for (let offset = 1; offset <= 7; offset += 1) {
-    const nextDay = (day + offset) % 7;
-    const nextEntry = store.hours.find((item) => item.day === nextDay);
-
-    if (nextEntry?.open) {
-      const dayLabel = offset === 1 ? 'amanha' : weekdayLabelPt[nextDay];
-
-      return {
-        isOpen: false,
-        text: 'Fechado agora',
-        nextText: `Abre ${dayLabel} as ${nextEntry.open}`,
-      };
-    }
-  }
-
-  return {
-    isOpen: false,
-    text: 'Fechado',
-    nextText: 'Sem horario definido',
-  };
-}
 
 function clearRotationTimer() {
   if (!rotationTimer) return;
@@ -171,6 +88,28 @@ function buildEventsUrl(apiBase: string) {
   return `${apiBase.replace(/\/$/, '')}/api/events`;
 }
 
+function buildStoreStatusUrl(apiBase: string) {
+  if (!apiBase) return '/api/store/status';
+  return `${apiBase.replace(/\/$/, '')}/api/store/status`;
+}
+
+async function refreshStoreStatus() {
+  const currentNow = new Date();
+  now.value = currentNow;
+
+  try {
+    const payload = await $fetch<StoreStatusApiResponse>(buildStoreStatusUrl(config.public.apiBase || ''), {
+      timeout: 4500,
+    });
+
+    statusState.value = payload.storeStatus;
+    storeClockLabelState.value = payload.storeClockLabel || getStoreClockLabel(props.store, currentNow);
+  } catch {
+    statusState.value = getStoreStatus(props.store, currentNow);
+    storeClockLabelState.value = getStoreClockLabel(props.store, currentNow);
+  }
+}
+
 async function trackEvent(eventType: string, itemId: string, source: string) {
   if (!process.client) return;
 
@@ -189,16 +128,8 @@ async function trackEvent(eventType: string, itemId: string, source: string) {
   }
 }
 
-const status = computed(() => getStoreStatus(props.store, now.value));
-
-const storeClockLabel = computed(() =>
-  new Intl.DateTimeFormat('pt-BR', {
-    timeZone: props.store.timeZone,
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: false,
-  }).format(now.value),
-);
+const status = computed(() => statusState.value);
+const storeClockLabel = computed(() => storeClockLabelState.value);
 
 const pickupEtaText = computed(() =>
   status.value.isOpen ? 'Retirada em 20 a 35 min' : 'Retirada apos abertura da loja',
@@ -439,6 +370,24 @@ watch(
 );
 
 watch(
+  () => props.storeStatus,
+  (nextStatus) => {
+    if (!nextStatus) return;
+    statusState.value = nextStatus;
+  },
+  { immediate: true },
+);
+
+watch(
+  () => props.storeClockLabel,
+  (nextClock) => {
+    if (!nextClock) return;
+    storeClockLabelState.value = nextClock;
+  },
+  { immediate: true },
+);
+
+watch(
   () => currentAnnouncement.value.id,
   (announcementId) => {
     trackEvent('announcement_impression', announcementId, 'hero');
@@ -449,9 +398,10 @@ watch(
 
 onMounted(() => {
   clockTimer = setInterval(() => {
-    now.value = new Date();
+    refreshStoreStatus();
   }, 60_000);
 
+  refreshStoreStatus();
   scheduleRotation();
 });
 

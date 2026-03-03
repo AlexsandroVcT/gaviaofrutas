@@ -1,7 +1,7 @@
 <template>
   <NuxtLink to="/" class="app-logo" aria-label="Gaviao Frutas - inicio">
     <picture>
-      <source media="(max-width: 560px)" srcset="/imgs/logo-mark.webp" />
+      <source media="(max-width: 460px)" srcset="/imgs/logo-mobile.webp" />
       <source media="(max-width: 980px)" srcset="/imgs/logo-mobile.webp" />
       <img src="/imgs/logo-desktop.webp" alt="Logo Gaviao Frutas" />
     </picture>
@@ -23,13 +23,19 @@
 
 @media (max-width: 980px) {
   .app-logo img {
-    width: clamp(150px, 33vw, 220px);
+    width: clamp(138px, 30vw, 196px);
   }
 }
 
-@media (max-width: 560px) {
+@media (max-width: 640px) {
   .app-logo img {
-    width: clamp(52px, 14vw, 70px);
+    width: clamp(126px, 36vw, 170px);
+  }
+}
+
+@media (max-width: 420px) {
+  .app-logo img {
+    width: clamp(112px, 38vw, 148px);
   }
 }
 </style>

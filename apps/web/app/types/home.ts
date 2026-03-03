@@ -68,6 +68,19 @@ export type StoreHour = {
   close: string | null; // HH:mm
 };
 
+export type StoreSpecialHour = {
+  date: string; // YYYY-MM-DD no timezone da loja
+  open: string | null; // HH:mm | null para fechado o dia todo
+  close: string | null; // HH:mm | null para fechado o dia todo
+  note?: string;
+};
+
+export type StoreStatus = {
+  isOpen: boolean;
+  text: string;
+  nextText: string;
+};
+
 export type StoreInfo = {
   name: string;
   cityState: string;
@@ -78,4 +91,5 @@ export type StoreInfo = {
   longitude: number;
   timeZone: string;
   hours: StoreHour[];
+  specialHours?: StoreSpecialHour[];
 };

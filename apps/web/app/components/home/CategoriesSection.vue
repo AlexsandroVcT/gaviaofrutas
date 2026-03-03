@@ -26,6 +26,7 @@ const props = defineProps<{
   background: color-mix(in srgb, var(--surface-1) 92%, transparent);
   border-radius: 22px;
   padding: 18px;
+  overflow: hidden;
 }
 
 .categories-wrap h2 {
@@ -38,6 +39,7 @@ const props = defineProps<{
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 12px;
+  min-width: 0;
 }
 
 .category-card {
@@ -66,11 +68,17 @@ const props = defineProps<{
 
 @media (max-width: 980px) {
   .categories-row {
-    display: grid;
+    grid-template-columns: none;
     grid-auto-flow: column;
-    grid-auto-columns: minmax(170px, 1fr);
+    grid-auto-columns: minmax(152px, 72%);
     overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
     padding-bottom: 6px;
+  }
+
+  .category-card {
+    scroll-snap-align: start;
   }
 }
 
@@ -91,6 +99,26 @@ const props = defineProps<{
 
   .category-card img {
     height: 68px;
+  }
+}
+
+@media (max-width: 420px) {
+  .categories-wrap {
+    padding: 10px;
+  }
+
+  .categories-wrap h2 {
+    font-size: clamp(1.9rem, 10vw, 2.25rem);
+  }
+
+  .categories-row {
+    gap: 10px;
+    grid-auto-columns: minmax(138px, 78%);
+  }
+
+  .category-card {
+    min-height: 126px;
+    padding: 10px;
   }
 }
 </style>

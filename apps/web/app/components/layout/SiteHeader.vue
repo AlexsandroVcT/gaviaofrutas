@@ -1,14 +1,16 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import type { NavItem } from "~/types/home";
 
 const props = withDefaults(
   defineProps<{
     menuItems: NavItem[];
     cartCount?: number;
+    whatsappPhone?: string;
   }>(),
   {
     cartCount: 0,
+    whatsappPhone: "5582998763021",
   },
 );
 
@@ -18,6 +20,8 @@ const { isDark, toggleTheme } = useTheme();
 function closeMobileMenu() {
   isMobileMenuOpen.value = false;
 }
+
+const whatsappHref = computed(() => `https://wa.me/${props.whatsappPhone}`);
 </script>
 
 <template>
@@ -72,7 +76,7 @@ function closeMobileMenu() {
 
           <a
             class="whatsapp-btn"
-            href="https://wa.me/5582999999999"
+            :href="whatsappHref"
             target="_blank"
             rel="noreferrer"
           >
@@ -105,7 +109,7 @@ function closeMobileMenu() {
 
         <a
           class="mobile-whatsapp"
-          href="https://wa.me/5582999999999"
+          :href="whatsappHref"
           target="_blank"
           rel="noreferrer"
           @click="closeMobileMenu"
@@ -130,6 +134,8 @@ function closeMobileMenu() {
     color-mix(in srgb, var(--bg-page) 80%, transparent) 60%,
     transparent 100%
   );
+  max-width: 100%;
+  overflow-x: clip;
 }
 
 .header-shell {
@@ -141,6 +147,7 @@ function closeMobileMenu() {
   box-shadow: var(--shadow-2);
   padding: 10px 14px;
   position: relative;
+  min-width: 0;
 }
 
 .header-top {
@@ -148,6 +155,7 @@ function closeMobileMenu() {
   grid-template-columns: auto minmax(0, 1fr) auto auto;
   align-items: center;
   gap: 12px;
+  min-width: 0;
 }
 
 .main-nav {
@@ -176,6 +184,7 @@ function closeMobileMenu() {
   display: flex;
   align-items: center;
   gap: 8px;
+  min-width: 0;
 }
 
 .icon-btn,
@@ -231,18 +240,19 @@ function closeMobileMenu() {
 
 .badge {
   position: absolute;
-  right: -5px;
-  top: -7px;
-  min-width: 20px;
-  height: 20px;
+  right: 2px;
+  top: 2px;
+  min-width: 18px;
+  height: 18px;
   border-radius: 999px;
-  border: 2px solid var(--surface-1);
+  border: 1px solid var(--surface-1);
   background: var(--accent-600);
   color: #fff;
   display: grid;
   place-items: center;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   font-weight: 800;
+  line-height: 1;
 }
 
 .whatsapp-btn,
@@ -336,6 +346,46 @@ function closeMobileMenu() {
 
   .header-top {
     gap: 7px;
+  }
+}
+
+@media (max-width: 420px) {
+  .site-header {
+    padding: 8px 8px 0;
+  }
+
+  .header-shell {
+    padding: 6px 8px;
+  }
+
+  .header-top {
+    gap: 5px;
+  }
+
+  .header-actions {
+    gap: 5px;
+  }
+
+  .icon-btn,
+  .cart-btn,
+  .menu-toggle,
+  .login-btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  .login-btn svg,
+  .cart-btn svg,
+  .menu-toggle svg,
+  .icon-btn svg {
+    width: 17px;
+    height: 17px;
+  }
+}
+
+@media (max-width: 480px) {
+  .icon-btn {
+    display: none;
   }
 }
 </style>

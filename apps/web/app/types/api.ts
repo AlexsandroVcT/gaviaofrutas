@@ -6,6 +6,7 @@ import type {
   OfferItem,
   ProductItem,
   StoreInfo,
+  StoreStatus,
 } from '~/types/home';
 
 export type HomeApiResponse = {
@@ -17,5 +18,14 @@ export type HomeApiResponse = {
   offers: OfferItem[];
   announcements: AnnouncementItem[];
   store: StoreInfo;
+  storeStatus?: StoreStatus;
+  storeClockLabel?: string;
   fetchedAt?: string;
+};
+
+export type StoreStatusApiResponse = {
+  store: StoreInfo;
+  storeStatus: StoreStatus;
+  storeClockLabel: string;
+  fetchedAt: string;
 };

@@ -1,7 +1,13 @@
 <script setup lang="ts">
+import { computed, ref } from "vue";
+import { useCartStore } from "~/stores/cart";
+
 const homeData = await useHomeData();
 const config = useRuntimeConfig();
 const siteUrl = (config.public.siteUrl || "https://gaviaofrutas.com.br").replace(/\/$/, "");
+const cartStore = useCartStore();
+const cartCount = computed(() => cartStore.totalItems);
+const isCartDrawerOpen = ref(false);
 
 const weekdaySchema = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
@@ -70,21 +76,32 @@ useHead({
 
 <template>
   <div class="home-page">
-    <SiteHeader :menu-items="homeData.menuItems" :cart-count="2" :whatsapp-phone="homeData.store.phone" />
+    <SiteHeader
+      :menu-items="homeData.menuItems"
+      :cart-count="cartCount"
+      :whatsapp-phone="homeData.store.phone"
+      @cart-click="isCartDrawerOpen = true"
+    />
 
     <main class="main-content">
+      <OffersSection :offers="homeData.offers" />
       <HeroSection
         :highlights="homeData.heroHighlights"
         :announcements="homeData.announcements"
+        :fresh-products="homeData.freshProducts"
         :store="homeData.store"
         :store-status="homeData.storeStatus"
         :store-clock-label="homeData.storeClockLabel"
       />
-      <CategoriesSection :categories="homeData.categories" />
-      <ProductShowcase :products="homeData.products" :whatsapp-phone="homeData.store.phone" />
-      <BenefitsSection :benefits="homeData.benefits" />
-      <OffersSection :offers="homeData.offers" />
+      <ShopSection
+        :categories="homeData.categories"
+        :products="homeData.products"
+        :benefits="homeData.benefits"
+        :whatsapp-phone="homeData.store.phone"
+      />
     </main>
+
+    <CartDrawer v-model:open="isCartDrawerOpen" :whatsapp-phone="homeData.store.phone" />
   </div>
 </template>
 
@@ -96,9 +113,31 @@ useHead({
 .main-content {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 20px 18px 28px;
-  display: grid;
-  gap: 0;
+  padding: 22px 18px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+@media (max-width: 1100px) {
+  .main-content {
+    padding: 20px 16px 26px;
+    gap: 18px;
+  }
+}
+
+@media (max-width: 780px) {
+  .main-content {
+    padding: 16px 14px 22px;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 560px) {
+  .main-content {
+    padding: 12px 10px 18px;
+    gap: 14px;
+  }
 }
 
 @media (max-width: 980px) {

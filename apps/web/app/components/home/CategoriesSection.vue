@@ -3,11 +3,12 @@ import type { CategoryItem } from "~/types/home";
 
 const props = defineProps<{
   categories: CategoryItem[];
+  embedded?: boolean;
 }>();
 </script>
 
 <template>
-  <section class="categories-wrap" aria-label="Categorias de produtos">
+  <section :class="['categories-wrap', { embedded: props.embedded }]" aria-label="Categorias de produtos">
     <h2>O que voce procura hoje?</h2>
 
     <div class="categories-row">
@@ -21,12 +22,18 @@ const props = defineProps<{
 
 <style scoped>
 .categories-wrap {
-  margin-top: 26px;
   border: 1px solid var(--border-1);
   background: color-mix(in srgb, var(--surface-1) 92%, transparent);
   border-radius: 22px;
   padding: 18px;
   overflow: hidden;
+}
+
+.categories-wrap.embedded {
+  border: 0;
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
 }
 
 .categories-wrap h2 {
@@ -45,7 +52,9 @@ const props = defineProps<{
 .category-card {
   border: 1px solid var(--border-1);
   border-radius: 16px;
-  background: var(--surface-1);
+  background:
+    radial-gradient(circle at 82% 18%, rgba(99, 190, 73, 0.12) 0%, transparent 36%),
+    linear-gradient(180deg, color-mix(in srgb, var(--surface-1) 98%, transparent), color-mix(in srgb, var(--surface-2) 92%, transparent));
   box-shadow: var(--shadow-2);
   min-height: 146px;
   padding: 12px;
@@ -66,27 +75,20 @@ const props = defineProps<{
   text-align: center;
 }
 
-@media (max-width: 980px) {
+@media (max-width: 900px) {
   .categories-row {
-    grid-template-columns: none;
-    grid-auto-flow: column;
-    grid-auto-columns: minmax(152px, 72%);
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    scroll-snap-type: x mandatory;
-    padding-bottom: 6px;
-  }
-
-  .category-card {
-    scroll-snap-align: start;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 640px) {
   .categories-wrap {
-    margin-top: 18px;
     border-radius: 16px;
     padding: 12px;
+  }
+
+  .categories-wrap.embedded {
+    padding: 0;
   }
 
   .categories-wrap h2 {
@@ -100,11 +102,19 @@ const props = defineProps<{
   .category-card img {
     height: 68px;
   }
+
+  .category-card h3 {
+    font-size: 1.32rem;
+  }
 }
 
 @media (max-width: 420px) {
   .categories-wrap {
     padding: 10px;
+  }
+
+  .categories-wrap.embedded {
+    padding: 0;
   }
 
   .categories-wrap h2 {
@@ -113,12 +123,19 @@ const props = defineProps<{
 
   .categories-row {
     gap: 10px;
-    grid-auto-columns: minmax(138px, 78%);
   }
 
   .category-card {
-    min-height: 126px;
+    min-height: 122px;
     padding: 10px;
+  }
+
+  .category-card img {
+    height: 58px;
+  }
+
+  .category-card h3 {
+    font-size: 1.15rem;
   }
 }
 </style>

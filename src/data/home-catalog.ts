@@ -105,6 +105,7 @@ export const offers = [
     title: 'Ofertas do dia',
     description: 'Promocoes relampago para retirada hoje.',
     cta: 'Ver ofertas',
+    href: '#produtos',
     image: '/imgs/products/banana.webp',
   },
   {
@@ -112,6 +113,7 @@ export const offers = [
     title: 'Frigorifico',
     description: 'Cortes selecionados com preco especial.',
     cta: 'Conferir',
+    href: '#frigorifico',
     image: '/imgs/products/tomate.webp',
   },
   {
@@ -119,9 +121,29 @@ export const offers = [
     title: 'Bebidas geladas',
     description: 'Linhas populares para seu fim de semana.',
     cta: 'Ver bebidas',
+    href: '#produtos',
     image: '/imgs/products/maracuja.webp',
   },
+  {
+    id: 'oferta-retirada-expressa',
+    title: 'Retirada expressa',
+    description: 'Monte o pedido e passe aqui com tudo separado.',
+    cta: 'Agendar retirada',
+    href: '#produtos',
+    image: '/imgs/products/abacaxi.webp',
+  },
 ];
+
+export const freshProducts = [
+  products[1],
+  products[2],
+  products[3],
+  products[4],
+  products[0],
+  products[5],
+];
+
+export const freshProductsSelectedAt = '05:30';
 
 export const announcements = [
   {
@@ -177,15 +199,15 @@ export const announcements = [
     endAt: null,
   },
   {
-    id: 'catalogo-social',
-    tag: 'Redes sociais',
-    title: 'Confira novidades no catalogo',
-    description: 'Veja os produtos e combine sua retirada pelo WhatsApp.',
-    image: '/imgs/products/banana.webp',
-    ctaLabel: 'Ver produtos',
+    id: 'pascoa-especial',
+    tag: 'Pascoa',
+    title: 'Ovos de Pascoa e caixas de bombom para sua celebracao',
+    description: 'Garanta itens sazonais para presentear e retirar na loja.',
+    image: '/imgs/announcements/easter-offer.svg',
+    ctaLabel: 'Ver ofertas',
     ctaType: 'catalog',
     isActive: true,
-    priority: 80,
+    priority: 70,
     weight: 1,
     durationMs: 6500,
     startAt: null,

@@ -29,7 +29,8 @@ export type OfferItem = {
   title: string;
   description: string;
   cta: string;
-  image: string;
+  href?: string;
+  image?: string;
 };
 
 export type AnnouncementCtaType = 'maps' | 'whatsapp' | 'catalog' | 'custom';

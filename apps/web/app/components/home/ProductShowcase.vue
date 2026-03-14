@@ -1,52 +1,34 @@
 <script setup lang="ts">
 import type { ProductItem } from "~/types/home";
-import { formatPrice } from "~/utils/format";
 
 const props = defineProps<{
   products: ProductItem[];
   whatsappPhone?: string;
+  embedded?: boolean;
 }>();
-
-function buildWhatsAppLink(product: ProductItem) {
-  const message = `Ola! Quero pedir ${product.name} (${product.unit}).`;
-  const phone = props.whatsappPhone || "5582998763021";
-  return `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-}
 </script>
 
 <template>
-  <section id="produtos" class="showcase-section">
+  <section id="produtos" :class="['showcase-section', { embedded: props.embedded }]">
     <div class="section-head">
       <h2>Produtos em destaque</h2>
       <a href="#produtos">Ver mais produtos</a>
     </div>
 
     <div class="products-grid">
-      <article v-for="product in props.products" :key="product.id" class="product-card">
-        <img :src="product.image" :alt="product.name" loading="lazy" />
-
-        <div class="product-body">
-          <h3>{{ product.name }} <span>({{ product.unit }})</span></h3>
-          <p class="rating">{{ "★".repeat(product.rating) }}</p>
-          <strong>{{ formatPrice(product.price) }}</strong>
-        </div>
-
-        <a
-          class="order-btn"
-          :href="buildWhatsAppLink(product)"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Pedir no WhatsApp
-        </a>
-      </article>
+      <ProductCard
+        v-for="product in props.products"
+        :key="product.id"
+        :product="product"
+        :whatsapp-phone="props.whatsappPhone"
+      />
     </div>
   </section>
 </template>
 
 <style scoped>
 .showcase-section {
-  margin-top: 20px;
+  min-width: 0;
 }
 
 .section-head {
@@ -68,78 +50,19 @@ function buildWhatsAppLink(product: ProductItem) {
   padding: 10px 16px;
   font-weight: 700;
   color: var(--text-2);
-  background: var(--surface-1);
+  background: color-mix(in srgb, var(--surface-1) 90%, transparent);
+  white-space: nowrap;
 }
 
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 12px;
   min-width: 0;
+  align-items: stretch;
 }
 
-.product-card {
-  border: 1px solid var(--border-1);
-  border-radius: 18px;
-  background: var(--surface-1);
-  box-shadow: var(--shadow-2);
-  padding: 12px;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-}
-
-.product-card img {
-  width: 100%;
-  height: 122px;
-  object-fit: contain;
-}
-
-.product-body {
-  margin-top: 8px;
-}
-
-.product-card h3 {
-  margin: 0;
-  line-height: 1.1;
-  font-size: 1.55rem;
-  overflow-wrap: anywhere;
-}
-
-.product-card h3 span {
-  color: var(--text-3);
-  font-size: 0.94rem;
-}
-
-.rating {
-  margin: 8px 0;
-  color: #ffc62f;
-  letter-spacing: 2px;
-}
-
-.product-card strong {
-  font-size: 1.2rem;
-}
-
-.order-btn {
-  margin-top: 12px;
-  display: block;
-  width: 100%;
-  border-radius: 999px;
-  padding: 11px 12px;
-  background: var(--cta-gradient);
-  color: #fff;
-  text-align: center;
-  font-weight: 700;
-}
-
-@media (max-width: 1200px) {
-  .products-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 980px) {
+@media (max-width: 860px) {
   .products-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -155,13 +78,11 @@ function buildWhatsAppLink(product: ProductItem) {
     width: 100%;
     text-align: center;
   }
+}
 
+@media (max-width: 520px) {
   .products-grid {
     grid-template-columns: 1fr;
-  }
-
-  .product-card h3 {
-    font-size: 1.35rem;
   }
 }
 </style>

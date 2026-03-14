@@ -1,15 +1,13 @@
+import './config/env';
 import cors from 'cors';
 import 'reflect-metadata';
 import express from 'express';
 import path from 'path';
-import dotenv from 'dotenv';
 import { login } from './scripts/login';
 import { register } from './scripts/register';
 import { homeApi } from './scripts/home-api';
 import { errorHandler } from './middlewares/error-handler'; // Certifique-se de que o caminho está correto
 import { appDataSource } from './database';
-
-dotenv.config({ path: '.env.development.local' });
 
 const app = express();
 const port = process.env.PORT || 3000;

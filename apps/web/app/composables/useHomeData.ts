@@ -4,6 +4,8 @@ import {
   announcements as fallbackAnnouncements,
   benefits as fallbackBenefits,
   categories as fallbackCategories,
+  freshProducts as fallbackFreshProducts,
+  freshProductsSelectedAt as fallbackFreshProductsSelectedAt,
   heroHighlights as fallbackHighlights,
   menuItems as fallbackMenuItems,
   offers as fallbackOffers,
@@ -21,6 +23,8 @@ function buildFallbackHomeData(): HomeApiResponse {
     products: fallbackProducts,
     benefits: fallbackBenefits,
     offers: fallbackOffers,
+    freshProducts: fallbackFreshProducts,
+    freshProductsSelectedAt: fallbackFreshProductsSelectedAt,
     announcements: fallbackAnnouncements,
     store: fallbackStore,
     storeStatus: getStoreStatus(fallbackStore, now),
@@ -47,6 +51,8 @@ export async function useHomeData() {
 
     return {
       ...data,
+      freshProducts: data.freshProducts?.length ? data.freshProducts : fallbackFreshProducts,
+      freshProductsSelectedAt: data.freshProductsSelectedAt || fallbackFreshProductsSelectedAt,
       storeStatus: data.storeStatus ?? getStoreStatus(data.store, now),
       storeClockLabel: data.storeClockLabel ?? getStoreClockLabel(data.store, now),
     };

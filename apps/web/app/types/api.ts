@@ -16,6 +16,8 @@ export type HomeApiResponse = {
   products: ProductItem[];
   benefits: BenefitItem[];
   offers: OfferItem[];
+  freshProducts?: ProductItem[];
+  freshProductsSelectedAt?: string;
   announcements: AnnouncementItem[];
   store: StoreInfo;
   storeStatus?: StoreStatus;

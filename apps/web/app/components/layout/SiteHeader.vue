@@ -14,6 +14,10 @@ const props = withDefaults(
   },
 );
 
+const emit = defineEmits<{
+  (event: "cart-click"): void;
+}>();
+
 const isMobileMenuOpen = ref(false);
 const { isDark, toggleTheme } = useTheme();
 
@@ -22,6 +26,22 @@ function closeMobileMenu() {
 }
 
 const whatsappHref = computed(() => `https://wa.me/${props.whatsappPhone}`);
+
+function handleCartClick() {
+  if (!process.client) return;
+
+  closeMobileMenu();
+
+  if (window.matchMedia("(max-width: 1023px)").matches) {
+    emit("cart-click");
+    return;
+  }
+
+  document.querySelector<HTMLElement>("#carrinho")?.scrollIntoView({
+    behavior: "smooth",
+    block: "start",
+  });
+}
 </script>
 
 <template>
@@ -65,7 +85,7 @@ const whatsappHref = computed(() => `https://wa.me/${props.whatsappPhone}`);
             <span class="login-label">Entrar</span>
           </button>
 
-          <button class="cart-btn" type="button" aria-label="Meu carrinho">
+          <button class="cart-btn" type="button" aria-label="Ver carrinho" @click="handleCartClick">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M6 6h15l-1.5 8.5H9L7 4H3" />
               <circle cx="10" cy="19" r="1.5" />

@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 import type { StoreStatusApiResponse } from '~/types/api';
-import type { AnnouncementCtaType, AnnouncementItem, AnnouncementVariant, StoreInfo, StoreStatus } from '~/types/home';
+import type { AnnouncementCtaType, AnnouncementItem, AnnouncementVariant, ProductItem, StoreInfo, StoreStatus } from '~/types/home';
 import { getStoreClockLabel, getStoreStatus } from '~/utils/store-status';
 
 const props = defineProps<{
   highlights: string[];
   announcements: AnnouncementItem[];
+  freshProducts: ProductItem[];
   store: StoreInfo;
   storeStatus?: StoreStatus;
   storeClockLabel?: string;
@@ -15,13 +16,17 @@ const props = defineProps<{
 const config = useRuntimeConfig();
 const now = ref(new Date());
 const activeIndex = ref(0);
+const spotlightIndex = ref(0);
 const routeLoading = ref(false);
 const routeHint = ref('');
 const statusState = ref<StoreStatus>(props.storeStatus ?? getStoreStatus(props.store, now.value));
 const storeClockLabelState = ref(props.storeClockLabel ?? getStoreClockLabel(props.store, now.value));
+const touchStartX = ref<number | null>(null);
+const touchCurrentX = ref<number | null>(null);
 
 let clockTimer: ReturnType<typeof setInterval> | null = null;
 let rotationTimer: ReturnType<typeof setTimeout> | null = null;
+let spotlightRotationTimer: ReturnType<typeof setTimeout> | null = null;
 
 type AnnouncementDisplay = {
   id: string;
@@ -71,6 +76,13 @@ function clearRotationTimer() {
 
   clearTimeout(rotationTimer);
   rotationTimer = null;
+}
+
+function clearSpotlightRotationTimer() {
+  if (!spotlightRotationTimer) return;
+
+  clearTimeout(spotlightRotationTimer);
+  spotlightRotationTimer = null;
 }
 
 function normalizeIndex(next: number, total: number) {
@@ -151,10 +163,18 @@ const activeAnnouncements = computed(() => {
 });
 
 const canRotateAnnouncements = computed(() => activeAnnouncements.value.length > 1);
+const spotlightProducts = computed(() => props.freshProducts ?? []);
+const canRotateSpotlightProducts = computed(() => spotlightProducts.value.length > 1);
+const spotlightNote = computed(() => 'Siga o Gaviao Frutas no Instagram');
 
 const currentAnnouncement = computed(() => {
   const list = activeAnnouncements.value;
   return list[normalizeIndex(activeIndex.value, list.length)] ?? FALLBACK_ANNOUNCEMENT;
+});
+
+const currentSpotlightProduct = computed(() => {
+  const list = spotlightProducts.value;
+  return list[normalizeIndex(spotlightIndex.value, list.length)] ?? null;
 });
 
 function toDisplayAnnouncement(item: AnnouncementItem): AnnouncementDisplay {
@@ -220,6 +240,7 @@ const googleDirectionsFallbackUrl = computed(
     `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(`${props.store.latitude},${props.store.longitude}`)}&travelmode=driving`,
 );
 
+const instagramUrl = 'https://www.instagram.com/gaviao_fr';
 const whatsappUrl = computed(() => {
   const text = 'Ola! Quero fazer um pedido e retirar na loja.';
   return `https://wa.me/${props.store.phone}?text=${encodeURIComponent(text)}`;
@@ -270,6 +291,64 @@ function prevAnnouncement() {
   const total = activeAnnouncements.value.length;
   activeIndex.value = normalizeIndex(activeIndex.value - 1, total);
   trackEvent('announcement_rotate', currentAnnouncement.value.id, 'prev');
+}
+
+function scheduleSpotlightRotation() {
+  clearSpotlightRotationTimer();
+
+  if (!process.client || !canRotateSpotlightProducts.value) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  spotlightRotationTimer = setTimeout(() => {
+    const total = spotlightProducts.value.length;
+    spotlightIndex.value = normalizeIndex(spotlightIndex.value + 1, total);
+  }, 5200);
+}
+
+function goToSpotlightProduct(index: number) {
+  const total = spotlightProducts.value.length;
+  spotlightIndex.value = normalizeIndex(index, total);
+}
+
+function handleAnnouncementTouchStart(event: TouchEvent) {
+  const point = event.touches[0];
+
+  if (!point) return;
+
+  touchStartX.value = point.clientX;
+  touchCurrentX.value = point.clientX;
+}
+
+function handleAnnouncementTouchMove(event: TouchEvent) {
+  const point = event.touches[0];
+
+  if (!point || touchStartX.value === null) return;
+
+  touchCurrentX.value = point.clientX;
+}
+
+function resetAnnouncementTouch() {
+  touchStartX.value = null;
+  touchCurrentX.value = null;
+}
+
+function handleAnnouncementTouchEnd() {
+  if (touchStartX.value === null || touchCurrentX.value === null) {
+    resetAnnouncementTouch();
+    return;
+  }
+
+  const deltaX = touchCurrentX.value - touchStartX.value;
+
+  if (Math.abs(deltaX) >= 42) {
+    if (deltaX < 0) {
+      nextAnnouncement();
+    } else {
+      prevAnnouncement();
+    }
+  }
+
+  resetAnnouncementTouch();
 }
 
 function openAnnouncementCta(announcement: AnnouncementDisplay) {
@@ -370,6 +449,14 @@ watch(
 );
 
 watch(
+  () => spotlightProducts.value.length,
+  (total) => {
+    if (spotlightIndex.value >= total) spotlightIndex.value = 0;
+    if (!total || total === 1) clearSpotlightRotationTimer();
+  },
+);
+
+watch(
   () => props.storeStatus,
   (nextStatus) => {
     if (!nextStatus) return;
@@ -396,6 +483,14 @@ watch(
   { immediate: true },
 );
 
+watch(
+  () => currentSpotlightProduct.value?.id,
+  () => {
+    scheduleSpotlightRotation();
+  },
+  { immediate: true },
+);
+
 onMounted(() => {
   clockTimer = setInterval(() => {
     refreshStoreStatus();
@@ -403,10 +498,12 @@ onMounted(() => {
 
   refreshStoreStatus();
   scheduleRotation();
+  scheduleSpotlightRotation();
 });
 
 onUnmounted(() => {
   clearRotationTimer();
+  clearSpotlightRotationTimer();
 
   if (!clockTimer) return;
 
@@ -417,29 +514,73 @@ onUnmounted(() => {
 
 <template>
   <section class="hero-section">
-    <div class="hero-copy">
-      <h1>
-        O Mercadinho
-        <span>da sua Regiao</span>
-      </h1>
+    <div class="hero-left">
+      <div class="hero-copy">
+        <h1>
+          O Mercadinho
+          <span>da sua Regiao</span>
+        </h1>
 
-      <p class="subtitle">Qualidade e preco baixo voce encontra aqui, Gaviao Frutas.</p>
+        <p class="subtitle">Qualidade e preco baixo voce encontra aqui, Gaviao Frutas.</p>
 
-      <ul class="highlights">
-        <li v-for="item in props.highlights" :key="item">
-          <span class="check">✓</span>
-          {{ item }}
-        </li>
-      </ul>
+        <ul class="highlights">
+          <li v-for="item in props.highlights" :key="item">
+            <span class="check">✓</span>
+            {{ item }}
+          </li>
+        </ul>
 
-      <div class="hero-cta">
-        <a class="cta-main" :href="whatsappUrl" target="_blank" rel="noreferrer">Pedir no WhatsApp</a>
-        <a class="cta-secondary" href="#produtos">Ver Produtos</a>
+        <div class="hero-cta">
+          <a class="cta-main" :href="whatsappUrl" target="_blank" rel="noreferrer">Pedir no WhatsApp</a>
+          <a class="cta-secondary" href="#produtos">Ver Produtos</a>
+        </div>
       </div>
+
+      <ProductCard
+        v-if="currentSpotlightProduct"
+        class="spotlight-card"
+        :product="currentSpotlightProduct"
+        :whatsapp-phone="props.store.phone"
+        badge-label="GAVIAO FRUTAS"
+        :info-label="spotlightNote"
+        emphasis="fresh"
+        layout="compact"
+        :show-rating="false"
+        :primary-action="{ label: 'Seguir no Instagram', href: instagramUrl, icon: 'instagram', tone: 'secondary' }"
+        :secondary-action="{ label: 'Todos os produtos', href: '#produtos', tone: 'primary' }"
+      >
+        <template #header>
+          <div class="spotlight-card-head">
+            <div class="spotlight-card-copy">
+              <p class="hub-kicker">Vitrine do dia</p>
+              <strong class="spotlight-card-title">Qualidade e preco baixo voce encontra aqui</strong>
+            </div>
+
+            <div v-if="canRotateSpotlightProducts" class="spotlight-dots" role="tablist" aria-label="Produtos da vitrine">
+              <button
+                v-for="(product, index) in spotlightProducts"
+                :key="product.id"
+                type="button"
+                :class="['spotlight-dot', { active: index === spotlightIndex }]"
+                :aria-label="`Ir para produto da vitrine ${index + 1}`"
+                :aria-pressed="index === spotlightIndex"
+                @click="goToSpotlightProduct(index)"
+              />
+            </div>
+          </div>
+        </template>
+      </ProductCard>
     </div>
 
     <div class="hero-visual">
-      <article class="hero-media" aria-label="Anuncios automaticos">
+      <article
+        class="hero-media"
+        aria-label="Anuncios automaticos"
+        @touchstart.passive="handleAnnouncementTouchStart"
+        @touchmove.passive="handleAnnouncementTouchMove"
+        @touchend.passive="handleAnnouncementTouchEnd"
+        @touchcancel="resetAnnouncementTouch"
+      >
         <div class="announcement-copy">
           <p class="announcement-tag">
             <svg class="ui-icon mini" viewBox="0 0 24 24" aria-hidden="true">
@@ -500,101 +641,103 @@ onUnmounted(() => {
         </div>
       </article>
 
-      <article class="pickup-hub" id="frigorifico" aria-label="Hub de retirada inteligente">
-        <header class="hub-header">
-          <div class="hub-title">
-            <p class="hub-kicker">Hub de retirada inteligente</p>
-            <h3>{{ props.store.name }}</h3>
+      <div class="hero-footer">
+        <article class="pickup-hub" id="frigorifico" aria-label="Hub de retirada inteligente">
+          <header class="hub-header">
+            <div class="hub-title">
+              <p class="hub-kicker">Hub de retirada inteligente</p>
+              <h3>{{ props.store.name }}</h3>
+            </div>
+            <span :class="['status-chip', { open: status.isOpen }]">{{ status.text }}</span>
+          </header>
+
+          <p class="store-location">{{ props.store.cityState }}</p>
+          <p class="store-address">{{ props.store.address }}</p>
+
+          <div class="hub-grid">
+            <article class="hub-item">
+              <span class="hub-stat-label">
+                <svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 9 16l10-10" /></svg>
+                Disponibilidade
+              </span>
+              <strong>{{ status.nextText }}</strong>
+            </article>
+
+            <article class="hub-item">
+              <span class="hub-stat-label">
+                <svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h6l-1 8 9-12h-6z" /></svg>
+                Previsao
+              </span>
+              <strong>{{ pickupEtaText }}</strong>
+            </article>
+
+            <article class="hub-item">
+              <span class="hub-stat-label">
+                <svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>
+                Horario local
+              </span>
+              <strong>{{ storeClockLabel }} (AL)</strong>
+            </article>
+
+            <article class="hub-item">
+              <span class="hub-stat-label">
+                <svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v10H8l-4 4V5Z" /></svg>
+                Canal rapido
+              </span>
+              <strong>WhatsApp</strong>
+            </article>
           </div>
-          <span :class="['status-chip', { open: status.isOpen }]">{{ status.text }}</span>
-        </header>
 
-        <p class="store-location">{{ props.store.cityState }}</p>
-        <p class="store-address">{{ props.store.address }}</p>
-
-        <div class="hub-grid">
-          <article class="hub-item">
-            <span class="hub-stat-label">
-              <svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 9 16l10-10" /></svg>
-              Disponibilidade
-            </span>
-            <strong>{{ status.nextText }}</strong>
-          </article>
-
-          <article class="hub-item">
-            <span class="hub-stat-label">
-              <svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h6l-1 8 9-12h-6z" /></svg>
-              Previsao
-            </span>
-            <strong>{{ pickupEtaText }}</strong>
-          </article>
-
-          <article class="hub-item">
-            <span class="hub-stat-label">
-              <svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>
-              Horario local
-            </span>
-            <strong>{{ storeClockLabel }} (AL)</strong>
-          </article>
-
-          <article class="hub-item">
-            <span class="hub-stat-label">
-              <svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v10H8l-4 4V5Z" /></svg>
-              Canal rapido
-            </span>
-            <strong>WhatsApp</strong>
-          </article>
-        </div>
-
-        <div class="hub-actions">
-          <button
-            type="button"
-            class="route-btn"
-            :disabled="status.isOpen && routeLoading"
-            @click="runPrimaryHubAction"
-          >
-            <svg v-if="status.isOpen" class="ui-icon btn-icon" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="m3 11 18-8-8 18-2-7-8-3Z" />
-            </svg>
-            <svg v-else class="ui-icon btn-icon" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M20 11.6A8.3 8.3 0 0 1 7.8 19l-3.8 1 1-3.7A8.3 8.3 0 1 1 20 11.6Z" />
-              <path d="M9.3 8.9c.2-.3.4-.3.6-.3h.5c.2 0 .4 0 .5.4l.7 1.7c.1.2.1.4 0 .6l-.3.5c-.1.1-.2.3-.1.5.2.4.7 1.1 1.5 1.7.9.7 1.6.9 2 .9.2 0 .3-.1.5-.2l.5-.6c.2-.2.4-.2.7-.1l1.6.8c.3.1.3.3.3.5v.5c0 .3 0 .5-.3.6-.4.3-.9.4-1.4.4-.8 0-1.9-.2-3.4-1.1-2.5-1.4-4.1-4.3-4.1-5 0-.4.1-.8.4-1.1Z" />
-            </svg>
-            <span>{{ primaryHubActionLabel }}</span>
-          </button>
-
-          <div class="hub-links">
-            <a
-              class="hub-link"
-              :href="googleMapsSearchUrl"
-              target="_blank"
-              rel="noreferrer"
-              @click="trackEvent('click_maps_link', 'store', 'hub')"
+          <div class="hub-actions">
+            <button
+              type="button"
+              class="route-btn"
+              :disabled="status.isOpen && routeLoading"
+              @click="runPrimaryHubAction"
             >
-              <svg class="ui-icon btn-icon" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11Z" />
-                <circle cx="12" cy="10" r="2.5" />
+              <svg v-if="status.isOpen" class="ui-icon btn-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="m3 11 18-8-8 18-2-7-8-3Z" />
               </svg>
-              Abrir no Google Maps
-            </a>
-            <a
-              class="hub-link ghost"
-              :href="whatsappUrl"
-              target="_blank"
-              rel="noreferrer"
-              @click="trackEvent('click_whatsapp_link', 'store', 'hub')"
-            >
-              <svg class="ui-icon btn-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <svg v-else class="ui-icon btn-icon" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M20 11.6A8.3 8.3 0 0 1 7.8 19l-3.8 1 1-3.7A8.3 8.3 0 1 1 20 11.6Z" />
                 <path d="M9.3 8.9c.2-.3.4-.3.6-.3h.5c.2 0 .4 0 .5.4l.7 1.7c.1.2.1.4 0 .6l-.3.5c-.1.1-.2.3-.1.5.2.4.7 1.1 1.5 1.7.9.7 1.6.9 2 .9.2 0 .3-.1.5-.2l.5-.6c.2-.2.4-.2.7-.1l1.6.8c.3.1.3.3.3.5v.5c0 .3 0 .5-.3.6-.4.3-.9.4-1.4.4-.8 0-1.9-.2-3.4-1.1-2.5-1.4-4.1-4.3-4.1-5 0-.4.1-.8.4-1.1Z" />
               </svg>
-              Pedir no WhatsApp
-            </a>
-          </div>
-        </div>
+              <span>{{ primaryHubActionLabel }}</span>
+            </button>
 
-        <p v-if="routeHint" class="route-hint">{{ routeHint }}</p>
-      </article>
+            <div class="hub-links">
+              <a
+                class="hub-link"
+                :href="googleMapsSearchUrl"
+                target="_blank"
+                rel="noreferrer"
+                @click="trackEvent('click_maps_link', 'store', 'hub')"
+              >
+                <svg class="ui-icon btn-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11Z" />
+                  <circle cx="12" cy="10" r="2.5" />
+                </svg>
+                Abrir no Google Maps
+              </a>
+              <a
+                class="hub-link ghost"
+                :href="whatsappUrl"
+                target="_blank"
+                rel="noreferrer"
+                @click="trackEvent('click_whatsapp_link', 'store', 'hub')"
+              >
+                <svg class="ui-icon btn-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M20 11.6A8.3 8.3 0 0 1 7.8 19l-3.8 1 1-3.7A8.3 8.3 0 1 1 20 11.6Z" />
+                  <path d="M9.3 8.9c.2-.3.4-.3.6-.3h.5c.2 0 .4 0 .5.4l.7 1.7c.1.2.1.4 0 .6l-.3.5c-.1.1-.2.3-.1.5.2.4.7 1.1 1.5 1.7.9.7 1.6.9 2 .9.2 0 .3-.1.5-.2l.5-.6c.2-.2.4-.2.7-.1l1.6.8c.3.1.3.3.3.5v.5c0 .3 0 .5-.3.6-.4.3-.9.4-1.4.4-.8 0-1.9-.2-3.4-1.1-2.5-1.4-4.1-4.3-4.1-5 0-.4.1-.8.4-1.1Z" />
+                </svg>
+                Pedir no WhatsApp
+              </a>
+            </div>
+          </div>
+
+          <p v-if="routeHint" class="route-hint">{{ routeHint }}</p>
+        </article>
+      </div>
     </div>
   </section>
 </template>
@@ -628,6 +771,13 @@ onUnmounted(() => {
   --hub-chip-border: color-mix(in srgb, #3b546d 60%, var(--border-1));
   --hub-chip-text: #d9e8fa;
   --hub-chip-dot: color-mix(in srgb, #b8cbe2 68%, transparent);
+}
+
+.hero-left {
+  display: grid;
+  align-content: start;
+  gap: 14px;
+  min-width: 0;
 }
 
 .hero-copy {
@@ -727,6 +877,13 @@ onUnmounted(() => {
   min-width: 0;
 }
 
+.hero-footer {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  min-width: 0;
+}
+
 .hero-media {
   --hero-bg-url: url('/imgs/hero-dark-bg.webp');
   border-radius: 24px;
@@ -747,6 +904,7 @@ onUnmounted(() => {
   align-items: end;
   gap: 12px;
   min-width: 0;
+  touch-action: pan-y;
 }
 
 .announcement-copy {
@@ -880,6 +1038,51 @@ onUnmounted(() => {
   padding: 14px 14px 12px;
   display: grid;
   gap: 10px;
+}
+
+.spotlight-card {
+  min-width: 0;
+  align-self: start;
+}
+
+.spotlight-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.spotlight-card-copy {
+  display: grid;
+  gap: 3px;
+}
+
+.spotlight-card-title {
+  display: block;
+  font-size: 1.02rem;
+  line-height: 1.08;
+  color: var(--text-1);
+}
+
+.spotlight-dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.spotlight-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  border: 0;
+  padding: 0;
+  background: color-mix(in srgb, var(--text-3) 42%, transparent);
+  cursor: pointer;
+}
+
+.spotlight-dot.active {
+  width: 22px;
+  background: var(--accent-600);
 }
 
 .hub-header {

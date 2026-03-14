@@ -88,7 +88,7 @@ useHead({
       <HeroSection
         :highlights="homeData.heroHighlights"
         :announcements="homeData.announcements"
-        :fresh-products="homeData.freshProducts"
+        :fresh-products="homeData.freshProducts ?? []"
         :store="homeData.store"
         :store-status="homeData.storeStatus"
         :store-clock-label="homeData.storeClockLabel"

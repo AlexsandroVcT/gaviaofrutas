@@ -1,11 +1,11 @@
 import type { BenefitItem, NavItem } from '~/types/home';
 
 export const menuItems: NavItem[] = [
-  { label: 'Inicio', href: '#' },
-  { label: 'Produtos', href: '#produtos' },
-  { label: 'Ofertas', href: '#ofertas' },
-  { label: 'Frigorifico', href: '#frigorifico' },
-  { label: 'Contatos', href: '#contatos' },
+  { label: 'Inicio', href: '/' },
+  { label: 'Produtos', href: '/produtos' },
+  { label: 'Ofertas', href: '/#ofertas' },
+  { label: 'Frigorifico', href: '/produtos?categoria=frigorifico' },
+  { label: 'Contatos', href: '/#contatos' },
 ];
 
 export const heroHighlights = [

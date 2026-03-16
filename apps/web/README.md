@@ -12,6 +12,15 @@ yarn dev --host 0.0.0.0 --port 3000
 
 Abrir: `http://localhost:3000`
 
+## Variaveis de ambiente
+
+```bash
+NUXT_PUBLIC_SITE_URL=https://gaviaofrutas.com.br
+NUXT_CATALOG_API_BASE=http://localhost:3001
+```
+
+O browser fala apenas com `/api/*` do proprio Nuxt. O Nuxt server faz o proxy para o backend/catalogo usando `NUXT_CATALOG_API_BASE`.
+
 ## Estrutura (padrao atual)
 
 ```txt

@@ -1,5 +1,4 @@
 import type { HomeApiResponse } from '~/types/api';
-import { benefits, heroHighlights, menuItems } from '~/data/site';
 import { getStoreClockLabel, getStoreStatus } from '~/utils/store-status';
 
 function buildFallbackHomeData(): HomeApiResponse {
@@ -43,52 +42,20 @@ function buildFallbackHomeData(): HomeApiResponse {
   };
 }
 
-function buildApiUrl(apiBase: string) {
-  if (!apiBase) return '/api/home';
-  return `${apiBase.replace(/\/$/, '')}/api/home`;
-}
-
-function buildHomeApiCandidates(apiBase: string) {
-  const candidates = ['/api/home'];
-
-  if (apiBase) {
-    candidates.unshift(buildApiUrl(apiBase));
-  }
-
-  if (import.meta.dev) {
-    candidates.push('http://127.0.0.1:3001/api/home');
-    candidates.push('http://localhost:3001/api/home');
-  }
-
-  return Array.from(new Set(candidates));
-}
-
 export async function useHomeData() {
-  const config = useRuntimeConfig();
-  const apiBase = config.public.apiBase || '';
-  const candidates = buildHomeApiCandidates(apiBase);
+  try {
+    const data = await $fetch<HomeApiResponse>('/api/home', {
+      timeout: 5000,
+    });
 
-  for (const url of candidates) {
-    try {
-      const data = await $fetch<HomeApiResponse>(url, {
-        timeout: 5000,
-      });
+    const now = new Date();
 
-      const now = new Date();
-
-      return {
-        ...data,
-        storeStatus: data.storeStatus ?? getStoreStatus(data.store, now),
-        storeClockLabel: data.storeClockLabel ?? getStoreClockLabel(data.store, now),
-      };
-    } catch {
-      continue;
-    }
+    return {
+      ...data,
+      storeStatus: data.storeStatus ?? getStoreStatus(data.store, now),
+      storeClockLabel: data.storeClockLabel ?? getStoreClockLabel(data.store, now),
+    };
+  } catch {
+    return buildFallbackHomeData();
   }
-
-  return buildFallbackHomeData();
 }
-
-export const siteMenuItems = menuItems;
-export const siteHeroHighlights = heroHighlights;
-export const siteBenefits = benefits;

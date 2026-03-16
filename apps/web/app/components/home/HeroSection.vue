@@ -13,7 +13,6 @@ const props = defineProps<{
   storeClockLabel?: string;
 }>();
 
-const config = useRuntimeConfig();
 const now = ref(new Date());
 const activeIndex = ref(0);
 const spotlightIndex = ref(0);
@@ -97,22 +96,12 @@ function clampDuration(ms?: number) {
   return Math.min(Math.max(ms, 3500), 15000);
 }
 
-function buildEventsUrl(apiBase: string) {
-  if (!apiBase) return '/api/events';
-  return `${apiBase.replace(/\/$/, '')}/api/events`;
-}
-
-function buildStoreStatusUrl(apiBase: string) {
-  if (!apiBase) return '/api/store/status';
-  return `${apiBase.replace(/\/$/, '')}/api/store/status`;
-}
-
 async function refreshStoreStatus() {
   const currentNow = new Date();
   now.value = currentNow;
 
   try {
-    const payload = await $fetch<StoreStatusApiResponse>(buildStoreStatusUrl(config.public.apiBase || ''), {
+    const payload = await $fetch<StoreStatusApiResponse>('/api/store/status', {
       timeout: 4500,
     });
 
@@ -128,7 +117,7 @@ async function trackEvent(eventType: string, itemId: string, source: string) {
   if (!process.client) return;
 
   try {
-    await $fetch(buildEventsUrl(config.public.apiBase || ''), {
+    await $fetch('/api/events', {
       method: 'POST',
       body: {
         eventType,
@@ -255,7 +244,7 @@ function getAnnouncementCtaUrl(announcement: AnnouncementDisplay) {
     case 'whatsapp':
       return whatsappUrl.value;
     case 'catalog':
-      return '#produtos';
+      return '/produtos';
     case 'custom':
       return announcement.ctaUrl || '#';
     default:
@@ -534,7 +523,7 @@ onUnmounted(() => {
 
         <div class="hero-cta">
           <a class="cta-main" :href="whatsappUrl" target="_blank" rel="noreferrer">Pedir no WhatsApp</a>
-          <a class="cta-secondary" href="#produtos">Ver Produtos</a>
+          <a class="cta-secondary" href="/produtos">Ver Produtos</a>
         </div>
       </div>
 
@@ -548,7 +537,7 @@ onUnmounted(() => {
         emphasis="fresh"
         layout="compact"
         :primary-action="{ label: 'Seguir no Instagram', href: instagramUrl, icon: 'instagram', tone: 'secondary' }"
-        :secondary-action="{ label: 'Todos os produtos', href: '#produtos', tone: 'primary' }"
+        :secondary-action="{ label: 'Todos os produtos', href: '/produtos', tone: 'primary' }"
       >
         <template #header>
           <div class="spotlight-card-head">

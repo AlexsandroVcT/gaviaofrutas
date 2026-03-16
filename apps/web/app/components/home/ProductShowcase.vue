@@ -3,7 +3,12 @@ import type { ProductItem } from "~/types/home";
 
 const props = defineProps<{
   products: ProductItem[];
+  title?: string;
   activeCategoryName?: string | null;
+  moreHref?: string;
+  moreLabel?: string;
+  hideMoreLink?: boolean;
+  emptyStateText?: string;
   whatsappPhone?: string;
   embedded?: boolean;
 }>();
@@ -13,10 +18,10 @@ const props = defineProps<{
   <section id="produtos" :class="['showcase-section', { embedded: props.embedded }]">
     <div class="section-head">
       <div class="section-copy">
-        <h2>Produtos em destaque</h2>
+        <h2>{{ props.title || 'Produtos em destaque' }}</h2>
         <p v-if="props.activeCategoryName" class="section-filter">{{ props.activeCategoryName }}</p>
       </div>
-      <a href="#produtos">Ver mais produtos</a>
+      <a v-if="!props.hideMoreLink" :href="props.moreHref || '/produtos'">{{ props.moreLabel || 'Ver mais produtos' }}</a>
     </div>
 
     <div v-if="props.products.length" class="products-grid">
@@ -29,7 +34,7 @@ const props = defineProps<{
     </div>
 
     <div v-else class="empty-state">
-      Nenhum produto disponivel nesta categoria agora.
+      {{ props.emptyStateText || 'Nenhum produto disponivel nesta categoria agora.' }}
     </div>
   </section>
 </template>

@@ -17,6 +17,7 @@ export type ProductItem = {
   id: number;
   categoryId: number;
   categorySlug: string;
+  categoryName: string;
   name: string;
   slug: string;
   shortDescription: string | null;

@@ -10,15 +10,26 @@ const props = defineProps<{
   whatsappPhone?: string;
 }>();
 
+const HOME_PRODUCTS_LIMIT = 12;
 const selectedCategoryId = ref<number | null>(null);
 
 const selectedCategory = computed(() =>
   props.categories.find((category) => category.id === selectedCategoryId.value) ?? null,
 );
 
+const automaticProducts = computed(() => {
+  const featuredIds = new Set(props.featuredProducts.map((product) => product.id));
+  const prioritizedProducts = [
+    ...props.featuredProducts,
+    ...props.products.filter((product) => !featuredIds.has(product.id)),
+  ];
+
+  return prioritizedProducts.slice(0, HOME_PRODUCTS_LIMIT);
+});
+
 const visibleProducts = computed(() => {
   if (selectedCategoryId.value === null) {
-    return props.featuredProducts;
+    return automaticProducts.value;
   }
 
   return props.products.filter((product) => product.categoryId === selectedCategoryId.value);

@@ -9,6 +9,7 @@ import { Product } from './entities/Product';
 import { StoreProfile } from './entities/StoreProfile';
 import { User } from './entities/User';
 import { CreatePublicCatalogSchema1760000000000 } from './migrations/1760000000000-CreatePublicCatalogSchema';
+import { SyncExpandedPublicCatalog1761000000000 } from './migrations/1761000000000-SyncExpandedPublicCatalog';
 
 const databaseUrl =
   process.env.GAVIAO_FRUTAS_DB_URL ||
@@ -26,7 +27,7 @@ const baseOptions = {
   synchronize: false,
   logging: true,
   entities: [User, StoreProfile, Category, Product, Inventory, Offer, Announcement, HomeSpotlight],
-  migrations: [CreatePublicCatalogSchema1760000000000],
+  migrations: [CreatePublicCatalogSchema1760000000000, SyncExpandedPublicCatalog1761000000000],
   subscribers: [],
 };
 

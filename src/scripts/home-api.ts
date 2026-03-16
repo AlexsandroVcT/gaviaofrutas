@@ -1,17 +1,14 @@
 import express from 'express';
-import {
-  announcements,
-  benefits,
-  categories,
-  freshProducts,
-  freshProductsSelectedAt,
-  heroHighlights,
-  menuItems,
-  offers,
-  products,
-  store,
-} from '../data/home-catalog';
 import { getStoreClockLabel, getStoreStatus } from './store-status';
+import {
+  getPublicAnnouncements,
+  getPublicCategories,
+  getPublicFeaturedProducts,
+  getPublicOffers,
+  getPublicProducts,
+  getPublicSpotlights,
+  getPublicStoreProfile,
+} from './public-home';
 
 export const homeApi = express.Router();
 
@@ -21,41 +18,6 @@ type EventCounter = {
 };
 
 const eventCounters = new Map<string, EventCounter>();
-
-function isAnnouncementLive(
-  announcement: {
-    isActive: boolean;
-    startAt?: string | null;
-    endAt?: string | null;
-  },
-  now: Date,
-) {
-  if (!announcement.isActive) return false;
-
-  if (announcement.startAt) {
-    const start = new Date(announcement.startAt);
-    if (!Number.isNaN(start.getTime()) && now < start) return false;
-  }
-
-  if (announcement.endAt) {
-    const end = new Date(announcement.endAt);
-    if (!Number.isNaN(end.getTime()) && now > end) return false;
-  }
-
-  return true;
-}
-
-function getActiveAnnouncements() {
-  const now = new Date();
-
-  return announcements
-    .filter((item) => isAnnouncementLive(item, now))
-    .sort((a, b) => {
-      if (b.priority !== a.priority) return b.priority - a.priority;
-      if (b.weight !== a.weight) return b.weight - a.weight;
-      return a.id.localeCompare(b.id);
-    });
-}
 
 function incrementEventCounter(key: string) {
   const now = new Date().toISOString();
@@ -71,69 +33,109 @@ function incrementEventCounter(key: string) {
   eventCounters.set(key, current);
 }
 
-homeApi.get('/api/home', (_req, res) => {
-  const now = new Date();
+homeApi.get('/api/home', async (_req, res, next) => {
+  try {
+    const now = new Date();
+    const [store, categories, products, featuredProducts, spotlights, offers, announcements] = await Promise.all([
+      getPublicStoreProfile(),
+      getPublicCategories(),
+      getPublicProducts(),
+      getPublicFeaturedProducts(),
+      getPublicSpotlights(now),
+      getPublicOffers(now),
+      getPublicAnnouncements(now),
+    ]);
 
-  res.status(200).json({
-    menuItems,
-    heroHighlights,
-    categories,
-    products,
-    benefits,
-    offers,
-    freshProducts,
-    freshProductsSelectedAt,
-    announcements: getActiveAnnouncements(),
-    store,
-    storeStatus: getStoreStatus(store, now),
-    storeClockLabel: getStoreClockLabel(store, now),
-    fetchedAt: now.toISOString(),
-  });
-});
-
-homeApi.get('/api/announcements', (_req, res) => {
-  const items = getActiveAnnouncements();
-
-  res.status(200).json({
-    items,
-    total: items.length,
-    fetchedAt: new Date().toISOString(),
-  });
-});
-
-homeApi.get('/api/products', (req, res) => {
-  const { category, limit } = req.query;
-
-  let result = products;
-
-  if (typeof category === 'string' && category.trim()) {
-    result = result.filter((item) => item.categoryId === category.trim());
-  }
-
-  if (typeof limit === 'string') {
-    const parsedLimit = Number.parseInt(limit, 10);
-
-    if (Number.isFinite(parsedLimit) && parsedLimit > 0) {
-      result = result.slice(0, parsedLimit);
+    if (!store) {
+      res.status(503).json({ message: 'Store profile is not configured' });
+      return;
     }
+
+    res.status(200).json({
+      store,
+      categories,
+      products,
+      featuredProducts,
+      spotlights,
+      offers,
+      announcements,
+      storeStatus: getStoreStatus(store, now),
+      storeClockLabel: getStoreClockLabel(store, now),
+      fetchedAt: now.toISOString(),
+    });
+  } catch (error) {
+    next(error);
   }
-
-  res.status(200).json({ items: result, total: result.length });
 });
 
-homeApi.get('/api/categories', (_req, res) => {
-  res.status(200).json({ items: categories, total: categories.length });
+homeApi.get('/api/announcements', async (_req, res, next) => {
+  try {
+    const items = await getPublicAnnouncements(new Date());
+
+    res.status(200).json({
+      items,
+      total: items.length,
+      fetchedAt: new Date().toISOString(),
+    });
+  } catch (error) {
+    next(error);
+  }
 });
 
-homeApi.get('/api/store/status', (_req, res) => {
-  const now = new Date();
+homeApi.get('/api/products', async (req, res, next) => {
+  try {
+    const { category, featured, limit } = req.query;
 
-  res.status(200).json({
-    store,
-    storeStatus: getStoreStatus(store, now),
-    storeClockLabel: getStoreClockLabel(store, now),
-    fetchedAt: now.toISOString(),
-  });
+    let items = await getPublicProducts({ featuredOnly: featured === 'true' });
+
+    if (typeof category === 'string' && category.trim()) {
+      const categoryFilter = category.trim();
+      items = items.filter(
+        (item) => item.categorySlug === categoryFilter || String(item.categoryId) === categoryFilter,
+      );
+    }
+
+    if (typeof limit === 'string') {
+      const parsedLimit = Number.parseInt(limit, 10);
+      if (Number.isFinite(parsedLimit) && parsedLimit > 0) {
+        items = items.slice(0, parsedLimit);
+      }
+    }
+
+    res.status(200).json({ items, total: items.length });
+  } catch (error) {
+    next(error);
+  }
+});
+
+homeApi.get('/api/categories', async (_req, res, next) => {
+  try {
+    const items = await getPublicCategories();
+    res.status(200).json({ items, total: items.length });
+  } catch (error) {
+    next(error);
+  }
+});
+
+homeApi.get('/api/store/status', async (_req, res, next) => {
+  try {
+    const now = new Date();
+    const store = await getPublicStoreProfile();
+
+    if (!store) {
+      res.status(503).json({ message: 'Store profile is not configured' });
+      return;
+    }
+
+    res.status(200).json({
+      store,
+      storeStatus: getStoreStatus(store, now),
+      storeClockLabel: getStoreClockLabel(store, now),
+      fetchedAt: now.toISOString(),
+    });
+  } catch (error) {
+    next(error);
+  }
 });
 
 homeApi.post('/api/events', (req, res) => {

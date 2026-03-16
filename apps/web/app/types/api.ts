@@ -10,16 +10,13 @@ import type {
 } from '~/types/home';
 
 export type HomeApiResponse = {
-  menuItems: NavItem[];
-  heroHighlights: string[];
+  store: StoreInfo;
   categories: CategoryItem[];
   products: ProductItem[];
-  benefits: BenefitItem[];
+  featuredProducts: ProductItem[];
+  spotlights: ProductItem[];
   offers: OfferItem[];
-  freshProducts?: ProductItem[];
-  freshProductsSelectedAt?: string;
   announcements: AnnouncementItem[];
-  store: StoreInfo;
   storeStatus?: StoreStatus;
   storeClockLabel?: string;
   fetchedAt?: string;

@@ -1,3 +1,6 @@
+const isProduction = process.env.NODE_ENV === 'production';
+const defaultCatalogApiBase = isProduction ? 'https://gaviaofrutas.com.br' : 'http://127.0.0.1:3001';
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
@@ -10,8 +13,14 @@ export default defineNuxtConfig({
     url: process.env.NUXT_PUBLIC_SITE_URL || 'https://gaviaofrutas.com.br'
   },
   runtimeConfig: {
+    catalogApiBase:
+      process.env.NUXT_CATALOG_API_BASE ||
+      process.env.NUXT_API_BASE ||
+      process.env.API_BASE ||
+      process.env.NUXT_PUBLIC_API_BASE ||
+      defaultCatalogApiBase,
     public: {
-      apiBase: process.env.NUXT_PUBLIC_API_BASE || 'https://gaviaofrutas.com.br',
+      apiBase: process.env.NUXT_PUBLIC_API_BASE || (isProduction ? '' : defaultCatalogApiBase),
       siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://gaviaofrutas.com.br'
     }
   },

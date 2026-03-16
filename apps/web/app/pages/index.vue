@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
+import { benefits, heroHighlights, menuItems } from "~/data/site";
 import { useCartStore } from "~/stores/cart";
 
 const homeData = await useHomeData();
@@ -55,14 +56,16 @@ const webSiteLd = {
 };
 
 useSeoMeta({
-  title: "Gaviao Frutas | Hortifruti em Santa Luzia do Norte",
+  title: homeData.store.seoTitle || "Gaviao Frutas | Hortifruti em Santa Luzia do Norte",
   description:
+    homeData.store.seoDescription ||
     "Gaviao Frutas: hortifruti com retirada na loja em Santa Luzia do Norte. Chame no WhatsApp ou trace sua rota no Google Maps.",
   ogTitle: "Gaviao Frutas",
   ogDescription:
+    homeData.store.seoDescription ||
     "Retirada rapida na loja fisica, atendimento via WhatsApp e localizacao direta no Google Maps.",
   ogUrl: siteUrl,
-  ogImage: `${siteUrl}/imgs/hero-dark-bg.webp`,
+  ogImage: `${siteUrl}${homeData.store.coverUrl || "/imgs/hero-dark-bg.webp"}`,
   twitterCard: "summary_large_image",
 });
 
@@ -77,7 +80,7 @@ useHead({
 <template>
   <div class="home-page">
     <SiteHeader
-      :menu-items="homeData.menuItems"
+      :menu-items="menuItems"
       :cart-count="cartCount"
       :whatsapp-phone="homeData.store.phone"
       @cart-click="isCartDrawerOpen = true"
@@ -86,9 +89,9 @@ useHead({
     <main class="main-content">
       <OffersSection :offers="homeData.offers" />
       <HeroSection
-        :highlights="homeData.heroHighlights"
+        :highlights="heroHighlights"
         :announcements="homeData.announcements"
-        :fresh-products="homeData.freshProducts ?? []"
+        :spotlights="homeData.spotlights"
         :store="homeData.store"
         :store-status="homeData.storeStatus"
         :store-clock-label="homeData.storeClockLabel"
@@ -96,7 +99,8 @@ useHead({
       <ShopSection
         :categories="homeData.categories"
         :products="homeData.products"
-        :benefits="homeData.benefits"
+        :featured-products="homeData.featuredProducts"
+        :benefits="benefits"
         :whatsapp-phone="homeData.store.phone"
       />
     </main>

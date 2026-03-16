@@ -2,7 +2,6 @@
 import { computed, useSlots } from "vue";
 import { useCartStore } from "~/stores/cart";
 import type { ProductItem } from "~/types/home";
-import { formatPrice } from "~/utils/format";
 
 type ProductCardAction = {
   label: string;
@@ -100,7 +99,7 @@ function handleAction(action: ProductCardAction) {
       <slot name="header" />
     </div>
 
-    <img :src="props.product.image" :alt="props.product.name" loading="lazy" />
+    <img :src="props.product.imageUrl || '/imgs/logo-desktop.webp'" :alt="props.product.name" loading="lazy" />
 
     <div class="product-body">
       <h3>
@@ -108,9 +107,13 @@ function handleAction(action: ProductCardAction) {
         <span>({{ props.product.unit }})</span>
       </h3>
 
-      <p v-if="props.showRating" class="rating">{{ "★".repeat(props.product.rating) }}</p>
+      <p class="product-availability">
+        {{ props.product.isAvailable ? "Disponivel para retirada" : "Disponibilidade sob consulta" }}
+      </p>
 
-      <strong>{{ formatPrice(props.product.price) }}</strong>
+      <p v-if="props.product.shortDescription" class="product-description">
+        {{ props.product.shortDescription }}
+      </p>
 
       <p v-if="props.infoLabel" class="fresh-note">
         <span class="fresh-note-icon" aria-hidden="true" />
@@ -259,15 +262,18 @@ function handleAction(action: ProductCardAction) {
   font-weight: 600;
 }
 
-.rating {
+.product-availability {
   margin: 2px 0 0;
-  color: #ffc62f;
-  letter-spacing: 1.5px;
-  font-size: 0.98rem;
+  color: color-mix(in srgb, var(--accent-700) 72%, var(--text-1) 28%);
+  font-size: 0.86rem;
+  font-weight: 700;
 }
 
-.product-card strong {
-  font-size: 1.08rem;
+.product-description {
+  margin: 0;
+  color: var(--text-2);
+  font-size: 0.84rem;
+  line-height: 1.3;
 }
 
 .fresh-note {
@@ -354,8 +360,9 @@ function handleAction(action: ProductCardAction) {
   font-size: 1.02rem;
 }
 
-.product-card.layout-compact strong {
-  font-size: 1rem;
+.product-card.layout-compact .product-availability,
+.product-card.layout-compact .product-description {
+  font-size: 0.76rem;
 }
 
 .product-card.layout-compact .fresh-note {

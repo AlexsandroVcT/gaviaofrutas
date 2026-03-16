@@ -7,7 +7,7 @@ import { getStoreClockLabel, getStoreStatus } from '~/utils/store-status';
 const props = defineProps<{
   highlights: string[];
   announcements: AnnouncementItem[];
-  freshProducts: ProductItem[];
+  spotlights: ProductItem[];
   store: StoreInfo;
   storeStatus?: StoreStatus;
   storeClockLabel?: string;
@@ -29,25 +29,27 @@ let rotationTimer: ReturnType<typeof setTimeout> | null = null;
 let spotlightRotationTimer: ReturnType<typeof setTimeout> | null = null;
 
 type AnnouncementDisplay = {
-  id: string;
-  tag: string;
+  id: number;
+  tag: string | null;
   title: string;
-  description: string;
-  image: string;
+  description: string | null;
+  imageUrl: string | null;
   ctaLabel: string;
   ctaType: AnnouncementCtaType;
-  ctaUrl?: string;
+  ctaUrl?: string | null;
   durationMs?: number;
 };
 
 const FALLBACK_ANNOUNCEMENT: AnnouncementItem = {
-  id: 'fallback',
+  id: 0,
   tag: 'Anuncio',
   title: 'Retire seus pedidos com Gaviao Frutas',
+  slug: 'fallback',
   description: 'Chame no WhatsApp ou trace a rota para retirada na loja fisica.',
-  image: '/imgs/products/abacaxi.webp',
+  imageUrl: '/images/announcements/retirada-rapida.webp',
   ctaLabel: 'Tracar rota',
   ctaType: 'maps',
+  ctaUrl: null,
   isActive: true,
   priority: 1,
   weight: 1,
@@ -156,14 +158,14 @@ const activeAnnouncements = computed(() => {
     .sort((a, b) => {
       if (b.priority !== a.priority) return b.priority - a.priority;
       if (b.weight !== a.weight) return b.weight - a.weight;
-      return a.id.localeCompare(b.id);
+      return a.id - b.id;
     });
 
   return live.length ? live : [FALLBACK_ANNOUNCEMENT];
 });
 
 const canRotateAnnouncements = computed(() => activeAnnouncements.value.length > 1);
-const spotlightProducts = computed(() => props.freshProducts ?? []);
+const spotlightProducts = computed(() => props.spotlights ?? []);
 const canRotateSpotlightProducts = computed(() => spotlightProducts.value.length > 1);
 const spotlightNote = computed(() => 'Siga o Gaviao Frutas no Instagram');
 
@@ -183,7 +185,7 @@ function toDisplayAnnouncement(item: AnnouncementItem): AnnouncementDisplay {
     tag: item.tag,
     title: item.title,
     description: item.description,
-    image: item.image,
+    imageUrl: item.imageUrl,
     ctaLabel: item.ctaLabel,
     ctaType: item.ctaType,
     ctaUrl: item.ctaUrl,
@@ -271,26 +273,26 @@ function scheduleRotation() {
   rotationTimer = setTimeout(() => {
     const total = activeAnnouncements.value.length;
     activeIndex.value = normalizeIndex(activeIndex.value + 1, total);
-    trackEvent('announcement_rotate', currentAnnouncement.value.id, 'auto');
+    trackEvent('announcement_rotate', String(currentAnnouncement.value.id), 'auto');
   }, wait);
 }
 
 function goToAnnouncement(index: number) {
   const total = activeAnnouncements.value.length;
   activeIndex.value = normalizeIndex(index, total);
-  trackEvent('announcement_rotate', currentAnnouncement.value.id, 'dot');
+  trackEvent('announcement_rotate', String(currentAnnouncement.value.id), 'dot');
 }
 
 function nextAnnouncement() {
   const total = activeAnnouncements.value.length;
   activeIndex.value = normalizeIndex(activeIndex.value + 1, total);
-  trackEvent('announcement_rotate', currentAnnouncement.value.id, 'next');
+  trackEvent('announcement_rotate', String(currentAnnouncement.value.id), 'next');
 }
 
 function prevAnnouncement() {
   const total = activeAnnouncements.value.length;
   activeIndex.value = normalizeIndex(activeIndex.value - 1, total);
-  trackEvent('announcement_rotate', currentAnnouncement.value.id, 'prev');
+  trackEvent('announcement_rotate', String(currentAnnouncement.value.id), 'prev');
 }
 
 function scheduleSpotlightRotation() {
@@ -353,7 +355,7 @@ function handleAnnouncementTouchEnd() {
 
 function openAnnouncementCta(announcement: AnnouncementDisplay) {
   const url = getAnnouncementCtaUrl(announcement);
-  trackEvent('announcement_click', announcement.id, announcement.ctaType);
+  trackEvent('announcement_click', String(announcement.id), announcement.ctaType);
 
   if (!process.client) return;
 
@@ -477,7 +479,7 @@ watch(
 watch(
   () => currentAnnouncement.value.id,
   (announcementId) => {
-    trackEvent('announcement_impression', announcementId, 'hero');
+    trackEvent('announcement_impression', String(announcementId), 'hero');
     scheduleRotation();
   },
   { immediate: true },
@@ -545,7 +547,6 @@ onUnmounted(() => {
         :info-label="spotlightNote"
         emphasis="fresh"
         layout="compact"
-        :show-rating="false"
         :primary-action="{ label: 'Seguir no Instagram', href: instagramUrl, icon: 'instagram', tone: 'secondary' }"
         :secondary-action="{ label: 'Todos os produtos', href: '#produtos', tone: 'primary' }"
       >
@@ -609,7 +610,7 @@ onUnmounted(() => {
 
         <img
           class="announcement-image"
-          :src="currentAnnouncementDisplay.image"
+          :src="currentAnnouncementDisplay.imageUrl || '/imgs/logo-desktop.webp'"
           :alt="currentAnnouncementDisplay.title"
           loading="lazy"
         />

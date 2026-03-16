@@ -84,23 +84,22 @@ homeApi.get('/api/announcements', async (_req, res, next) => {
 
 homeApi.get('/api/products', async (req, res, next) => {
   try {
-    const { category, featured, limit } = req.query;
+    const { category, featured, limit, slug } = req.query;
+    const rawLimit =
+      typeof limit === 'string'
+        ? limit
+        : Array.isArray(limit) && typeof limit[0] === 'string'
+          ? limit[0]
+          : null;
 
-    let items = await getPublicProducts({ featuredOnly: featured === 'true' });
+    const parsedLimit = rawLimit ? Number.parseInt(rawLimit, 10) : NaN;
 
-    if (typeof category === 'string' && category.trim()) {
-      const categoryFilter = category.trim();
-      items = items.filter(
-        (item) => item.categorySlug === categoryFilter || String(item.categoryId) === categoryFilter,
-      );
-    }
-
-    if (typeof limit === 'string') {
-      const parsedLimit = Number.parseInt(limit, 10);
-      if (Number.isFinite(parsedLimit) && parsedLimit > 0) {
-        items = items.slice(0, parsedLimit);
-      }
-    }
+    const items = await getPublicProducts({
+      featuredOnly: featured === 'true',
+      category: typeof category === 'string' && category.trim() ? category.trim() : null,
+      slug: typeof slug === 'string' && slug.trim() ? slug.trim() : null,
+      limit: Number.isFinite(parsedLimit) && parsedLimit > 0 ? parsedLimit : null,
+    });
 
     res.status(200).json({ items, total: items.length });
   } catch (error) {

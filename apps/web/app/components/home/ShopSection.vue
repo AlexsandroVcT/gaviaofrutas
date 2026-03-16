@@ -27,6 +27,11 @@ const visibleProducts = computed(() => {
 function handleCategorySelect(categoryId: number) {
   selectedCategoryId.value = selectedCategoryId.value === categoryId ? null : categoryId;
 }
+
+const moreProductsHref = computed(() => {
+  if (!selectedCategory.value) return '/produtos';
+  return `/produtos?categoria=${encodeURIComponent(selectedCategory.value.slug)}`;
+});
 </script>
 
 <template>
@@ -43,6 +48,7 @@ function handleCategorySelect(categoryId: number) {
         <ProductShowcase
           :products="visibleProducts"
           :active-category-name="selectedCategory?.name ?? null"
+          :more-href="moreProductsHref"
           :whatsapp-phone="props.whatsappPhone"
           embedded
         />

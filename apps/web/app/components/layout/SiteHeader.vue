@@ -18,6 +18,7 @@ const emit = defineEmits<{
   (event: "cart-click"): void;
 }>();
 
+const route = useRoute();
 const isMobileMenuOpen = ref(false);
 const { isDark, toggleTheme } = useTheme();
 
@@ -26,6 +27,21 @@ function closeMobileMenu() {
 }
 
 const whatsappHref = computed(() => `https://wa.me/${props.whatsappPhone}`);
+
+function normalizeHrefPath(href: string) {
+  const normalized = href.startsWith("http") ? href : `https://local${href.startsWith("/") ? "" : "/"}${href}`;
+  return new URL(normalized).pathname;
+}
+
+function isActiveItem(item: NavItem) {
+  const itemPath = normalizeHrefPath(item.href);
+
+  if (itemPath === "/") {
+    return route.path === "/";
+  }
+
+  return route.path === itemPath || route.path.startsWith(`${itemPath}/`);
+}
 
 function handleCartClick() {
   if (!process.client) return;
@@ -55,7 +71,7 @@ function handleCartClick() {
             v-for="item in props.menuItems"
             :key="item.label"
             :href="item.href"
-            :class="{ active: item.label === 'Inicio' }"
+            :class="{ active: isActiveItem(item) }"
           >
             {{ item.label }}
           </a>

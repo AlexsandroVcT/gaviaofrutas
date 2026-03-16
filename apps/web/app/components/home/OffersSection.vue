@@ -20,7 +20,15 @@ const pageCount = computed(() => maxPageIndex.value + 1);
 const hasMultiplePages = computed(() => props.offers.length > cardsPerView.value);
 
 function resolveOfferHref(offer: OfferItem) {
-  return offer.ctaUrl || "#produtos";
+  if (offer.ctaUrl === "#frigorifico") {
+    return "/produtos?categoria=frigorifico";
+  }
+
+  if (!offer.ctaUrl || offer.ctaUrl === "#produtos") {
+    return "/produtos";
+  }
+
+  return offer.ctaUrl;
 }
 
 function updateResponsiveState() {
@@ -158,7 +166,7 @@ onBeforeUnmount(() => {
         <h2>Prioridade para quem quer retirar hoje</h2>
         <p>Selecao rapida das ofertas em estoque e ja prontas para separacao.</p>
       </div>
-      <a class="all-offers" href="#produtos">Ver todos os produtos</a>
+      <a class="all-offers" href="/produtos">Ver todos os produtos</a>
     </header>
 
     <div

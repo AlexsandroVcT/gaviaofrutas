@@ -22,6 +22,22 @@ export type HomeApiResponse = {
   fetchedAt?: string;
 };
 
+export type ProductsApiResponse = {
+  items: ProductItem[];
+  total: number;
+};
+
+export type CategoriesApiResponse = {
+  items: CategoryItem[];
+  total: number;
+};
+
+export type AnnouncementsApiResponse = {
+  items: AnnouncementItem[];
+  total: number;
+  fetchedAt?: string;
+};
+
 export type StoreStatusApiResponse = {
   store: StoreInfo;
   storeStatus: StoreStatus;

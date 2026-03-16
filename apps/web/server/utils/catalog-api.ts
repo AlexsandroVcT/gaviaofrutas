@@ -22,7 +22,7 @@ async function parseJsonResponse<T>(response: Response) {
 
 function getCatalogApiBase() {
   const config = useRuntimeConfig();
-  const baseUrl = String(config.catalogApiBase || config.public.apiBase || '').trim();
+  const baseUrl = String(config.catalogApiBase || '').trim();
 
   if (!baseUrl) {
     throw createError({

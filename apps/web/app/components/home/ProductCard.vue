@@ -16,7 +16,6 @@ const props = withDefaults(
   defineProps<{
     product: ProductItem;
     whatsappPhone?: string;
-    showRating?: boolean;
     badgeLabel?: string;
     infoLabel?: string;
     emphasis?: "default" | "fresh";
@@ -25,7 +24,6 @@ const props = withDefaults(
     secondaryAction?: ProductCardAction;
   }>(),
   {
-    showRating: true,
     emphasis: "default",
     layout: "default",
   },
@@ -33,6 +31,7 @@ const props = withDefaults(
 
 const slots = useSlots();
 const cart = useCartStore();
+const productHref = computed(() => `/produtos/${props.product.slug}`);
 
 const defaultPrimaryAction = computed<ProductCardAction>(() => ({
   label: "Adicionar",
@@ -99,12 +98,16 @@ function handleAction(action: ProductCardAction) {
       <slot name="header" />
     </div>
 
-    <img :src="props.product.imageUrl || '/imgs/logo-desktop.webp'" :alt="props.product.name" loading="lazy" />
+    <NuxtLink class="product-link" :to="productHref" :aria-label="`Abrir produto ${props.product.name}`">
+      <img :src="props.product.imageUrl || '/imgs/logo-desktop.webp'" :alt="props.product.name" loading="lazy" />
+    </NuxtLink>
 
     <div class="product-body">
       <h3>
-        {{ props.product.name }}
-        <span>({{ props.product.unit }})</span>
+        <NuxtLink class="product-title-link" :to="productHref">
+          {{ props.product.name }}
+          <span>({{ props.product.unit }})</span>
+        </NuxtLink>
       </h3>
 
       <p class="product-availability">
@@ -243,6 +246,10 @@ function handleAction(action: ProductCardAction) {
   object-fit: contain;
 }
 
+.product-link {
+  display: block;
+}
+
 .product-body {
   margin-top: 8px;
   display: grid;
@@ -254,6 +261,14 @@ function handleAction(action: ProductCardAction) {
   line-height: 1.08;
   font-size: clamp(1.08rem, 1.4vw, 1.32rem);
   overflow-wrap: anywhere;
+}
+
+.product-title-link {
+  color: inherit;
+}
+
+.product-title-link:hover {
+  color: var(--brand-1);
 }
 
 .product-card h3 span {

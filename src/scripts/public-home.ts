@@ -106,6 +106,9 @@ export async function getPublicFeaturedProducts() {
 
 type ProductQueryOptions = {
   featuredOnly?: boolean;
+  category?: string | number | null;
+  slug?: string | null;
+  limit?: number | null;
 };
 
 export async function getPublicProducts(options: ProductQueryOptions = {}) {
@@ -120,10 +123,21 @@ export async function getPublicProducts(options: ProductQueryOptions = {}) {
 
   return items
     .filter((item) => item.isAvailable && (item.inventory?.isAvailable ?? true))
+    .filter((item) => {
+      if (!options.category) return true;
+
+      const categoryFilter = String(options.category).trim();
+      return item.category?.slug === categoryFilter || String(item.categoryId) === categoryFilter;
+    })
+    .filter((item) => {
+      if (!options.slug) return true;
+      return item.slug === options.slug;
+    })
     .map((item) => ({
       id: toNumber(item.id),
       categoryId: toNumber(item.categoryId),
       categorySlug: item.category?.slug || '',
+      categoryName: item.category?.name || '',
       name: item.name,
       slug: item.slug,
       shortDescription: item.shortDescription,
@@ -133,7 +147,8 @@ export async function getPublicProducts(options: ProductQueryOptions = {}) {
       isFeatured: item.isFeatured,
       isAvailable: item.isAvailable && (item.inventory?.isAvailable ?? true),
       sortOrder: item.sortOrder,
-    }));
+    }))
+    .slice(0, options.limit && options.limit > 0 ? options.limit : undefined);
 }
 
 export async function getPublicSpotlights(now = new Date()) {
@@ -152,6 +167,7 @@ export async function getPublicSpotlights(now = new Date()) {
       id: toNumber(item.product.id),
       categoryId: toNumber(item.product.categoryId),
       categorySlug: item.product.category?.slug || '',
+      categoryName: item.product.category?.name || '',
       name: item.product.name,
       slug: item.product.slug,
       shortDescription: item.product.shortDescription,

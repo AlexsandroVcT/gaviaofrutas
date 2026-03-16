@@ -17,10 +17,8 @@ export default defineNuxtConfig({
       process.env.NUXT_CATALOG_API_BASE ||
       process.env.NUXT_API_BASE ||
       process.env.API_BASE ||
-      process.env.NUXT_PUBLIC_API_BASE ||
       defaultCatalogApiBase,
     public: {
-      apiBase: process.env.NUXT_PUBLIC_API_BASE || (isProduction ? '' : defaultCatalogApiBase),
       siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://gaviaofrutas.com.br'
     }
   },

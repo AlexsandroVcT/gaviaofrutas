@@ -49,12 +49,15 @@ function buildApiUrl(apiBase: string) {
 }
 
 function buildHomeApiCandidates(apiBase: string) {
-  const candidates = [buildApiUrl(apiBase)];
+  const candidates = ['/api/home'];
+
+  if (apiBase) {
+    candidates.unshift(buildApiUrl(apiBase));
+  }
 
   if (import.meta.dev) {
     candidates.push('http://127.0.0.1:3001/api/home');
     candidates.push('http://localhost:3001/api/home');
-    candidates.push('/api/home');
   }
 
   return Array.from(new Set(candidates));

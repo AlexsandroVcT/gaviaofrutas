@@ -10,7 +10,7 @@ import { errorHandler } from './middlewares/error-handler'; // Certifique-se de 
 import { appDataSource } from './database';
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 const rootDir = path.resolve(__dirname, '..');
 const pagesDir = path.join(rootDir, 'pages');
 const assetsDir = path.join(rootDir, 'assets');
@@ -33,7 +33,8 @@ const ensureDataSource = async () => {
   if (!dataSourceInitPromise) {
     dataSourceInitPromise = appDataSource
       .initialize()
-      .then(() => {
+      .then(async () => {
+        await appDataSource.runMigrations();
         console.log('Conexão com o banco de dados inicializada com sucesso.');
       })
       .catch((error) => {
@@ -62,9 +63,6 @@ app.get('/', (_req, res) => {
   res.redirect('/pages/login.html');
 });
 
-// API publica de home/produtos para o novo front-end em Nuxt
-app.use(homeApi);
-
 // Garante conexão com o banco antes das rotas de API
 app.use(async (_req, _res, next) => {
   try {
@@ -74,6 +72,9 @@ app.use(async (_req, _res, next) => {
     next(error);
   }
 });
+
+// API publica de home/produtos para o novo front-end em Nuxt
+app.use(homeApi);
 
 // Registro de rotas
 app.use(register);

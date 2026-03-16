@@ -1,21 +1,51 @@
 <script setup lang="ts">
+import { computed, ref } from "vue";
 import type { BenefitItem, CategoryItem, ProductItem } from "~/types/home";
 
 const props = defineProps<{
   categories: CategoryItem[];
   products: ProductItem[];
+  featuredProducts: ProductItem[];
   benefits: BenefitItem[];
   whatsappPhone?: string;
 }>();
+
+const selectedCategoryId = ref<number | null>(null);
+
+const selectedCategory = computed(() =>
+  props.categories.find((category) => category.id === selectedCategoryId.value) ?? null,
+);
+
+const visibleProducts = computed(() => {
+  if (selectedCategoryId.value === null) {
+    return props.featuredProducts;
+  }
+
+  return props.products.filter((product) => product.categoryId === selectedCategoryId.value);
+});
+
+function handleCategorySelect(categoryId: number) {
+  selectedCategoryId.value = selectedCategoryId.value === categoryId ? null : categoryId;
+}
 </script>
 
 <template>
   <section class="shop-section" aria-label="Area de compras">
     <div class="shop-main">
       <div class="catalog-shell">
-        <CategoriesSection :categories="props.categories" embedded />
+        <CategoriesSection
+          :categories="props.categories"
+          :active-category-id="selectedCategoryId"
+          embedded
+          @select="handleCategorySelect"
+        />
         <div class="catalog-divider" />
-        <ProductShowcase :products="props.products" :whatsapp-phone="props.whatsappPhone" embedded />
+        <ProductShowcase
+          :products="visibleProducts"
+          :active-category-name="selectedCategory?.name ?? null"
+          :whatsapp-phone="props.whatsappPhone"
+          embedded
+        />
       </div>
 
       <div class="sidebar-shell">

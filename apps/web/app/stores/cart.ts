@@ -3,12 +3,11 @@ import { defineStore } from 'pinia';
 import type { ProductItem } from '~/types/home';
 
 type CartLine = {
-  id: string;
+  id: number;
   name: string;
   unit: string;
-  price: number;
   qty: number;
-  image: string;
+  imageUrl: string | null;
 };
 
 const STORAGE_KEY = 'gaviao:cart';
@@ -17,9 +16,6 @@ export const useCartStore = defineStore('cart', () => {
   const items = ref<CartLine[]>([]);
 
   const totalItems = computed(() => items.value.reduce((sum, item) => sum + item.qty, 0));
-  const totalPrice = computed(() =>
-    items.value.reduce((sum, item) => sum + item.price * item.qty, 0),
-  );
 
   function add(product: ProductItem, qty = 1) {
     if (!product?.id) return;
@@ -34,25 +30,24 @@ export const useCartStore = defineStore('cart', () => {
       id: product.id,
       name: product.name,
       unit: product.unit,
-      price: product.price,
       qty,
-      image: product.image,
+      imageUrl: product.imageUrl,
     });
   }
 
-  function increment(id: string) {
+  function increment(id: number) {
     const item = items.value.find((line) => line.id === id);
     if (item) item.qty += 1;
   }
 
-  function decrement(id: string) {
+  function decrement(id: number) {
     const item = items.value.find((line) => line.id === id);
     if (!item) return;
     item.qty -= 1;
     if (item.qty <= 0) remove(id);
   }
 
-  function remove(id: string) {
+  function remove(id: number) {
     items.value = items.value.filter((line) => line.id !== id);
   }
 
@@ -66,11 +61,10 @@ export const useCartStore = defineStore('cart', () => {
     }
 
     const lines = items.value.map(
-      (item) =>
-        `- ${item.name} (${item.unit}) x${item.qty} = R$ ${(item.price * item.qty).toFixed(2)}`,
+      (item) => `- ${item.name} (${item.unit}) x${item.qty}`,
     );
 
-    return `Ola! Quero pedir:\n${lines.join('\n')}\nTotal: R$ ${totalPrice.value.toFixed(2)}`;
+    return `Ola! Quero pedir:\n${lines.join('\n')}\nTotal de itens: ${totalItems.value}`;
   });
 
   function buildWhatsappUrl(phone = '5582998763021') {
@@ -100,7 +94,6 @@ export const useCartStore = defineStore('cart', () => {
   return {
     items,
     totalItems,
-    totalPrice,
     add,
     increment,
     decrement,

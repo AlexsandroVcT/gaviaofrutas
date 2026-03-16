@@ -20,7 +20,7 @@ const pageCount = computed(() => maxPageIndex.value + 1);
 const hasMultiplePages = computed(() => props.offers.length > cardsPerView.value);
 
 function resolveOfferHref(offer: OfferItem) {
-  return offer.href || "#produtos";
+  return offer.ctaUrl || "#produtos";
 }
 
 function updateResponsiveState() {
@@ -174,13 +174,13 @@ onBeforeUnmount(() => {
         :key="offer.id"
         class="offer-card"
       >
-        <div class="offer-copy">
-          <p class="offer-tag">{{ offer.title }}</p>
-          <h3>{{ offer.description }}</h3>
-          <a class="offer-cta" :href="resolveOfferHref(offer)">{{ offer.cta }}</a>
-        </div>
+          <div class="offer-copy">
+            <p class="offer-tag">{{ offer.title }}</p>
+            <h3>{{ offer.description }}</h3>
+            <a class="offer-cta" :href="resolveOfferHref(offer)">{{ offer.ctaLabel || "Saiba mais" }}</a>
+          </div>
 
-        <img v-if="offer.image" :src="offer.image" :alt="offer.title" loading="lazy" />
+        <img v-if="offer.imageUrl" :src="offer.imageUrl" :alt="offer.title" loading="lazy" />
       </article>
     </div>
 

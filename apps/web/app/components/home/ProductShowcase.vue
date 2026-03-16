@@ -3,6 +3,7 @@ import type { ProductItem } from "~/types/home";
 
 const props = defineProps<{
   products: ProductItem[];
+  activeCategoryName?: string | null;
   whatsappPhone?: string;
   embedded?: boolean;
 }>();
@@ -11,17 +12,24 @@ const props = defineProps<{
 <template>
   <section id="produtos" :class="['showcase-section', { embedded: props.embedded }]">
     <div class="section-head">
-      <h2>Produtos em destaque</h2>
+      <div class="section-copy">
+        <h2>Produtos em destaque</h2>
+        <p v-if="props.activeCategoryName" class="section-filter">{{ props.activeCategoryName }}</p>
+      </div>
       <a href="#produtos">Ver mais produtos</a>
     </div>
 
-    <div class="products-grid">
+    <div v-if="props.products.length" class="products-grid">
       <ProductCard
         v-for="product in props.products"
         :key="product.id"
         :product="product"
         :whatsapp-phone="props.whatsappPhone"
       />
+    </div>
+
+    <div v-else class="empty-state">
+      Nenhum produto disponivel nesta categoria agora.
     </div>
   </section>
 </template>
@@ -44,6 +52,20 @@ const props = defineProps<{
   font-size: clamp(1.8rem, 3vw, 2.8rem);
 }
 
+.section-copy {
+  display: grid;
+  gap: 4px;
+}
+
+.section-filter {
+  margin: 0;
+  color: var(--brand-1);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
 .section-head a {
   border: 1px solid var(--border-1);
   border-radius: 999px;
@@ -60,6 +82,15 @@ const props = defineProps<{
   gap: 12px;
   min-width: 0;
   align-items: stretch;
+}
+
+.empty-state {
+  border: 1px dashed var(--border-1);
+  border-radius: 18px;
+  padding: 28px 18px;
+  text-align: center;
+  color: var(--text-2);
+  background: color-mix(in srgb, var(--surface-1) 88%, transparent);
 }
 
 @media (max-width: 860px) {

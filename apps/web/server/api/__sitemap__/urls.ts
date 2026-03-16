@@ -1,27 +1,24 @@
-import { announcements as fallbackAnnouncements } from '../../../app/data/home';
-
 type AnnouncementResponse = {
-  items?: Array<{ id: string }>;
+  items?: Array<{ slug: string }>;
 };
 
 export default defineEventHandler(async () => {
   const config = useRuntimeConfig();
   const siteUrl = (config.public.siteUrl || 'https://gaviaofrutas.com.br').replace(/\/$/, '');
   const apiBase = (config.public.apiBase || '').replace(/\/$/, '');
+  const announcementsUrl = apiBase ? `${apiBase}/api/announcements` : '/api/announcements';
   const now = new Date().toISOString();
 
-  let announcementIds = fallbackAnnouncements.map((item) => item.id);
+  let announcementSlugs: string[] = [];
 
-  if (apiBase) {
-    try {
-      const response = await $fetch<AnnouncementResponse>(`${apiBase}/api/announcements`, { timeout: 3500 });
+  try {
+    const response = await $fetch<AnnouncementResponse>(announcementsUrl, { timeout: 3500 });
 
-      if (response.items?.length) {
-        announcementIds = response.items.map((item) => item.id);
-      }
-    } catch {
-      // keep fallback announcement IDs
+    if (response.items?.length) {
+      announcementSlugs = response.items.map((item) => item.slug);
     }
+  } catch {
+    // keep homepage URL only
   }
 
   const urls = [
@@ -31,8 +28,8 @@ export default defineEventHandler(async () => {
       changefreq: 'daily',
       priority: 1,
     },
-    ...announcementIds.map((id) => ({
-      loc: `${siteUrl}/anuncios/${id}`,
+    ...announcementSlugs.map((slug) => ({
+      loc: `${siteUrl}/anuncios/${slug}`,
       lastmod: now,
       changefreq: 'daily',
       priority: 0.7,

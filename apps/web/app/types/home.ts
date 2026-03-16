@@ -4,18 +4,28 @@ export type NavItem = {
 };
 
 export type CategoryItem = {
-  id: string;
+  id: number;
   name: string;
-  image: string;
+  slug: string;
+  imageUrl: string | null;
+  description: string | null;
+  sortOrder: number;
+  isActive: boolean;
 };
 
 export type ProductItem = {
-  id: string;
+  id: number;
+  categoryId: number;
+  categorySlug: string;
   name: string;
+  slug: string;
+  shortDescription: string | null;
   unit: string;
-  price: number;
-  image: string;
-  rating: number;
+  imageUrl: string | null;
+  isActive: boolean;
+  isFeatured: boolean;
+  isAvailable: boolean;
+  sortOrder: number;
 };
 
 export type BenefitItem = {
@@ -25,54 +35,61 @@ export type BenefitItem = {
 };
 
 export type OfferItem = {
-  id: string;
+  id: number;
   title: string;
-  description: string;
-  cta: string;
-  href?: string;
-  image?: string;
+  description: string | null;
+  ctaLabel: string | null;
+  ctaUrl: string | null;
+  imageUrl: string | null;
+  isActive: boolean;
+  startsAt?: string | null;
+  endsAt?: string | null;
+  priority: number;
+  productId?: number | null;
+  categoryId?: number | null;
 };
 
 export type AnnouncementCtaType = 'maps' | 'whatsapp' | 'catalog' | 'custom';
 
 export type AnnouncementVariant = {
-  tag?: string;
-  title?: string;
-  description?: string;
-  ctaLabel?: string;
+  tag?: string | null;
+  title?: string | null;
+  description?: string | null;
+  ctaLabel?: string | null;
   ctaType?: AnnouncementCtaType;
-  ctaUrl?: string;
+  ctaUrl?: string | null;
 };
 
 export type AnnouncementItem = {
-  id: string;
-  tag: string;
+  id: number;
+  tag: string | null;
   title: string;
-  description: string;
-  image: string;
+  slug: string;
+  description: string | null;
+  imageUrl: string | null;
   ctaLabel: string;
   ctaType: AnnouncementCtaType;
-  ctaUrl?: string;
+  ctaUrl?: string | null;
   isActive: boolean;
   priority: number;
   weight: number;
-  startAt?: string | null;
-  endAt?: string | null;
+  startsAt?: string | null;
+  endsAt?: string | null;
   durationMs?: number;
   onlyWhenOpen?: boolean;
   closedVariant?: AnnouncementVariant;
 };
 
 export type StoreHour = {
-  day: number; // 0 domingo, 6 sabado
-  open: string | null; // HH:mm
-  close: string | null; // HH:mm
+  day: number;
+  open: string | null;
+  close: string | null;
 };
 
 export type StoreSpecialHour = {
-  date: string; // YYYY-MM-DD no timezone da loja
-  open: string | null; // HH:mm | null para fechado o dia todo
-  close: string | null; // HH:mm | null para fechado o dia todo
+  date: string;
+  open: string | null;
+  close: string | null;
   note?: string;
 };
 
@@ -83,14 +100,26 @@ export type StoreStatus = {
 };
 
 export type StoreInfo = {
+  id: number;
   name: string;
-  cityState: string;
-  address: string;
+  slug: string;
+  logoUrl: string | null;
+  coverUrl: string | null;
   phone: string;
+  whatsapp: string;
+  instagram: string;
+  googleMapsUrl: string;
+  googlePlaceId: string | null;
   mapQuery: string;
   latitude: number;
   longitude: number;
+  city: string;
+  state: string;
+  cityState: string;
+  address: string;
   timeZone: string;
   hours: StoreHour[];
   specialHours?: StoreSpecialHour[];
+  seoTitle: string | null;
+  seoDescription: string | null;
 };

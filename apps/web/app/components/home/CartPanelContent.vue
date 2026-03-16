@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { useCartStore } from "~/stores/cart";
-import { formatPrice } from "~/utils/format";
 
 const props = defineProps<{
   whatsappPhone?: string;
@@ -25,7 +24,7 @@ const whatsappUrl = computed(() => cart.buildWhatsappUrl(phone.value));
 
     <ul v-if="cart.items.length" class="cart-list">
       <li v-for="item in cart.items" :key="item.id" class="cart-line">
-        <img :src="item.image" :alt="item.name" loading="lazy" />
+        <img :src="item.imageUrl || '/imgs/logo-desktop.webp'" :alt="item.name" loading="lazy" />
 
         <div class="line-body">
           <div class="line-top">
@@ -35,7 +34,7 @@ const whatsappUrl = computed(() => cart.buildWhatsappUrl(phone.value));
             </button>
           </div>
 
-          <p class="line-meta">{{ item.qty }} x {{ formatPrice(item.price) }}</p>
+          <p class="line-meta">{{ item.unit }} • {{ item.qty }} item(ns)</p>
 
           <div class="qty-row">
             <button class="qty-btn ghost" type="button" aria-label="Diminuir quantidade" @click="cart.decrement(item.id)">
@@ -45,7 +44,7 @@ const whatsappUrl = computed(() => cart.buildWhatsappUrl(phone.value));
             <button class="qty-btn" type="button" aria-label="Aumentar quantidade" @click="cart.increment(item.id)">
               +
             </button>
-            <strong class="line-total">{{ formatPrice(item.price * item.qty) }}</strong>
+            <strong class="line-total">Retirada</strong>
           </div>
         </div>
       </li>
@@ -54,8 +53,8 @@ const whatsappUrl = computed(() => cart.buildWhatsappUrl(phone.value));
     <p v-else class="empty">Seu carrinho esta vazio. Adicione itens para montar o pedido.</p>
 
     <div class="cart-total">
-      <span>Total</span>
-      <strong>{{ formatPrice(cart.totalPrice) }}</strong>
+      <span>Itens selecionados</span>
+      <strong>{{ cart.totalItems }}</strong>
     </div>
 
     <div class="cart-actions">

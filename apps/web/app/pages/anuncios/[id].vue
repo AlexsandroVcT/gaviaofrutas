@@ -5,7 +5,7 @@ const route = useRoute();
 const homeData = await useHomeData();
 
 const announcement = computed(() =>
-  homeData.announcements.find((item) => item.id === String(route.params.id)) || null,
+  homeData.announcements.find((item) => item.slug === String(route.params.id) || String(item.id) === String(route.params.id)) || null,
 );
 
 const mapsUrl = computed(
@@ -25,7 +25,7 @@ useSeoMeta({
       : 'Anuncio | Gaviao Frutas',
   description: () =>
     announcement.value
-      ? `${announcement.value.description} - visite Gaviao Frutas em Santa Luzia do Norte.`
+      ? `${announcement.value.description || 'Campanha ativa de Gaviao Frutas'} - visite Gaviao Frutas em Santa Luzia do Norte.`
       : 'Anuncio de Gaviao Frutas para retirada na loja.',
 });
 </script>
@@ -40,7 +40,7 @@ useSeoMeta({
         <h1>{{ announcement.title }}</h1>
         <p class="description">{{ announcement.description }}</p>
 
-        <img :src="announcement.image" :alt="announcement.title" loading="lazy" />
+        <img :src="announcement.imageUrl || '/imgs/logo-desktop.webp'" :alt="announcement.title" loading="lazy" />
 
         <div class="actions">
           <a :href="mapsUrl" target="_blank" rel="noreferrer">Tracar rota</a>

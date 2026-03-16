@@ -3,7 +3,12 @@ import type { CategoryItem } from "~/types/home";
 
 const props = defineProps<{
   categories: CategoryItem[];
+  activeCategoryId?: number | null;
   embedded?: boolean;
+}>();
+
+const emit = defineEmits<{
+  select: [categoryId: number];
 }>();
 </script>
 
@@ -12,10 +17,17 @@ const props = defineProps<{
     <h2>O que voce procura hoje?</h2>
 
     <div class="categories-row">
-      <article v-for="category in props.categories" :key="category.id" class="category-card">
-        <img :src="category.image" :alt="category.name" loading="lazy" />
+      <button
+        v-for="category in props.categories"
+        :key="category.id"
+        type="button"
+        :class="['category-card', { active: props.activeCategoryId === category.id }]"
+        :aria-pressed="props.activeCategoryId === category.id"
+        @click="emit('select', category.id)"
+      >
+        <img :src="category.imageUrl || '/imgs/logo-desktop.webp'" :alt="category.name" loading="lazy" />
         <h3>{{ category.name }}</h3>
-      </article>
+      </button>
     </div>
   </section>
 </template>
@@ -50,6 +62,8 @@ const props = defineProps<{
 }
 
 .category-card {
+  appearance: none;
+  width: 100%;
   border: 1px solid var(--border-1);
   border-radius: 16px;
   background:
@@ -61,6 +75,30 @@ const props = defineProps<{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  cursor: pointer;
+  transition:
+    border-color 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    background 180ms ease;
+}
+
+.category-card:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--brand-1) 45%, var(--border-1));
+}
+
+.category-card.active {
+  border-color: color-mix(in srgb, var(--brand-1) 62%, var(--border-1));
+  background:
+    radial-gradient(circle at 82% 18%, rgba(99, 190, 73, 0.22) 0%, transparent 36%),
+    linear-gradient(180deg, color-mix(in srgb, var(--surface-1) 96%, transparent), color-mix(in srgb, var(--surface-2) 88%, transparent));
+  box-shadow: 0 0 0 1px rgba(99, 190, 73, 0.18), var(--shadow-2);
+}
+
+.category-card:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--brand-1) 72%, white);
+  outline-offset: 2px;
 }
 
 .category-card img {

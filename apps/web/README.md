@@ -33,7 +33,7 @@ app/
       BenefitsSection.vue    # blocos de beneficios
       OffersSection.vue      # cards de ofertas
   data/
-    home.ts                  # conteudo da home (menu, produtos, ofertas, etc)
+    site.ts                  # conteudo institucional fixo (menu, highlights, beneficios)
   types/
     home.ts                  # tipagem dos dados
   composables/
@@ -44,12 +44,14 @@ app/
     css/main.css             # estilos globais e variaveis
 
 public/
-  imgs/                      # imagens estaticas da interface
+  imgs/                      # imagens legadas da interface
+  images/                    # imagens referenciadas pelo catalogo vindo do banco
 ```
 
 ## Regras praticas para editar
 
-- Trocar textos/produtos/categorias: `app/data/home.ts`
+- Trocar menu/highlights/beneficios fixos: `app/data/site.ts`
+- Trocar catalogo/ofertas/anuncios: PostgreSQL + seed inicial em `src/data/public-catalog-seed.ts`
 - Ajustar visual de uma secao: componente da secao em `app/components/...`
 - Ajustar regra global (fonte, reset, variaveis): `app/assets/css/main.css`
 - Paleta light/dark: `app/assets/css/main.css` e `app/composables/useTheme.ts`

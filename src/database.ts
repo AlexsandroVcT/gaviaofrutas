@@ -1,6 +1,14 @@
 import './config/env';
 import { DataSource } from 'typeorm';
+import { Announcement } from './entities/Announcement';
+import { Category } from './entities/Category';
+import { HomeSpotlight } from './entities/HomeSpotlight';
+import { Inventory } from './entities/Inventory';
+import { Offer } from './entities/Offer';
+import { Product } from './entities/Product';
+import { StoreProfile } from './entities/StoreProfile';
 import { User } from './entities/User';
+import { CreatePublicCatalogSchema1760000000000 } from './migrations/1760000000000-CreatePublicCatalogSchema';
 
 const databaseUrl =
   process.env.GAVIAO_FRUTAS_DB_URL ||
@@ -15,10 +23,10 @@ const shouldUseSsl =
 
 const baseOptions = {
   type: 'postgres' as const,
-  synchronize: true,
+  synchronize: false,
   logging: true,
-  entities: [User],
-  migrations: [],
+  entities: [User, StoreProfile, Category, Product, Inventory, Offer, Announcement, HomeSpotlight],
+  migrations: [CreatePublicCatalogSchema1760000000000],
   subscribers: [],
 };
 
